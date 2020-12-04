@@ -5,6 +5,8 @@
 #ifndef DUNGEONRUNNER_ENTITY_H
 #define DUNGEONRUNNER_ENTITY_H
 #include <iostream>
+#include <memory>
+
 
 namespace DungeonRunner {
     class Entity {

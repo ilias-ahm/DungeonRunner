@@ -5,6 +5,7 @@
 #ifndef DUNGEONRUNNER_ABSTRACTFACTORY_H
 #define DUNGEONRUNNER_ABSTRACTFACTORY_H
 #include "Entity.h"
+
 namespace DungeonRunner {
     class AbstractFactory {
     public:
