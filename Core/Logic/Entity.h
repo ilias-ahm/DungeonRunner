@@ -6,7 +6,7 @@
 #define DUNGEONRUNNER_ENTITY_H
 #include <iostream>
 #include <memory>
-
+#include <vector>
 
 namespace DungeonRunner {
     class Entity {

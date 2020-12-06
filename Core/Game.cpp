@@ -3,3 +3,7 @@
 //
 
 #include "Game.h"
+
+DungeonRunner::Game::Game(const std::shared_ptr<sf::RenderWindow> &gameWindow) : gameWindow(gameWindow) {
+
+}
