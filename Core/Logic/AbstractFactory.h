@@ -12,7 +12,7 @@
 namespace DungeonRunner {
     class AbstractFactory {
     public:
-        std::shared_ptr<World> createWorld(int x, int y);
+        std::shared_ptr<World> createWorld(std::shared_ptr<sf::RenderWindow> gWindow, int x, int y);
         std::shared_ptr<DungeonRunnerSFML::Player> createPlayer(sf::RectangleShape player,sf::Texture playerTexture,sf::IntRect uvRect);
     };
 }

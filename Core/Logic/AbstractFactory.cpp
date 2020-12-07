@@ -5,8 +5,8 @@
 #include "AbstractFactory.h"
 
 
-std::shared_ptr<DungeonRunner::World> DungeonRunner::AbstractFactory::createWorld(int x, int y) {
-    std::shared_ptr<DungeonRunner::World> newWorld = std::make_shared<DungeonRunner::World>(x,y);
+std::shared_ptr<DungeonRunner::World> DungeonRunner::AbstractFactory::createWorld(std::shared_ptr<sf::RenderWindow> gWindow,int x, int y) {
+    std::shared_ptr<DungeonRunner::World> newWorld = std::make_shared<DungeonRunner::World>(gWindow,x,y);
     return newWorld;
 }
 

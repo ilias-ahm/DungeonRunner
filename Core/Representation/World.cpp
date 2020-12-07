@@ -4,12 +4,30 @@
 
 #include "World.h"
 
-DungeonRunner::World::World(int x, int y) {
+DungeonRunner::World::World(std::shared_ptr<sf::RenderWindow> gWindow, int x, int y) {
     worldSize = std::pair<int,int>(x,y);
-    for(int lanes = 0; lanes != x; lanes++){
-        world.push_back({});
+    gameWindow = gWindow;
+    std::vector<std::shared_ptr<sf::RectangleShape>> placeholder;
+    for(int board = 0; board != y ; board++){
+        std::vector<std::vector<std::vector<std::shared_ptr<sf::RectangleShape>>>> pVector;
+        for(int lane = 0; lane!= x; lane++){
+            pVector.push_back({placeholder});
+        }
+        world.push_back(pVector);
     }
+
     initWorld();
+
+    wall1 = sf::RectangleShape(sf::Vector2f(gameWindow->getSize().x/8.0,gameWindow->getSize().y+gameWindow->getSize().y/16.0));
+    wall2 = sf::RectangleShape(sf::Vector2f(gameWindow->getSize().x/8.0,gameWindow->getSize().y+gameWindow->getSize().y/16.0));
+    wallTexture.loadFromFile("../Resources/wallSprite/wall1.png");
+    wall1.setTexture(&wallTexture);
+    wall2.setTexture(&wallTexture);
+    wall1.setPosition(gameWindow->getSize().x/8.0,0);
+    wall2.setPosition(gameWindow->getSize().x/2.0 + gameWindow->getSize().x/4.0,0);
+    wall1.setOrigin(0,gameWindow->getSize().y/2.0);
+    wall2.setOrigin(0,gameWindow->getSize().y/2.0);
+    int b = 5;
 }
 
 void DungeonRunner::World::initWorld() {
@@ -19,31 +37,31 @@ void DungeonRunner::World::initWorld() {
             while (currentRow != 8) {
                 std::vector<std::shared_ptr<sf::RectangleShape>> Tile;
                 for (int i = 0; i != 4; i++) {
-                    std::shared_ptr<sf::Texture> floor = std::make_shared<sf::Texture>();
+                    sf::Texture* floor = new sf::Texture();
                     floor->loadFromFile(getRandomFloorTile());
                     std::shared_ptr<sf::RectangleShape> tile = std::make_shared<sf::RectangleShape>();
                     tile->setSize(sf::Vector2f(gameWindow->getSize().x / 16.0, gameWindow->getSize().y / 16.0));
-                    tile->setTexture(floor.get());
+                    tile->setTexture(floor);
                     switch (i) {
                         case 0:
-                            tile->setPosition((float) (lane + 1) * gameWindow->getSize().x / 8,
+                            tile->setPosition((float) (lane + 2) * gameWindow->getSize().x / 8,
                                               (float) currentRow * gameWindow->getSize().y / 8 -
                                               (float) (board * gameWindow->getSize().y));
                             break;
                         case 1:
-                            tile->setPosition((float) (lane + 1) * (float) currentRow * gameWindow->getSize().x / 8 +
+                            tile->setPosition((float) (lane + 2) * (float) gameWindow->getSize().x / 8 +
                                               (float) (gameWindow->getSize().x / 16.0),
                                               (float) currentRow * gameWindow->getSize().y / 8 -
                                               (float) (board * gameWindow->getSize().y));
                             break;
                         case 2:
-                            tile->setPosition((float) (lane + 1) * gameWindow->getSize().x / 8,
+                            tile->setPosition((float) (lane + 2) * gameWindow->getSize().x / 8,
                                               (float) currentRow * gameWindow->getSize().y / 8 +
                                               (float) (gameWindow->getSize().y / 16.0) -
                                               (float) (board * gameWindow->getSize().y));
                             break;
                         case 3:
-                            tile->setPosition((float) (lane + 1) * (float) currentRow * gameWindow->getSize().x / 8 +
+                            tile->setPosition((float) (lane + 2) * (float)gameWindow->getSize().x / 8 +
                                               (float) (gameWindow->getSize().x / 16.0),
                                               (float) currentRow * gameWindow->getSize().y / 8 +
                                               (float) (gameWindow->getSize().y / 16.0) -
@@ -54,8 +72,12 @@ void DungeonRunner::World::initWorld() {
                     }
                     Tile.push_back(tile);
                 }
-
-                world[board][lane].push_back(Tile);
+                if(currentRow == 0){
+                    world[board][lane][currentRow] = Tile;
+                }
+                else{
+                    world[board][lane].push_back(Tile);
+                }
                 currentRow++;
             }
         }
@@ -88,4 +110,20 @@ std::string DungeonRunner::World::getRandomFloorTile() {
     }
     floorTile+= std::to_string(random) + ".png";
     return floorTile;
+}
+
+void DungeonRunner::World::update(sf::View view) {
+    wall1.setPosition(sf::Vector2f(gameWindow->getSize().x/8.0,view.getCenter().y));
+    wall2.setPosition(sf::Vector2f(gameWindow->getSize().x/2.0 + gameWindow->getSize().x/4.0 ,view.getCenter().y));
+    for(auto &board:world){
+        for( auto &lane:board){
+            for(auto &tile:lane){
+                for(auto &subtile:tile){
+                    gameWindow->draw(*subtile);
+                }
+            }
+        }
+    }
+    gameWindow->draw(wall1);
+    gameWindow->draw(wall2);
 }

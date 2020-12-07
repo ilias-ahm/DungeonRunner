@@ -5,6 +5,8 @@
 #ifndef DUNGEONRUNNER_GAME_H
 #define DUNGEONRUNNER_GAME_H
 #include "Representation/PlayerSFML.h"
+#include "Representation/World.h"
+#include "Logic/AbstractFactory.h"
 
 namespace DungeonRunner {
     class Game {
@@ -12,7 +14,9 @@ namespace DungeonRunner {
     //                                                          Variables                                                           //
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         private:
+        AbstractFactory gameFactory;
         std::shared_ptr<sf::RenderWindow> gameWindow;
+        std::shared_ptr<World> gameWorld;
         sf::View gameView;
 
         public:
@@ -25,6 +29,7 @@ namespace DungeonRunner {
 
         public:
         Game(const std::shared_ptr<sf::RenderWindow> &gameWindow);
+        void update();
     };
 }
 
