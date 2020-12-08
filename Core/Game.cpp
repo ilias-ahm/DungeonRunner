@@ -16,15 +16,15 @@ void DungeonRunner::Game::update() {
     sf::Event event;
     while (gameWindow->pollEvent(event))
     {
-        // "close requested" event: we close the window
+
         if (event.type == sf::Event::Closed)
             gameWindow->close();
     }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Z)){
-        gameView.move(0,-5);
+        gameView.move(0,-50);
     }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::S)){
-        gameView.move(0,+5);
+        gameView.move(0,+50);
     }
     gameWorld->update(gameView);
     gameWindow->setView(gameView);

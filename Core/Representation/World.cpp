@@ -10,28 +10,26 @@ DungeonRunner::World::World(std::shared_ptr<sf::RenderWindow> gWindow, int x, in
     std::vector<std::shared_ptr<sf::RectangleShape>> placeholder;
     for(int board = 0; board != y ; board++){
         std::vector<std::vector<std::vector<std::shared_ptr<sf::RectangleShape>>>> pVector;
-        for(int lane = 0; lane!= x; lane++){
+        for(int lane = 0; lane!= x+2; lane++){
             pVector.push_back({placeholder});
         }
         world.push_back(pVector);
     }
-
+    wallTexture.loadFromFile("../Resources/wallSprite/wall1.png");
     initWorld();
 
-    wall1 = sf::RectangleShape(sf::Vector2f(gameWindow->getSize().x/8.0,gameWindow->getSize().y+gameWindow->getSize().y/16.0));
-    wall2 = sf::RectangleShape(sf::Vector2f(gameWindow->getSize().x/8.0,gameWindow->getSize().y+gameWindow->getSize().y/16.0));
-    wallTexture.loadFromFile("../Resources/wallSprite/wall1.png");
-    wall1.setTexture(&wallTexture);
-    wall2.setTexture(&wallTexture);
-    wall1.setPosition(gameWindow->getSize().x/8.0,0);
-    wall2.setPosition(gameWindow->getSize().x/2.0 + gameWindow->getSize().x/4.0,0);
-    wall1.setOrigin(0,gameWindow->getSize().y/2.0);
-    wall2.setOrigin(0,gameWindow->getSize().y/2.0);
-    int b = 5;
 }
 
 void DungeonRunner::World::initWorld() {
     for(int board = 0; board != worldSize.second;board++) {
+        std::shared_ptr<sf::RectangleShape> Wall1 = std::make_shared<sf::RectangleShape>(sf::Vector2f(gameWindow->getSize().x/8.0,gameWindow->getSize().y));
+        std::shared_ptr<sf::RectangleShape> Wall2 = std::make_shared<sf::RectangleShape>(sf::Vector2f(gameWindow->getSize().x/8.0,gameWindow->getSize().y));
+        Wall1->setTexture(&wallTexture);
+        Wall2->setTexture(&wallTexture);
+        Wall1->setPosition(gameWindow->getSize().x/8.0,(float)board*(-(float)gameWindow->getSize().y));
+        Wall2->setPosition(gameWindow->getSize().x/2.0 + gameWindow->getSize().x/4.0,(float)board*(-(float)gameWindow->getSize().y));
+        world[board][0] = {{Wall1}};
+        world[board][worldSize.first+1] = {{Wall2}};
         for (int lane = 0; lane != worldSize.first; lane++) {
             int currentRow = 0;
             while (currentRow != 8) {
@@ -73,10 +71,10 @@ void DungeonRunner::World::initWorld() {
                     Tile.push_back(tile);
                 }
                 if(currentRow == 0){
-                    world[board][lane][currentRow] = Tile;
+                    world[board][lane+1][currentRow] = Tile;
                 }
                 else{
-                    world[board][lane].push_back(Tile);
+                    world[board][lane+1].push_back(Tile);
                 }
                 currentRow++;
             }
@@ -113,8 +111,6 @@ std::string DungeonRunner::World::getRandomFloorTile() {
 }
 
 void DungeonRunner::World::update(sf::View view) {
-    wall1.setPosition(sf::Vector2f(gameWindow->getSize().x/8.0,view.getCenter().y));
-    wall2.setPosition(sf::Vector2f(gameWindow->getSize().x/2.0 + gameWindow->getSize().x/4.0 ,view.getCenter().y));
     for(auto &board:world){
         for( auto &lane:board){
             for(auto &tile:lane){
@@ -124,6 +120,4 @@ void DungeonRunner::World::update(sf::View view) {
             }
         }
     }
-    gameWindow->draw(wall1);
-    gameWindow->draw(wall2);
 }
