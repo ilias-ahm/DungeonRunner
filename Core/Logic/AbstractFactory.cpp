@@ -10,7 +10,7 @@ std::shared_ptr<DungeonRunner::World> DungeonRunner::AbstractFactory::createWorl
     return newWorld;
 }
 
-std::shared_ptr<DungeonRunnerSFML::Player> DungeonRunner::AbstractFactory::createPlayer(sf::RectangleShape player, sf::Texture playerTexture, sf::IntRect uvRect) {
-    std::shared_ptr<DungeonRunnerSFML::Player> newPlayer = std::make_shared<DungeonRunnerSFML::Player>(player,playerTexture,uvRect);
+std::shared_ptr<DungeonRunnerSFML::Player> DungeonRunner::AbstractFactory::createPlayer(std::shared_ptr<sf::RenderWindow> gWindow,std::shared_ptr<sf::RectangleShape> player,std::shared_ptr<sf::Texture> playerTexture,std::shared_ptr<sf::IntRect> uvRect){
+    std::shared_ptr<DungeonRunnerSFML::Player> newPlayer = std::make_shared<DungeonRunnerSFML::Player>(gWindow,player,playerTexture,uvRect);
     return newPlayer;
 }

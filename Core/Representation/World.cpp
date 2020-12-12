@@ -16,6 +16,7 @@ DungeonRunner::World::World(std::shared_ptr<sf::RenderWindow> gWindow, int x, in
         world.push_back(pVector);
     }
     wallTexture.loadFromFile("../Resources/wallSprite/wall1.png");
+    initTileTex();
     initWorld();
 
 }
@@ -35,11 +36,9 @@ void DungeonRunner::World::initWorld() {
             while (currentRow != 8) {
                 std::vector<std::shared_ptr<sf::RectangleShape>> Tile;
                 for (int i = 0; i != 4; i++) {
-                    sf::Texture* floor = new sf::Texture();
-                    floor->loadFromFile(getRandomFloorTile());
                     std::shared_ptr<sf::RectangleShape> tile = std::make_shared<sf::RectangleShape>();
                     tile->setSize(sf::Vector2f(gameWindow->getSize().x / 16.0, gameWindow->getSize().y / 16.0));
-                    tile->setTexture(floor);
+                    tile->setTexture(getRandomFloorTile().get());
                     switch (i) {
                         case 0:
                             tile->setPosition((float) (lane + 2) * gameWindow->getSize().x / 8,
@@ -82,7 +81,7 @@ void DungeonRunner::World::initWorld() {
     }
 }
 
-std::string DungeonRunner::World::getRandomFloorTile() {
+std::shared_ptr<sf::Texture> DungeonRunner::World::getRandomFloorTile() {
     std::string floorTile = "../Resources/floorSprites/floor_";
     int random = rand()%100;
     if(0<=random and random <50) random = 1;
@@ -106,8 +105,7 @@ std::string DungeonRunner::World::getRandomFloorTile() {
                 break;
         }
     }
-    floorTile+= std::to_string(random) + ".png";
-    return floorTile;
+    return tileTextures[random-1];
 }
 
 void DungeonRunner::World::update(sf::View view) {
@@ -119,5 +117,15 @@ void DungeonRunner::World::update(sf::View view) {
                 }
             }
         }
+    }
+}
+
+void DungeonRunner::World::initTileTex() {
+    for(int i=1;i!=9;i++){
+        std::shared_ptr<sf::Texture> fTile = std::make_shared<sf::Texture>();
+        std::string filePath = "../Resources/floorSprites/floor_";
+        filePath+= std::to_string(i) + ".png";
+        fTile->loadFromFile(filePath);
+        tileTextures.push_back(fTile);
     }
 }

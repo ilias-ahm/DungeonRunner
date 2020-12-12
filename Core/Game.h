@@ -14,10 +14,13 @@ namespace DungeonRunner {
     //                                                          Variables                                                           //
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         private:
+        bool pauseView = true;
         AbstractFactory gameFactory;
         std::shared_ptr<sf::RenderWindow> gameWindow;
         std::shared_ptr<World> gameWorld;
         sf::View gameView;
+        std::shared_ptr<DungeonRunnerSFML::Player> gamePlayer;
+        std::vector<std::shared_ptr<sf::Texture>> characterTex;
 
         public:
 
@@ -29,7 +32,9 @@ namespace DungeonRunner {
 
         public:
         Game(const std::shared_ptr<sf::RenderWindow> &gameWindow);
+        void createPlayer();
         void update();
+        bool isColliding(std::shared_ptr<Entity> e1,std::shared_ptr<Entity> e2);
     };
 }
 

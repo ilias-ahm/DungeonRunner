@@ -16,6 +16,7 @@ namespace DungeonRunner {
         std::pair<int,int> worldSize;
         std::vector<std::vector<std::vector<std::vector<std::shared_ptr<sf::RectangleShape>>>>> world;
         sf::Texture wallTexture;
+        std::vector<std::shared_ptr<sf::Texture>> tileTextures;
         sf::RectangleShape wall1;
         sf::RectangleShape wall2;
 
@@ -28,7 +29,8 @@ namespace DungeonRunner {
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         private:
         void initWorld();
-        std::string getRandomFloorTile();
+        std::shared_ptr<sf::Texture> getRandomFloorTile();
+        void initTileTex();
 
         public:
         World(std::shared_ptr<sf::RenderWindow> gWindow, int x, int y);

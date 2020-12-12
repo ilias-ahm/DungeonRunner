@@ -13,9 +13,10 @@ namespace DungeonRunnerSFML{
     //                                                          Variables                                                           //
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     private:
-        sf::Texture playerTexture;
-        sf::RectangleShape player;
-        sf::IntRect uvRect;
+        std::shared_ptr<sf::Texture> playerTexture;
+        std::shared_ptr<sf::RectangleShape> player;
+        std::shared_ptr<sf::IntRect> uvRect;
+        std::shared_ptr<sf::RenderWindow> gWindow;
     public:
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -24,7 +25,10 @@ namespace DungeonRunnerSFML{
     private:
 
     public:
-        Player(sf::RectangleShape player,sf::Texture playerTexture,sf::IntRect uvRect);
+        void update(sf::View gView);
+        Player(std::shared_ptr<sf::RenderWindow> gWindow,std::shared_ptr<sf::RectangleShape> player,std::shared_ptr<sf::Texture> playerTexture,std::shared_ptr<sf::IntRect> uvRect);
+        void move(float x, float y);
+        sf::Vector2f getPos();
     };
 }
 
