@@ -1,6 +1,8 @@
 #include <iostream>
 #include "Core/Game.h"
 #include "Core/Representation/World.h"
+#include "Core/Logic/Transformation.h"
+#include <random>
 int main()
 {
     std::shared_ptr<sf::RenderWindow> gWindow = std::make_shared<sf::RenderWindow>(sf::VideoMode(2048,2048),"Test");
@@ -12,6 +14,5 @@ int main()
         newGame->update();
         gWindow->display();
     }
-
     return 0;
 }

@@ -6,6 +6,7 @@
 #define DUNGEONRUNNER_PLAYERSFML_H
 #include "../Logic/Player.h"
 #include <SFML/Graphics.hpp>
+#include "../Logic/Transformation.h"
 
 namespace DungeonRunnerSFML{
     class Player : public DungeonRunner::Player {
@@ -25,10 +26,13 @@ namespace DungeonRunnerSFML{
     private:
 
     public:
-        void update(sf::View gView);
+        void update(std::shared_ptr<Transformation> t);
         Player(std::shared_ptr<sf::RenderWindow> gWindow,std::shared_ptr<sf::RectangleShape> player,std::shared_ptr<sf::Texture> playerTexture,std::shared_ptr<sf::IntRect> uvRect);
-        void move(float x, float y);
+        void move(std::shared_ptr<Transformation> t,float x, float y);
         sf::Vector2f getPos();
+        void update() override;
+        void display() override;
+        void action() override;
     };
 }
 

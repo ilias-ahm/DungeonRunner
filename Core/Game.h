@@ -21,6 +21,7 @@ namespace DungeonRunner {
         sf::View gameView;
         std::shared_ptr<DungeonRunnerSFML::Player> gamePlayer;
         std::vector<std::shared_ptr<sf::Texture>> characterTex;
+        std::shared_ptr<Transformation> gameTransformer;
 
         public:
 

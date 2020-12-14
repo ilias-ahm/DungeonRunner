@@ -26,9 +26,11 @@ namespace DungeonRunner {
 
         public:
 
-        void display();
-        void update();
-        void action();
+        virtual void display() = 0;
+
+        virtual void update() = 0;
+
+        virtual void action() = 0;
 
     };
 

@@ -6,10 +6,11 @@
 
 
 DungeonRunner::Game::Game(const std::shared_ptr<sf::RenderWindow> &gameWindow) : gameWindow(gameWindow) {
-   gameWorld = gameFactory.createWorld(gameWindow,4,25);
+   gameWorld = gameFactory.createWorld(gameWindow,4,14);
    gameView = sf::View(sf::Vector2f(gameWindow->getSize().x/2.0,0),sf::Vector2f(gameWindow->getSize().x,gameWindow->getSize().y));
    gameView.setCenter(gameWindow->getSize().x/2.0,gameWindow->getSize().y/2.0);
-   gameWorld->update(gameView);
+   gameWorld->update();
+   gameTransformer = gameFactory.createTransformation(gameWindow,4,14);
    std::shared_ptr<sf::Texture> maleTex = std::make_shared<sf::Texture>();
    maleTex->loadFromFile("../Resources/characterSprites/maleCharacter.png");
    characterTex.push_back(maleTex);
@@ -23,18 +24,28 @@ void DungeonRunner::Game::update() {
         if (event.type == sf::Event::Closed)
             gameWindow->close();
     }
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Z)){
-        gamePlayer->move(0,-5);
+    /*if(sf::Keyboard::isKeyPressed(sf::Keyboard::Z)){
+        gamePlayer->move(gameTransformer,0,24*0.0002);
         if(gamePlayer->getPos().y<=gameView.getCenter().y)
             pauseView = false;
     }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::S)){
-        gamePlayer->move(0,+5);
+
+        gamePlayer->move(gameTransformer,0,-0.0012);
         pauseView = true;
+    }*/
+    gameView.setCenter(gameWindow->getSize().x/2.0,gamePlayer->getPos().y);
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Z)){
+        gamePlayer->setPlayerSpeed(gamePlayer->getPlayerSpeed()*1.005);
+        if(gamePlayer->getPlayerSpeed() >0.01) gamePlayer->setPlayerSpeed(0.01);
     }
-    if(!pauseView) gameView.setCenter(gameWindow->getSize().x/2.0,gamePlayer->getPos().y);
-    gameWorld->update(gameView);
-    gamePlayer->update(gameView);
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::S)){
+        gamePlayer->setPlayerSpeed(gamePlayer->getPlayerSpeed()/1.005);
+        if(gamePlayer->getPlayerSpeed() < 0.0025) gamePlayer->setPlayerSpeed(0.0025);
+    }
+    gamePlayer->move(gameTransformer,0,gamePlayer->getPlayerSpeed());
+    gameWorld->update();
+    gamePlayer->update(gameTransformer);
     gameWindow->setView(gameView);
 }
 
@@ -46,8 +57,11 @@ void DungeonRunner::Game::createPlayer() {
     uvRect->height = playerSize->y;
     uvRect->left = uvRect->width*7;
     uvRect->top = uvRect->height*3;
-    player->setPosition((gameWindow->getSize().x/8.0)*2,gameWindow->getSize().y-gameWindow->getSize().y/8.0);
     player->setTextureRect(*uvRect);
     player->setTexture(&*characterTex[0]);
     gamePlayer = gameFactory.createPlayer(gameWindow,player,characterTex[0],uvRect);
+}
+
+bool DungeonRunner::Game::isColliding(std::shared_ptr<Entity> e1, std::shared_ptr<Entity> e2) {
+    return false;
 }
