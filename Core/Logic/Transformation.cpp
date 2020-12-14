@@ -3,6 +3,7 @@
 //
 
 #include "Transformation.h"
+#include <cmath>
 
 std::pair<float, float> Transformation::toPixel(float x, float y) {
     std::pair<float,float> windowSize = std::pair<float,float>(gWindow->getSize().x,gWindow->getSize().y);

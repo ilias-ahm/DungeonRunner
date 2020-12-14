@@ -6,6 +6,7 @@
 #define DUNGEONRUNNER_TRANSFORMATION_H
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include <memory>
 
 class Transformation {
 private:

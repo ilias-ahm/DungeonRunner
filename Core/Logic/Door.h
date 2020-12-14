@@ -5,6 +5,7 @@
 #ifndef DUNGEONRUNNER_DOOR_H
 #define DUNGEONRUNNER_DOOR_H
 #include "Entity.h"
+#include <memory>
 namespace DungeonRunner {
     class Door: public Entity{
     protected:
