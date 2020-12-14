@@ -8,14 +8,18 @@
 
 class Random {
 public:
+
     static Random& getInstance();
     static double generateRandomChance();
     static int generateRandInt(int min, int max);
     static int generateRandInt(int max);
 
+
 private:
     Random();
     ~Random() = default;
+    double _generateRandomChance();
+    std::mt19937 &getGenerator();
     std::random_device rDev;
     std::mt19937 rng;
     std::uniform_real_distribution<double> fDist;

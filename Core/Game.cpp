@@ -43,6 +43,12 @@ void DungeonRunner::Game::update() {
         gamePlayer->setPlayerSpeed(gamePlayer->getPlayerSpeed()/1.005);
         if(gamePlayer->getPlayerSpeed() < 0.0025) gamePlayer->setPlayerSpeed(0.0025);
     }
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)){
+        gamePlayer->move(gameTransformer,0.035,0);
+    }
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Q)){
+        gamePlayer->move(gameTransformer,-0.035,0);
+    }
     gamePlayer->move(gameTransformer,0,gamePlayer->getPlayerSpeed());
     gameWorld->update();
     gamePlayer->update(gameTransformer);

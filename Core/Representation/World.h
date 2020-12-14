@@ -7,6 +7,7 @@
 #include "../Logic/Entity.h"
 #include "DoorSFML.h"
 #include <SFML/Graphics.hpp>
+#include "../Logic/Random.h"
 namespace DungeonRunner {
     class World : public Entity {
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

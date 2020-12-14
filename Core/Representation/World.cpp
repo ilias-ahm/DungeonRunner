@@ -3,7 +3,6 @@
 //
 
 #include "World.h"
-#include <random>
 DungeonRunner::World::World(std::shared_ptr<sf::RenderWindow> gWindow, int x, int y) {
     worldSize = std::pair<int,int>(x,y);
     gameWindow = gWindow;
@@ -43,7 +42,6 @@ void DungeonRunner::World::initWorld() {
                 std::random_device dev;
                 std::mt19937 rng(dev());
                 std::uniform_real_distribution<double> dist(0,1); // distribution in range [1, 6]
-
                 if(dist(rng)<0.012 and board>0) {
                     std::shared_ptr<sf::RectangleShape> dRec = std::make_shared<sf::RectangleShape>(
                             sf::Vector2f(gameWindow->getSize().x / 8.0, gameWindow->getSize().y / 8.0));

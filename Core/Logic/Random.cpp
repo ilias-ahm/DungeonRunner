@@ -5,10 +5,7 @@
 #include "Random.h"
 
 double Random::generateRandomChance() {
-    std::random_device dev;
-    std::mt19937 rng(dev());
-    std::uniform_real_distribution<double> dist(0,1); // distribution in range [1, 6]
-    return dist(rng);
+    return getInstance()._generateRandomChance();
 }
 
 int Random::generateRandInt(int min, int max) {
@@ -22,10 +19,21 @@ int Random::generateRandInt(int max) {
     return 0;
 }
 
-Random::Random() {
-    rng = std::mt19937(rDev());
+Random::Random(){
 }
 
 Random &Random::getInstance() {
-    return Random();
+    static Random newInstance;
+    return newInstance;
 }
+
+double Random::_generateRandomChance() {
+    fDist = std::uniform_real_distribution<double>(0,1);
+    return fDist(getInstance().getGenerator());
+}
+
+std::mt19937 &Random::getGenerator() {
+    return rng;
+}
+
+
