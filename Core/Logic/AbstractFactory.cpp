@@ -15,7 +15,3 @@ std::shared_ptr<DungeonRunnerSFML::Player> DungeonRunner::AbstractFactory::creat
     return newPlayer;
 }
 
-std::shared_ptr<Transformation>
-DungeonRunner::AbstractFactory::createTransformation(std::shared_ptr<sf::RenderWindow> gWindow, int x, int y) {
-    return std::make_shared<Transformation>(gWindow,std::pair<int,int>(x,y));
-}

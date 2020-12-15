@@ -5,11 +5,9 @@
 #include "PlayerSFML.h"
 
 
-void DungeonRunnerSFML::Player::update(std::shared_ptr<Transformation> t) {
-    std::pair<float,float> pixelC = t->toPixel(playerPosition.first,playerPosition.second);
+void DungeonRunnerSFML::Player::update() {
+    std::pair<float,float> pixelC = Transformation::toPixel(gWindow, ePosition.first, ePosition.second);
     player->setPosition(pixelC.first,pixelC.second);
-    //std::cout <<"----------------------------------------"<< std::endl <<playerPosition.first << ", " << playerPosition.second << std::endl<< pixelC.first <<", "<<pixelC.second <<std::endl<<player->getPosition().x << ", "<<player->getPosition().y << std::endl;
-    //std::cout <<"----------------------------------------"<< std::endl;
     gWindow->draw(*player);
 }
 
@@ -20,16 +18,18 @@ DungeonRunnerSFML::Player::Player(std::shared_ptr<sf::RenderWindow> gWindow, std
     DungeonRunnerSFML::Player::uvRect = uvRect;
     DungeonRunnerSFML::Player::gWindow = gWindow;
     playerSpeed = 14*0.0002;
-    playerPosition = std::pair<float,float>(-2,-7);
+    ePosition = std::pair<float,float>(-2, -7);
     player->setTexture(&*playerTexture);
     player->setTextureRect(*uvRect);
+    player->setOrigin(player->getSize().x/2.0,0);
+    eType = "Player";
 }
 
-void DungeonRunnerSFML::Player::move(std::shared_ptr<Transformation> t,float x, float y) {
-    if(playerPosition.first+x< -(t->getWSize().first/2.0) or playerPosition.first+x>(t->getWSize().first/2.0) or
-            playerPosition.second+y<-(t->getWSize().second/2.0) or playerPosition.second+y>(t->getWSize().second/2.0)) return;
-    playerPosition.first+=x;
-    playerPosition.second+=y;
+void DungeonRunnerSFML::Player::move(float x, float y) {
+    if(ePosition.first + x < -(Transformation::getWSize().first / 2.0) or ePosition.first + x > (Transformation::getWSize().first / 2.0) or
+       ePosition.second + y < -(Transformation::getWSize().second / 2.0) or ePosition.second + y > (Transformation::getWSize().second / 2.0)) return;
+    ePosition.first+=x;
+    ePosition.second+=y;
 
 }
 
@@ -42,10 +42,6 @@ void DungeonRunnerSFML::Player::action() {
 }
 
 void DungeonRunnerSFML::Player::display() {
-
-}
-
-void DungeonRunnerSFML::Player::update() {
 
 }
 

@@ -10,15 +10,18 @@
 
 class Transformation {
 private:
-     std::shared_ptr<sf::RenderWindow> gWindow;
-     std::pair<int,int> wSize;
+    Transformation();
+    std::pair<int,int> wSize;
+    std::pair<float,float> _toPixel(std::shared_ptr<sf::RenderWindow> gWindow,float x, float y);
+    std::pair<int,int> _getWSize();
+    std::pair<float,float> _toCoords(std::shared_ptr<sf::RenderWindow>gWindow,float x, float y);
 public:
-    std::pair<float,float> toCoords(float x, float y);
-    std::pair<float,float> toPixel(float x, float y);
+    static std::pair<float,float> toCoords(std::shared_ptr<sf::RenderWindow>gWindow,float x, float y);
+    static std::pair<float,float> toPixel(std::shared_ptr<sf::RenderWindow> gWindow,float x, float y);
+    static Transformation& getInstance();
+    static std::pair<int, int> getWSize();
 
-    const std::pair<int, int> &getWSize() const;
 
-    Transformation(const std::shared_ptr<sf::RenderWindow> &gWindow, const std::pair<int, int> &wSize);
 };
 
 

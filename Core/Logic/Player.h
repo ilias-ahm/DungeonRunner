@@ -16,7 +16,6 @@ namespace DungeonRunner {
         int playerLives;
         std::string playerName;
         std::string playerType;
-        std::pair<float,float> playerPosition;
 
         public:
 
@@ -43,7 +42,6 @@ namespace DungeonRunner {
 
         const std::string &getPlayerName() const;
 
-        const std::pair<float, float> &getPlayerPosition() const;
     };
 }
 

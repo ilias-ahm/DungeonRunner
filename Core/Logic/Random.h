@@ -19,6 +19,8 @@ private:
     Random();
     ~Random() = default;
     double _generateRandomChance();
+    int _generateRandomInt(int max);
+    int _generateRandomInt(int min,int max);
     std::mt19937 &getGenerator();
     std::random_device rDev;
     std::mt19937 rng;

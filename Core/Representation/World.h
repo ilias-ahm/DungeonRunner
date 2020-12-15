@@ -8,6 +8,7 @@
 #include "DoorSFML.h"
 #include <SFML/Graphics.hpp>
 #include "../Logic/Random.h"
+#include "../Logic/Transformation.h"
 namespace DungeonRunner {
     class World : public Entity {
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -39,7 +40,7 @@ namespace DungeonRunner {
         public:
         World(std::shared_ptr<sf::RenderWindow> gWindow, int x, int y);
 
-        const std::vector<std::shared_ptr<Entity>> &getObstacles() const;
+        const std::vector<std::shared_ptr<Entity>> &getObstacles();
 
         void update() override;
         void action() override;

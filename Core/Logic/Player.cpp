@@ -17,10 +17,10 @@ void DungeonRunner::Player::setPlayerName(const std::string &playerName) {
 }
 
 void DungeonRunner::Player::setPlayerPosition(const std::pair<float, float> &playerPosition) {
-    Player::playerPosition = playerPosition;
+    Player::ePosition = playerPosition;
 }
 void DungeonRunner::Player::setPlayerPosition(float x, float y) {
-    Player::playerPosition = std::pair<float,float>(x,y);
+    Player::ePosition = std::pair<float,float>(x, y);
 }
 
 float DungeonRunner::Player::getPlayerSpeed() const {
@@ -35,6 +35,3 @@ const std::string &DungeonRunner::Player::getPlayerName() const {
     return playerName;
 }
 
-const std::pair<float, float> &DungeonRunner::Player::getPlayerPosition() const {
-    return playerPosition;
-}

@@ -15,13 +15,13 @@ namespace DungeonRunner {
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         private:
         bool pauseView = true;
+        bool pauseGame = false;
         AbstractFactory gameFactory;
         std::shared_ptr<sf::RenderWindow> gameWindow;
         std::shared_ptr<World> gameWorld;
         sf::View gameView;
         std::shared_ptr<DungeonRunnerSFML::Player> gamePlayer;
         std::vector<std::shared_ptr<sf::Texture>> characterTex;
-        std::shared_ptr<Transformation> gameTransformer;
 
         public:
 

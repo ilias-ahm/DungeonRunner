@@ -26,9 +26,8 @@ namespace DungeonRunnerSFML{
     private:
 
     public:
-        void update(std::shared_ptr<Transformation> t);
         Player(std::shared_ptr<sf::RenderWindow> gWindow,std::shared_ptr<sf::RectangleShape> player,std::shared_ptr<sf::Texture> playerTexture,std::shared_ptr<sf::IntRect> uvRect);
-        void move(std::shared_ptr<Transformation> t,float x, float y);
+        void move(float x, float y);
         sf::Vector2f getPos();
         void update() override;
         void display() override;

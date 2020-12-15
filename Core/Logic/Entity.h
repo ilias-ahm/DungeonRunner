@@ -7,14 +7,15 @@
 #include <iostream>
 #include <memory>
 #include <vector>
-
+#include "Transformation.h"
 namespace DungeonRunner {
     class Entity {
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //                                                          Variables                                                           //
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         protected:
-
+        std::string eType;
+        std::pair<float,float> ePosition;
 
         public:
 
@@ -25,12 +26,18 @@ namespace DungeonRunner {
         private:
 
         public:
+        Entity();
 
-        virtual void display() = 0;
+        const std::pair<float, float> &getEPosition() const;
 
-        virtual void update() = 0;
+        void setEPosition(const std::pair<float, float> &ePosition);
 
-        virtual void action() = 0;
+        std::string getType();
+        virtual void display();
+
+        virtual void update();
+
+        virtual void action();
 
     };
 

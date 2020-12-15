@@ -20,6 +20,7 @@ DungeonRunner::World::World(std::shared_ptr<sf::RenderWindow> gWindow, int x, in
     initPillarTex();
     initSwordTex();
     initWorld();
+    eType = "World";
 
 }
 
@@ -38,15 +39,15 @@ void DungeonRunner::World::initWorld() {
             while (currentRow != 8) {
                 std::vector<std::shared_ptr<sf::RectangleShape>> Tile;
                 double rand = Random::generateRandomChance();
-                std::cout << rand <<std::endl;
-                if(rand<0.012 and board>0) {
+                if(rand<0.018 and board>0) {
                     std::shared_ptr<sf::RectangleShape> dRec = std::make_shared<sf::RectangleShape>(
                             sf::Vector2f(gameWindow->getSize().x / 8.0, gameWindow->getSize().y / 8.0));
                     std::shared_ptr<DungeonRunnerSFML::DoorSFML> dObs = std::make_shared<DungeonRunnerSFML::DoorSFML>(
                             dRec, gameWindow, obstacleTextures);
-                    dRec->setPosition((float) (lane + 2) * gameWindow->getSize().x / 8,
+                    dRec->setPosition((float) ((lane + 2) * gameWindow->getSize().x / 8)+dRec->getSize().x/2.0,
                                       (float) currentRow * gameWindow->getSize().y / 8 -
                                       (float) (board * gameWindow->getSize().y));
+                    dObs->setEPosition(Transformation::toCoords(gameWindow,dRec->getPosition().x,dRec->getPosition().y));
                     obstacles.push_back(dObs);
                 }
                 for (int i = 0; i != 4; i++) {
@@ -97,7 +98,7 @@ void DungeonRunner::World::initWorld() {
 
 std::shared_ptr<sf::Texture> DungeonRunner::World::getRandomFloorTile() {
     std::string floorTile = "../Resources/floorSprites/floor_";
-    int random = rand()%100;
+    int random = Random::generateRandInt(100);
     if(0<=random and random <50) random = 1;
     else if (50<=random and random <53) random = 2;
     else if (53<=random and random <73) random = 3;
@@ -193,6 +194,14 @@ void DungeonRunner::World::display() {
 
 }
 
-const std::vector<std::shared_ptr<DungeonRunner::Entity>> &DungeonRunner::World::getObstacles() const {
+const std::vector<std::shared_ptr<DungeonRunner::Entity>> &DungeonRunner::World::getObstacles(){
+    for(int i=0;i!=obstacles.size();i++) {
+        for (int j = 0;j!=obstacles.size()-1;j++) {
+            if(obstacles[j]->getEPosition().second>obstacles[j+1]->getEPosition().second){
+                std::swap(obstacles[j],obstacles[j+1]);
+            }
+        }
+    }
+
     return obstacles;
 }

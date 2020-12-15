@@ -9,14 +9,11 @@ double Random::generateRandomChance() {
 }
 
 int Random::generateRandInt(int min, int max) {
-    std::random_device dev;
-    std::mt19937 rng(dev());
-    std::uniform_int_distribution<int> dist(0,1); // distribution in range [1, 6]
-    return dist(rng);
+   return getInstance()._generateRandomInt(min,max);
 }
 
 int Random::generateRandInt(int max) {
-    return 0;
+    return getInstance()._generateRandomInt(max);
 }
 
 Random::Random(){
@@ -37,6 +34,16 @@ double Random::_generateRandomChance() {
 
 std::mt19937 &Random::getGenerator() {
     return rng;
+}
+
+int Random::_generateRandomInt(int max) {
+    std::uniform_int_distribution<int> iDist(0,max);
+    return iDist(getInstance().getGenerator());
+}
+
+int Random::_generateRandomInt(int min, int max) {
+    std::uniform_int_distribution<int> iDist(min,max);
+    return iDist(getInstance().getGenerator());
 }
 
 
