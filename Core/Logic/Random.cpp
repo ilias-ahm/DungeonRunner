@@ -20,7 +20,7 @@ int Random::generateRandInt(int max) {
 }
 
 Random::Random(){
-    rng = std::mt19937(rDev());
+    rng.seed(rDev());
 }
 
 Random &Random::getInstance() {
@@ -29,8 +29,10 @@ Random &Random::getInstance() {
 }
 
 double Random::_generateRandomChance() {
+    if(fDist.min() == 0 and fDist.max() == 1)  return fDist(getInstance().getGenerator());
     fDist = std::uniform_real_distribution<>(0,1);
     return fDist(getInstance().getGenerator());
+
 }
 
 std::mt19937 &Random::getGenerator() {

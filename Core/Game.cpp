@@ -55,6 +55,7 @@ void DungeonRunner::Game::update() {
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)){
         gamePlayer->move(gameTransformer,-0.035,0);
     }
+    gameWindow->clear();
     gamePlayer->move(gameTransformer,0,gamePlayer->getPlayerSpeed());
     if (!pauseView) gameView.setCenter(gameWindow->getSize().x/2.0,gamePlayer->getPos().y);
     gameWorld->update();
