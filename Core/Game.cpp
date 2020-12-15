@@ -34,10 +34,16 @@ void DungeonRunner::Game::update() {
         gamePlayer->move(gameTransformer,0,-0.0012);
         pauseView = true;
     }*/
-    gameView.setCenter(gameWindow->getSize().x/2.0,gamePlayer->getPos().y);
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Z)){
+    if(gamePlayer->getPos().y<=gameView.getCenter().y)
+        pauseView = false;
+    else{
+        pauseView = true;
+        gameView.setCenter(gameWindow->getSize().x/2.0,gameWindow->getSize().y/2.0);
+    }
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)){
         gamePlayer->setPlayerSpeed(gamePlayer->getPlayerSpeed()*1.005);
         if(gamePlayer->getPlayerSpeed() >0.01) gamePlayer->setPlayerSpeed(0.01);
+
     }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::S)){
         gamePlayer->setPlayerSpeed(gamePlayer->getPlayerSpeed()/1.005);
@@ -46,17 +52,22 @@ void DungeonRunner::Game::update() {
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)){
         gamePlayer->move(gameTransformer,0.035,0);
     }
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Q)){
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)){
         gamePlayer->move(gameTransformer,-0.035,0);
     }
     gamePlayer->move(gameTransformer,0,gamePlayer->getPlayerSpeed());
+    if (!pauseView) gameView.setCenter(gameWindow->getSize().x/2.0,gamePlayer->getPos().y);
     gameWorld->update();
     gamePlayer->update(gameTransformer);
+    for(auto &obstacle:gameWorld->getObstacles()){
+        obstacle->update();
+        obstacle->display();
+    }
     gameWindow->setView(gameView);
 }
 
 void DungeonRunner::Game::createPlayer() {
-    std::shared_ptr<sf::RectangleShape> player = std::make_shared<sf::RectangleShape>(sf::Vector2f(gameWindow->getSize().x/8.0,gameWindow->getSize().y/8.0));
+    std::shared_ptr<sf::RectangleShape> player = std::make_shared<sf::RectangleShape>(sf::Vector2f(gameWindow->getSize().x/10.0,gameWindow->getSize().y/10.0));
     std::shared_ptr<sf::Vector2u> playerSize = std::make_shared<sf::Vector2u>(576/12.0,576/8.0);
     std::shared_ptr<sf::IntRect> uvRect = std::make_shared<sf::IntRect>();
     uvRect->width = playerSize->x;

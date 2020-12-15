@@ -24,6 +24,9 @@ DungeonRunner::World::World(std::shared_ptr<sf::RenderWindow> gWindow, int x, in
 }
 
 void DungeonRunner::World::initWorld() {
+    std::random_device dev;
+    std::mt19937 rng(dev());
+    std::uniform_real_distribution<double> dist(0,1);
     for(int board = 0; board != worldSize.second;board++) {
         std::shared_ptr<sf::RectangleShape> Wall1 = std::make_shared<sf::RectangleShape>(sf::Vector2f(gameWindow->getSize().x/8.0,gameWindow->getSize().y));
         std::shared_ptr<sf::RectangleShape> Wall2 = std::make_shared<sf::RectangleShape>(sf::Vector2f(gameWindow->getSize().x/8.0,gameWindow->getSize().y));
@@ -37,12 +40,9 @@ void DungeonRunner::World::initWorld() {
             int currentRow = 0;
             while (currentRow != 8) {
                 std::vector<std::shared_ptr<sf::RectangleShape>> Tile;
-
-
-                std::random_device dev;
-                std::mt19937 rng(dev());
-                std::uniform_real_distribution<double> dist(0,1); // distribution in range [1, 6]
-                if(dist(rng)<0.012 and board>0) {
+                double rand = dist(rng);
+                std::cout << rand <<std::endl;
+                if(rand<0.012 and board>0) {
                     std::shared_ptr<sf::RectangleShape> dRec = std::make_shared<sf::RectangleShape>(
                             sf::Vector2f(gameWindow->getSize().x / 8.0, gameWindow->getSize().y / 8.0));
                     std::shared_ptr<DungeonRunnerSFML::DoorSFML> dObs = std::make_shared<DungeonRunnerSFML::DoorSFML>(
@@ -194,4 +194,8 @@ void DungeonRunner::World::action() {
 
 void DungeonRunner::World::display() {
 
+}
+
+const std::vector<std::shared_ptr<DungeonRunner::Entity>> &DungeonRunner::World::getObstacles() const {
+    return obstacles;
 }

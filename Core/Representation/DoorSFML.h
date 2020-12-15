@@ -13,6 +13,8 @@ namespace DungeonRunnerSFML {
         std::shared_ptr<sf::RectangleShape> door;
         std::shared_ptr<sf::RenderWindow> gWindow;
         std::map<std::string,std::shared_ptr<sf::Texture>> doorStates;
+        sf::RectangleShape lFrame;
+        sf::RectangleShape rFrame;
     public:
         DoorSFML(const std::shared_ptr<sf::RectangleShape> &door, const std::shared_ptr<sf::RenderWindow> &gWindow,
                  const std::map<std::string, std::shared_ptr<sf::Texture>> &doorStates);

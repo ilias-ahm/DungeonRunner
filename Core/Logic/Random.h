@@ -22,8 +22,7 @@ private:
     std::mt19937 &getGenerator();
     std::random_device rDev;
     std::mt19937 rng;
-    std::uniform_real_distribution<double> fDist;
-    std::uniform_int_distribution<int> iDist;
+    std::uniform_real_distribution<> fDist;
 };
 
 

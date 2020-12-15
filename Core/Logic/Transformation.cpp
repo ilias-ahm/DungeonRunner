@@ -7,11 +7,11 @@
 
 std::pair<float, float> Transformation::toPixel(float x, float y) {
     std::pair<float,float> windowSize = std::pair<float,float>(gWindow->getSize().x,gWindow->getSize().y);
-    double lenX = windowSize.first-windowSize.first/2.0-windowSize.first/8.0;
+    double lenX = windowSize.first-windowSize.first/2.0-windowSize.first/12.0;
     double lenY = windowSize.second;
     double rPosX = (x+wSize.first/2.0)/wSize.first;
-    double rPosY = abs(y) - floor(abs(y));
-    double newX = lenX* rPosX + windowSize.first/4.0;
+    double rPosY = std::abs(y) - std::floor(std::abs(y));
+    double newX = lenX* rPosX + windowSize.first/4.1;
     double newY;
     if(y>0) newY = windowSize.second - (rPosY *lenY) - ((int)y+wSize.second/2.0)*windowSize.second - windowSize.second/8.0;
     else newY = windowSize.second + (rPosY *lenY) - ((int)y+wSize.second/2.0)*windowSize.second - windowSize.second/8.0;

@@ -8,6 +8,8 @@
 void DungeonRunnerSFML::Player::update(std::shared_ptr<Transformation> t) {
     std::pair<float,float> pixelC = t->toPixel(playerPosition.first,playerPosition.second);
     player->setPosition(pixelC.first,pixelC.second);
+    //std::cout <<"----------------------------------------"<< std::endl <<playerPosition.first << ", " << playerPosition.second << std::endl<< pixelC.first <<", "<<pixelC.second <<std::endl<<player->getPosition().x << ", "<<player->getPosition().y << std::endl;
+    //std::cout <<"----------------------------------------"<< std::endl;
     gWindow->draw(*player);
 }
 
@@ -17,14 +19,15 @@ DungeonRunnerSFML::Player::Player(std::shared_ptr<sf::RenderWindow> gWindow, std
     DungeonRunnerSFML::Player::playerTexture = playerTexture;
     DungeonRunnerSFML::Player::uvRect = uvRect;
     DungeonRunnerSFML::Player::gWindow = gWindow;
-    playerSpeed = 24*0.0002;
+    playerSpeed = 14*0.0002;
     playerPosition = std::pair<float,float>(-2,-7);
     player->setTexture(&*playerTexture);
     player->setTextureRect(*uvRect);
 }
 
 void DungeonRunnerSFML::Player::move(std::shared_ptr<Transformation> t,float x, float y) {
-    if(playerPosition.first+x< -(t->getWSize().first/2.0) or playerPosition.first+x>(t->getWSize().first/2.0) or playerPosition.second+y<-(t->getWSize().second/2.0) or playerPosition.second+y>(t->getWSize().second/2.0)) return;
+    if(playerPosition.first+x< -(t->getWSize().first/2.0) or playerPosition.first+x>(t->getWSize().first/2.0) or
+            playerPosition.second+y<-(t->getWSize().second/2.0) or playerPosition.second+y>(t->getWSize().second/2.0)) return;
     playerPosition.first+=x;
     playerPosition.second+=y;
 

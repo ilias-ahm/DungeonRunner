@@ -38,6 +38,9 @@ namespace DungeonRunner {
 
         public:
         World(std::shared_ptr<sf::RenderWindow> gWindow, int x, int y);
+
+        const std::vector<std::shared_ptr<Entity>> &getObstacles() const;
+
         void update() override;
         void action() override;
         void display() override;
