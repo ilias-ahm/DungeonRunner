@@ -33,5 +33,26 @@ void DungeonRunner::Entity::action() {
 
 }
 
+const std::pair<float, float> &DungeonRunner::Entity::getESize() const {
+    return eSize;
+}
+
+void DungeonRunner::Entity::move(float x, float y) {
+    ePosition.first+=x;
+    ePosition.second+=y;
+}
+
+bool DungeonRunner::Entity::isNoclip() const {
+    return noclip;
+}
+
+DungeonRunner::Entity::Entity(const std::pair<float, float> &ePosition,
+                              const std::pair<float, float> &eSize) : ePosition(ePosition),
+                                                                      eSize(eSize) {}
+
+void DungeonRunner::Entity::setNoclip(bool noclip) {
+    Entity::noclip = noclip;
+}
+
 
 

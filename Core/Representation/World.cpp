@@ -3,6 +3,7 @@
 //
 
 #include "World.h"
+#include "../Logic/AbstractFactory.h"
 DungeonRunner::World::World(std::shared_ptr<sf::RenderWindow> gWindow, int x, int y) {
     worldSize = std::pair<int,int>(x,y);
     gameWindow = gWindow;
@@ -20,6 +21,16 @@ DungeonRunner::World::World(std::shared_ptr<sf::RenderWindow> gWindow, int x, in
     initPillarTex();
     initSwordTex();
     initWorld();
+    std::pair<float,float> fSize = Transformation::toCoords(gWindow, gameWindow->getSize().x, gameWindow->getSize().y / 8.0);
+    fSize.first+= Transformation::getWSize().first / 2.0;
+    fSize.second+= Transformation::getWSize().second / 2.0;
+    fSize.second = 1 - fSize.second;
+    worldFinishCollider = AbstractFactory::createCollider(std::pair<float,float>(0,7), fSize);
+    obstacles.push_back(worldFinishCollider);
+    worldFinish = std::make_shared<sf::RectangleShape>(sf::Vector2f(gameWindow->getSize().x,gameWindow->getSize().y/8.0));
+    worldFinish->setOrigin(gameWindow->getSize().x/2.0,worldFinish->getSize().y);
+    std::pair<float,float> finishPos = Transformation::toPixel(gWindow,0 ,7);
+    worldFinish->setPosition(finishPos.first,finishPos.second);
     eType = "World";
 
 }
@@ -42,10 +53,9 @@ void DungeonRunner::World::initWorld() {
                 if(rand<0.018 and board>0) {
                     std::shared_ptr<sf::RectangleShape> dRec = std::make_shared<sf::RectangleShape>(
                             sf::Vector2f(gameWindow->getSize().x / 8.0, gameWindow->getSize().y / 8.0));
-                    std::shared_ptr<DungeonRunnerSFML::DoorSFML> dObs = std::make_shared<DungeonRunnerSFML::DoorSFML>(
-                            dRec, gameWindow, obstacleTextures);
+                    std::shared_ptr<DungeonRunnerSFML::DoorSFML> dObs = AbstractFactory::createDoor(dRec, gameWindow, obstacleTextures);
                     dRec->setPosition((float) ((lane + 2) * gameWindow->getSize().x / 8)+dRec->getSize().x/2.0,
-                                      (float) currentRow * gameWindow->getSize().y / 8 -
+                                      (float) (currentRow * gameWindow->getSize().y / 8 ) + dRec->getSize().y -
                                       (float) (board * gameWindow->getSize().y));
                     dObs->setEPosition(Transformation::toCoords(gameWindow,dRec->getPosition().x,dRec->getPosition().y));
                     obstacles.push_back(dObs);
@@ -104,7 +114,7 @@ std::shared_ptr<sf::Texture> DungeonRunner::World::getRandomFloorTile() {
     else if (53<=random and random <73) random = 3;
     else if (73<=random and random <90) random = 5;
     else{
-        int r3 = rand()%4;
+        int r3 = Random::generateRandInt(4);
         switch (r3) {
             case 0:
                 random = 6;
@@ -118,25 +128,17 @@ std::shared_ptr<sf::Texture> DungeonRunner::World::getRandomFloorTile() {
             case 3:
                 random = 4;
                 break;
+            default:
+                random = 4;
+                break;
         }
     }
     return tileTextures[random-1];
 }
 
 void DungeonRunner::World::update() {
-    for(auto &board:world){
-        for( auto &lane:board){
-            for(auto &tile:lane){
-                for(auto &subtile:tile){
-                    gameWindow->draw(*subtile);
-                }
-            }
-        }
-    }
-    for(auto &obstacle:obstacles){
-        obstacle->update();
-        obstacle->display();
-    }
+
+
 }
 
 void DungeonRunner::World::initTileTex() {
@@ -191,7 +193,16 @@ void DungeonRunner::World::action() {
 }
 
 void DungeonRunner::World::display() {
-
+    for(auto &board:world){
+        for( auto &lane:board){
+            for(auto &tile:lane){
+                for(auto &subtile:tile){
+                    gameWindow->draw(*subtile);
+                }
+            }
+        }
+    }
+    gameWindow->draw(*worldFinish);
 }
 
 const std::vector<std::shared_ptr<DungeonRunner::Entity>> &DungeonRunner::World::getObstacles(){
@@ -204,4 +215,8 @@ const std::vector<std::shared_ptr<DungeonRunner::Entity>> &DungeonRunner::World:
     }
 
     return obstacles;
+}
+
+const std::map<std::string, std::shared_ptr<sf::Texture>> &DungeonRunner::World::getObstacleTextures() const {
+    return obstacleTextures;
 }

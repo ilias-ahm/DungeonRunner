@@ -8,7 +8,13 @@
 void DungeonRunnerSFML::Player::update() {
     std::pair<float,float> pixelC = Transformation::toPixel(gWindow, ePosition.first, ePosition.second);
     player->setPosition(pixelC.first,pixelC.second);
-    gWindow->draw(*player);
+    if(damaged) {
+        player->setFillColor(sf::Color::Red);
+        damaged = false;
+
+    }
+    else player->setFillColor(sf::Color::White);
+
 }
 
 DungeonRunnerSFML::Player::Player(std::shared_ptr<sf::RenderWindow> gWindow, std::shared_ptr<sf::RectangleShape> player,
@@ -18,30 +24,35 @@ DungeonRunnerSFML::Player::Player(std::shared_ptr<sf::RenderWindow> gWindow, std
     DungeonRunnerSFML::Player::uvRect = uvRect;
     DungeonRunnerSFML::Player::gWindow = gWindow;
     playerSpeed = 14*0.0002;
-    ePosition = std::pair<float,float>(-2, -7);
+    ePosition = std::pair<float,float>(-0.75, -6.7);
+    std::pair<float,float> tSize = Transformation::toCoords(gWindow,player->getSize().x,player->getSize().y);
+    tSize.first+=Transformation::getWSize().first/2.0;
+    tSize.second+=Transformation::getWSize().second/2.0;
+    tSize.second = 1 - tSize.second;
+    eSize = tSize;
     player->setTexture(&*playerTexture);
     player->setTextureRect(*uvRect);
-    player->setOrigin(player->getSize().x/2.0,0);
+    player->setOrigin(player->getSize().x/2.0,player->getSize().y);
     eType = "Player";
 }
 
-void DungeonRunnerSFML::Player::move(float x, float y) {
-    if(ePosition.first + x < -(Transformation::getWSize().first / 2.0) or ePosition.first + x > (Transformation::getWSize().first / 2.0) or
+/*void DungeonRunnerSFML::Player::move(float x, float y) {
+    if(ePosition.first + x < -(Transformation::getWSize().first / 2.0) or ePosition.first + x >= (Transformation::getWSize().first / 2.0) or
        ePosition.second + y < -(Transformation::getWSize().second / 2.0) or ePosition.second + y > (Transformation::getWSize().second / 2.0)) return;
     ePosition.first+=x;
     ePosition.second+=y;
 
-}
+}*/
 
 sf::Vector2f DungeonRunnerSFML::Player::getPos() {
     return player->getPosition();
 }
 
 void DungeonRunnerSFML::Player::action() {
-
+    damaged = true;
 }
 
 void DungeonRunnerSFML::Player::display() {
-
+    gWindow->draw(*player);
 }
 

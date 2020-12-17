@@ -13,6 +13,7 @@ public:
     static double generateRandomChance();
     static int generateRandInt(int min, int max);
     static int generateRandInt(int max);
+    static float generateRandFloat(float min, float max);
 
 
 private:
@@ -21,6 +22,7 @@ private:
     double _generateRandomChance();
     int _generateRandomInt(int max);
     int _generateRandomInt(int min,int max);
+    float _generateRandomFloat(float min, float max);
     std::mt19937 &getGenerator();
     std::random_device rDev;
     std::mt19937 rng;

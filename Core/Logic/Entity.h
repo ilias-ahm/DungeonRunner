@@ -16,6 +16,8 @@ namespace DungeonRunner {
         protected:
         std::string eType;
         std::pair<float,float> ePosition;
+        std::pair<float,float> eSize;
+        bool noclip = false;
 
         public:
 
@@ -28,13 +30,22 @@ namespace DungeonRunner {
         public:
         Entity();
 
+        void setNoclip(bool noclip);
+
+        Entity(const std::pair<float, float> &ePosition,
+               const std::pair<float, float> &eSize);
+
         const std::pair<float, float> &getEPosition() const;
+
+        bool isNoclip() const;
 
         void setEPosition(const std::pair<float, float> &ePosition);
 
+        const std::pair<float, float> &getESize() const;
+
         std::string getType();
         virtual void display();
-
+        void move(float x, float y);
         virtual void update();
 
         virtual void action();

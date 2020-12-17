@@ -4,16 +4,3 @@
 
 #include "Door.h"
 
-void DungeonRunner::Door::open() {
-    isOpen = true;
-
-
-}
-
-void DungeonRunner::Door::close() {
-    isOpen = false;
-}
-
-void DungeonRunner::Door::lockDoor() {
-    isLocked = true;
-}

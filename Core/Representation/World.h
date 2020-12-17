@@ -22,8 +22,11 @@ namespace DungeonRunner {
         std::vector<std::shared_ptr<sf::Texture>> tileTextures;
         std::map<std::string,std::shared_ptr<sf::Texture>> obstacleTextures;
         std::vector<std::shared_ptr<Entity>> obstacles;
+        std::shared_ptr<sf::RectangleShape> worldFinish;
+        std::shared_ptr<Entity> worldFinishCollider;
 
-        public:
+
+    public:
 
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -41,6 +44,8 @@ namespace DungeonRunner {
         World(std::shared_ptr<sf::RenderWindow> gWindow, int x, int y);
 
         const std::vector<std::shared_ptr<Entity>> &getObstacles();
+
+        const std::map<std::string, std::shared_ptr<sf::Texture>> &getObstacleTextures() const;
 
         void update() override;
         void action() override;

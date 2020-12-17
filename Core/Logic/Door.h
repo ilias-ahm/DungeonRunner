@@ -10,13 +10,9 @@ namespace DungeonRunner {
     class Door: public Entity{
     protected:
         bool isOpen = false;
-        std::pair<float,float> doorPosition;
         bool isLocked = false;
 
     public:
-        void open();
-        void close();
-        void lockDoor();
     };
 
 }

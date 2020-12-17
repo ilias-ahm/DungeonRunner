@@ -46,4 +46,13 @@ int Random::_generateRandomInt(int min, int max) {
     return iDist(getInstance().getGenerator());
 }
 
+float Random::_generateRandomFloat(float min, float max) {
+    fDist = std::uniform_real_distribution<>(min,max);
+    return fDist(getInstance().getGenerator());
+}
+
+float Random::generateRandFloat(float min, float max) {
+    return getInstance()._generateRandomFloat(min,max);
+}
+
 
