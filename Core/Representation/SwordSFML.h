@@ -11,7 +11,7 @@ namespace DungeonRunnerSFML {
         std::shared_ptr<sf::Texture> swordTexture;
         std::shared_ptr<sf::RenderWindow> gWindow;
     public:
-        Sword(std::shared_ptr<sf::RenderWindow> gWindow);
+        Sword(std::shared_ptr<sf::RenderWindow> &gWindow);
         void update() override;
         void display() override;
 

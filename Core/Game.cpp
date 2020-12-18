@@ -3,7 +3,6 @@
 //
 
 #include "Game.h"
-#include "Logic/Collision.h"
 
 DungeonRunner::Game::Game(const std::shared_ptr<sf::RenderWindow> &gameWindow) : gameWindow(gameWindow) {
    gameWorld = gameFactory.createWorld(gameWindow,4,14);
@@ -15,6 +14,7 @@ DungeonRunner::Game::Game(const std::shared_ptr<sf::RenderWindow> &gameWindow) :
    maleTex->loadFromFile("../Resources/characterSprites/maleCharacter.png");
    characterTex.push_back(maleTex);
    createPlayer();
+   initAI();
    gameEntities.push_back(gamePlayer);
    std::shared_ptr<Entity> Wall1 = AbstractFactory::createCollider(std::pair<float,float>(-1.25,-7),std::pair<float,float>(0.5,1));
    std::shared_ptr<Entity> Wall2 = AbstractFactory::createCollider(std::pair<float,float>(1.25,-7),std::pair<float,float>(0.5,1));
@@ -136,7 +136,7 @@ void DungeonRunner::Game::manageGameEvents() {
 
 void DungeonRunner::Game::spawnTraps() {
     std::pair<float, float> pPos = gamePlayer->getEPosition();
-    if(Random::generateRandomChance()<0.02 and pPos.second + 1 <7) {
+    if(Random::generateRandomChance()<0.009 and pPos.second + 1 <7) {
         std::pair<float, float> tPos;
         tPos.first = Random::getInstance().generateRandFloat(-1, 1);
         tPos.second = pPos.second + 0.8;
@@ -157,5 +157,9 @@ void DungeonRunner::Game::manageTraps() {
             trap->move(0,-0.01);
         }
     }
+
+}
+
+void DungeonRunner::Game::initAI() {
 
 }

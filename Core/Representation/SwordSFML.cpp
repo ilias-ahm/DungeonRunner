@@ -4,7 +4,7 @@
 
 #include "SwordSFML.h"
 
-DungeonRunnerSFML::Sword::Sword(std::shared_ptr<sf::RenderWindow> gWindow):
+DungeonRunnerSFML::Sword::Sword(std::shared_ptr<sf::RenderWindow> &gWindow):
                                 gWindow(gWindow) {
     sf::Vector2f swordSize;
     swordTexture = std::make_shared<sf::Texture>();

@@ -18,7 +18,7 @@ namespace DungeonRunnerSFML{
         std::shared_ptr<sf::RectangleShape> player;
         std::shared_ptr<sf::IntRect> uvRect;
         std::shared_ptr<sf::RenderWindow> gWindow;
-        bool damaged;
+        bool damaged = false;
     public:
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -27,7 +27,7 @@ namespace DungeonRunnerSFML{
     private:
 
     public:
-        Player(std::shared_ptr<sf::RenderWindow> gWindow,std::shared_ptr<sf::RectangleShape> player,std::shared_ptr<sf::Texture> playerTexture,std::shared_ptr<sf::IntRect> uvRect);
+        Player(std::shared_ptr<sf::RenderWindow> &gWindow,std::shared_ptr<sf::RectangleShape> &player,std::shared_ptr<sf::Texture> &playerTexture,std::shared_ptr<sf::IntRect> &uvRect);
         sf::Vector2f getPos();
         void update() override;
         void display() override;

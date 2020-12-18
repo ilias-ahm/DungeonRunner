@@ -17,8 +17,8 @@ void DungeonRunnerSFML::Player::update() {
 
 }
 
-DungeonRunnerSFML::Player::Player(std::shared_ptr<sf::RenderWindow> gWindow, std::shared_ptr<sf::RectangleShape> player,
-                                  std::shared_ptr<sf::Texture> playerTexture, std::shared_ptr<sf::IntRect> uvRect) {
+DungeonRunnerSFML::Player::Player(std::shared_ptr<sf::RenderWindow> &gWindow, std::shared_ptr<sf::RectangleShape> &player,
+                                  std::shared_ptr<sf::Texture> &playerTexture, std::shared_ptr<sf::IntRect> &uvRect) {
     DungeonRunnerSFML::Player::player = player;
     DungeonRunnerSFML::Player::playerTexture = playerTexture;
     DungeonRunnerSFML::Player::uvRect = uvRect;

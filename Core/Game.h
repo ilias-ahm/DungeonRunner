@@ -7,6 +7,8 @@
 #include "Representation/PlayerSFML.h"
 #include "Representation/World.h"
 #include "Logic/AbstractFactory.h"
+#include "Logic/Collision.h"
+#include "Representation/AIPlayerSFML.h"
 
 namespace DungeonRunner {
     class Game {
@@ -14,7 +16,6 @@ namespace DungeonRunner {
     //                                                          Variables                                                           //
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         private:
-        bool pauseView = true;
         bool pauseGame = false;
         AbstractFactory gameFactory;
         std::shared_ptr<sf::RenderWindow> gameWindow;
@@ -24,7 +25,7 @@ namespace DungeonRunner {
         std::vector<std::shared_ptr<sf::Texture>> characterTex;
         std::vector<std::shared_ptr<Entity>> gameEntities;
         std::vector<std::shared_ptr<Entity>> viewColliders;
-        //std::vector<DungeonRunnerSFML::AIPlayer> aiPlayers;
+        std::vector<DungeonRunnerSFML::AIPlayer> aiPlayers;
 
         public:
 
@@ -45,6 +46,8 @@ namespace DungeonRunner {
 
         void update();
         bool isColliding(std::shared_ptr<Entity> e1,std::shared_ptr<Entity> e2,float push);
+
+        void initAI();
     };
 }
 
