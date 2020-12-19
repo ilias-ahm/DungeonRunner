@@ -7,14 +7,18 @@
 #include "../Logic/AIPlayer.h"
 
 namespace DungeonRunnerSFML {
-class AIPlayer: public DungeonRunner::AIPlayer {
-private:
-    std::vector<std::shared_ptr<DungeonRunner::Entity>> gameEntities;
-    std::shared_ptr<sf::RenderWindow> gWindow;
+    class AIPlayer: public DungeonRunner::AIPlayer {
+    private:
+        std::vector<std::shared_ptr<DungeonRunner::Entity>> gameEntities;
+        std::shared_ptr<sf::RenderWindow> gWindow;
+        sf::RectangleShape aiPlayer;
+        sf::Texture aiTexture;
 
-public:
-    AIPlayer(std::vector<std::shared_ptr<DungeonRunner::Entity>> &gameEntities,
-    std::shared_ptr<sf::RenderWindow> &gWindow);
+    public:
+        AIPlayer(std::vector<std::shared_ptr<DungeonRunner::Entity>> &gameEntities,
+        std::shared_ptr<sf::RenderWindow> &gWindow);
+        void display() override;
+        void update() override;
     };
 
 }

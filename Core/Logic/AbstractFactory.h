@@ -10,6 +10,7 @@
 #include "../Representation/PlayerSFML.h"
 #include "Transformation.h"
 #include "../Representation/SwordSFML.h"
+#include "../Representation/AIPlayerSFML.h"
 
 namespace DungeonRunner {
     class AbstractFactory {
@@ -22,6 +23,8 @@ namespace DungeonRunner {
         static std::shared_ptr<DungeonRunner::Entity> createCollider(const std::pair<float, float> &ePosition,
                                                               const std::pair<float, float> &eSize);
         static std::shared_ptr<DungeonRunnerSFML::Sword> createSword(std::shared_ptr<sf::RenderWindow> gWindow);
+        static std::shared_ptr<DungeonRunnerSFML::AIPlayer> createAI(std::vector<std::shared_ptr<DungeonRunner::Entity>> &gameEntities,
+                                                                  std::shared_ptr<sf::RenderWindow> &gWindow);
     };
 }
 

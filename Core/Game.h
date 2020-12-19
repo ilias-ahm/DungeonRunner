@@ -26,7 +26,7 @@ namespace DungeonRunner {
         std::vector<std::shared_ptr<sf::Texture>> characterTex;
         std::vector<std::shared_ptr<Entity>> gameEntities;
         std::vector<std::shared_ptr<Entity>> viewColliders;
-        std::vector<DungeonRunnerSFML::AIPlayer> aiPlayers;
+        std::vector<std::shared_ptr<DungeonRunnerSFML::AIPlayer>> aiPlayers;
 
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -40,13 +40,14 @@ namespace DungeonRunner {
         void manageGameEvents();
         void spawnTraps();
         void manageTraps(double dTime);
+        void manageAI(float dTime);
 
         bool isColliding(std::shared_ptr<Entity> e1,std::shared_ptr<Entity> e2,float push);
 
     public:
         Game(const std::shared_ptr<sf::RenderWindow> &gameWindow);
         void update(double dTime);
-
+        void run();
 
         void initAI();
 

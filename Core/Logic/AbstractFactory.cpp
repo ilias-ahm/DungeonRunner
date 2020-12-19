@@ -36,5 +36,11 @@ DungeonRunner::AbstractFactory::createSword(std::shared_ptr<sf::RenderWindow> gW
     return std::make_shared<DungeonRunnerSFML::Sword>(gWindow);
 }
 
+std::shared_ptr<DungeonRunnerSFML::AIPlayer>
+DungeonRunner::AbstractFactory::createAI(std::vector<std::shared_ptr<DungeonRunner::Entity>> &gameEntities,
+                                         std::shared_ptr<sf::RenderWindow> &gWindow) {
+    return std::make_shared<DungeonRunnerSFML::AIPlayer>(gameEntities,gWindow);
+}
+
 
 

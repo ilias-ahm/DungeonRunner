@@ -7,7 +7,12 @@
 #include "Entity.h"
 namespace DungeonRunner {
     class AIPlayer: public Entity {
+    protected:
+        float aiSpeed;
+    public:
+        float getAiSpeed() const;
 
+        void setAiSpeed(float aiSpeed);
     };
 }
 

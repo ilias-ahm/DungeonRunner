@@ -15,7 +15,6 @@ namespace DungeonRunner {
         float playerSpeed;
         int playerLives;
         std::string playerName;
-        std::string playerType;
 
         public:
 
