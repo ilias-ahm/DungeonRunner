@@ -23,7 +23,7 @@ DungeonRunnerSFML::Player::Player(std::shared_ptr<sf::RenderWindow> &gWindow, st
     DungeonRunnerSFML::Player::playerTexture = playerTexture;
     DungeonRunnerSFML::Player::uvRect = uvRect;
     DungeonRunnerSFML::Player::gWindow = gWindow;
-    playerSpeed = 14*0.0002;
+    playerSpeed = 0.2;
     ePosition = std::pair<float,float>(-0.75, -6.7);
     std::pair<float,float> tSize = Transformation::toCoords(gWindow,player->getSize().x,player->getSize().y);
     tSize.first+=Transformation::getWSize().first/2.0;

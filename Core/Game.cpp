@@ -24,12 +24,12 @@ DungeonRunner::Game::Game(const std::shared_ptr<sf::RenderWindow> &gameWindow) :
    viewColliders.push_back(Wall2);
 }
 
-void DungeonRunner::Game::update() {
+void DungeonRunner::Game::update(double dTime) {
     spawnTraps();
     gameWindow->clear();
     manageGameEvents();
-    manageTraps();
-    managePlayerMovement();
+    manageTraps(dTime);
+    managePlayerMovement(dTime);
     gameWorld->update();
     gameWorld->display();
     gamePlayer->update();
@@ -85,25 +85,25 @@ void DungeonRunner::Game::manageCollision(std::shared_ptr<Entity> entity) {
     }
 }
 
-void DungeonRunner::Game::managePlayerMovement() {
+void DungeonRunner::Game::managePlayerMovement(double dTime) {
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Z)){
-        //gamePlayer->setPlayerSpeed(gamePlayer->getPlayerSpeed()*1.005);
-        //if(gamePlayer->getPlayerSpeed() >0.01) gamePlayer->setPlayerSpeed(0.01);
-        gamePlayer->move(0,gamePlayer->getPlayerSpeed());
+        gamePlayer->setPlayerSpeed(gamePlayer->getPlayerSpeed()*1.005);
+        if(gamePlayer->getPlayerSpeed()*1.005 > 0.4) gamePlayer->setPlayerSpeed(0.4);
+        //gamePlayer->move(0,gamePlayer->getPlayerSpeed()*dTime);
 
     }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::S)){
-        //gamePlayer->setPlayerSpeed(gamePlayer->getPlayerSpeed()/1.005);
-        //if(gamePlayer->getPlayerSpeed() < 0.0025) gamePlayer->setPlayerSpeed(0.0025);
-        gamePlayer->move(0,-gamePlayer->getPlayerSpeed());
+        gamePlayer->setPlayerSpeed(gamePlayer->getPlayerSpeed()/1.005);
+        if(gamePlayer->getPlayerSpeed()/1.005 < 0.1) gamePlayer->setPlayerSpeed(0.1);
+        //gamePlayer->move(0,-gamePlayer->getPlayerSpeed()*dTime);
     }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)){
-        gamePlayer->move(0.035,0);
+        gamePlayer->move(2*dTime,0);
     }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Q)){
-        gamePlayer->move(-0.035,0);
+        gamePlayer->move(-2*dTime,0);
     }
-    if(!pauseGame) gamePlayer->move(0,gamePlayer->getPlayerSpeed());
+    if(!pauseGame) gamePlayer->move(0,gamePlayer->getPlayerSpeed()*dTime);
 }
 
 void DungeonRunner::Game::manageGameEvents() {
@@ -136,7 +136,7 @@ void DungeonRunner::Game::manageGameEvents() {
 
 void DungeonRunner::Game::spawnTraps() {
     std::pair<float, float> pPos = gamePlayer->getEPosition();
-    if(Random::generateRandomChance()<0.009 and pPos.second + 1 <7) {
+    if(Random::generateRandomChance()<0.005 and pPos.second + 1 <7) {
         std::pair<float, float> tPos;
         tPos.first = Random::getInstance().generateRandFloat(-1, 1);
         tPos.second = pPos.second + 0.8;
@@ -151,10 +151,10 @@ void DungeonRunner::Game::spawnTraps() {
 
 }
 
-void DungeonRunner::Game::manageTraps() {
+void DungeonRunner::Game::manageTraps(double dTime) {
     for(auto &trap:gameEntities){
         if(trap->getType() == "Sword"){
-            trap->move(0,-0.01);
+            trap->move(0,-dTime*0.8);
         }
     }
 

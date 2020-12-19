@@ -9,6 +9,7 @@
 #include "Logic/AbstractFactory.h"
 #include "Logic/Collision.h"
 #include "Representation/AIPlayerSFML.h"
+#include <chrono>
 
 namespace DungeonRunner {
     class Game {
@@ -27,8 +28,6 @@ namespace DungeonRunner {
         std::vector<std::shared_ptr<Entity>> viewColliders;
         std::vector<DungeonRunnerSFML::AIPlayer> aiPlayers;
 
-        public:
-
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //                                                          Functions                                                           //
@@ -37,17 +36,20 @@ namespace DungeonRunner {
         void createPlayer();
         void updateViewColliders();
         void manageCollision(std::shared_ptr<Entity> entity);
-        void managePlayerMovement();
+        void managePlayerMovement(double dTime);
         void manageGameEvents();
         void spawnTraps();
-        void manageTraps();
-        public:
-        Game(const std::shared_ptr<sf::RenderWindow> &gameWindow);
+        void manageTraps(double dTime);
 
-        void update();
         bool isColliding(std::shared_ptr<Entity> e1,std::shared_ptr<Entity> e2,float push);
 
+    public:
+        Game(const std::shared_ptr<sf::RenderWindow> &gameWindow);
+        void update(double dTime);
+
+
         void initAI();
+
     };
 }
 
