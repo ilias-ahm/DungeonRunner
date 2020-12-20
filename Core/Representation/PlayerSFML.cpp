@@ -56,3 +56,8 @@ void DungeonRunnerSFML::Player::display() {
     gWindow->draw(*player);
 }
 
+void DungeonRunnerSFML::Player::setUvRect(const std::shared_ptr<sf::IntRect> &uvRect) {
+    Player::uvRect = uvRect;
+    player->setTextureRect(*uvRect);
+}
+

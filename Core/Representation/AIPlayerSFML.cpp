@@ -8,8 +8,9 @@
 DungeonRunnerSFML::AIPlayer::AIPlayer(
         std::vector<std::shared_ptr<DungeonRunner::Entity>> &gameEntities,
         std::shared_ptr<sf::RenderWindow> &gWindow): gameEntities(gameEntities),gWindow(gWindow) {
-    aiPlayer = sf::RectangleShape(sf::Vector2f(gWindow->getSize().x/12.0,gWindow->getSize().y/8.0));
-    aiTexture.loadFromFile("../Resources/characterSprites/aisprite.png");
+    aiPlayer = sf::RectangleShape(sf::Vector2f(gWindow->getSize().x/11.0,gWindow->getSize().y/11.0));
+    aiTexture.loadFromFile("../Resources/characterSprites/Soldier_01-4.png");
+    aiPlayer.setTexture(&aiTexture);
     std::pair<float,float> aiPos(-0.25,-6.7);
     while(true){
         bool correctPos = true;
@@ -41,4 +42,9 @@ void DungeonRunnerSFML::AIPlayer::display() {
 void DungeonRunnerSFML::AIPlayer::update() {
     std::pair<float,float> pixelC = Transformation::toPixel(gWindow, ePosition.first, ePosition.second);
     aiPlayer.setPosition(pixelC.first,pixelC.second);
+}
+
+void DungeonRunnerSFML::AIPlayer::setUvRect(const sf::IntRect &uvRect) {
+    AIPlayer::uvRect = uvRect;
+    aiPlayer.setTextureRect(uvRect);
 }

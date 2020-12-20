@@ -11,11 +11,15 @@ DungeonRunner::Game::Game(const std::shared_ptr<sf::RenderWindow> &gameWindow) :
    gameWorld->update();
    gameEntities.insert(gameEntities.end(),gameWorld->getObstacles().begin(),gameWorld->getObstacles().end());
    std::shared_ptr<sf::Texture> maleTex = std::make_shared<sf::Texture>();
-   maleTex->loadFromFile("../Resources/characterSprites/maleCharacter.png");
+   std::shared_ptr<sf::Texture> aiTex = std::make_shared<sf::Texture>();
+   maleTex->loadFromFile("../Resources/characterSprites/Male_16-1.png");
+   aiTex->loadFromFile("../Resources/characterSprites/Soldier_01-4.png");
    characterTex.push_back(maleTex);
    createPlayer();
    initAI();
    gameEntities.push_back(gamePlayer);
+   playerAnimation = std::make_shared<DungeonRunnerSFML::Animation>(maleTex,sf::Vector2u(3,4));
+   aiAnimation = std::make_shared<DungeonRunnerSFML::Animation>(aiTex,sf::Vector2u(3,4));
    std::shared_ptr<Entity> Wall1 = AbstractFactory::createCollider(std::pair<float,float>(-1.25,-7),std::pair<float,float>(0.5,1));
    std::shared_ptr<Entity> Wall2 = AbstractFactory::createCollider(std::pair<float,float>(1.25,-7),std::pair<float,float>(0.5,1));
    std::shared_ptr<Entity> Wall3 = AbstractFactory::createCollider(std::pair<float,float>(0,-6),std::pair<float,float>(4,0.125));
@@ -35,18 +39,32 @@ void DungeonRunner::Game::update(double dTime) {
     gameWindow->clear();
     manageGameEvents();
     manageTraps(dTime);
-    managePlayerMovement(dTime);
     manageCollision(gamePlayer);
+    managePlayerMovement(dTime);
+    for(auto &ai:aiPlayers){
+        manageCollision(ai);
+    }
     manageAI(dTime);
     gameWorld->update();
     gameWorld->display();
+    for(auto &ai:aiPlayers){
+        aiAnimation->update(3,dTime,true,0.5/ai->getAiSpeed());
+        ai->setUvRect(aiAnimation->getUvRect());
+        ai->update();
+        ai->display();
+    }
     gamePlayer->update();
+    playerAnimation->update(3,dTime,true,0.15/gamePlayer->getPlayerSpeed());
+    gamePlayer->setUvRect(std::make_shared<sf::IntRect>(playerAnimation->getUvRect()));
+
+
+
     gamePlayer->display();
     gameView.setCenter(gameWindow->getSize().x/2.0,gamePlayer->getPos().y-gameWindow->getSize().y/4.0);
     updateViewColliders();
 
     for(auto &entity:gameEntities){
-        if(entity==gamePlayer) continue;
+        if(entity==gamePlayer or entity->getType() == "AI") continue;
         entity->update();
         entity->display();
     }
@@ -54,12 +72,12 @@ void DungeonRunner::Game::update(double dTime) {
 }
 
 void DungeonRunner::Game::createPlayer() {
-    std::shared_ptr<sf::RectangleShape> player = std::make_shared<sf::RectangleShape>(sf::Vector2f(gameWindow->getSize().x/12.0,gameWindow->getSize().y/8.0));
-    std::shared_ptr<sf::Vector2u> playerSize = std::make_shared<sf::Vector2u>(576/12.0,576/8.0);
+    std::shared_ptr<sf::RectangleShape> player = std::make_shared<sf::RectangleShape>(sf::Vector2f(gameWindow->getSize().x/11.0,gameWindow->getSize().y/11.0));
+    std::shared_ptr<sf::Vector2u> playerSize = std::make_shared<sf::Vector2u>(32,32);
     std::shared_ptr<sf::IntRect> uvRect = std::make_shared<sf::IntRect>();
     uvRect->width = playerSize->x;
     uvRect->height = playerSize->y;
-    uvRect->left = uvRect->width*7;
+    uvRect->left = uvRect->width*1;
     uvRect->top = uvRect->height*3;
     player->setTextureRect(*uvRect);
     player->setTexture(&*characterTex[0]);
@@ -97,9 +115,9 @@ void DungeonRunner::Game::manageCollision(std::shared_ptr<Entity> entity) {
     for(auto &collider:gameEntities){
         float push = 1;
         if(collider == entity) continue;
-        if(entity->getType() == "AI" and collider->getType() == "Player") push =0.3;
-        if(collider->getType() == "AI" and entity->getType() == "Player") push =0.3;
-        if(collider->getType() == "AI" and entity->getType() == "AI") push =0.3;
+        if(entity->getType() == "AI" and collider->getType() == "Player") push =0.5;
+        if(collider->getType() == "AI" and entity->getType() == "Player") push =0.5;
+        if(collider->getType() == "AI" and entity->getType() == "AI") push =0.5;
         if(isColliding(collider,entity,push)){
             if(collider->getType() == "Sword" and (entity->getType() == "Player" or entity->getType() == "AI")){
                 collider->setEPosition(std::pair<float,float>(-3,9));
@@ -110,22 +128,22 @@ void DungeonRunner::Game::manageCollision(std::shared_ptr<Entity> entity) {
 }
 
 void DungeonRunner::Game::managePlayerMovement(double dTime) {
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Z)){
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)){
         gamePlayer->setPlayerSpeed(gamePlayer->getPlayerSpeed()*1.01);
         if(gamePlayer->getPlayerSpeed()*1.01 > 0.5) gamePlayer->setPlayerSpeed(0.5);
         //gamePlayer->move(0,gamePlayer->getPlayerSpeed()*dTime);
 
     }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::S)){
-        gamePlayer->setPlayerSpeed(gamePlayer->getPlayerSpeed()/1.01);
-        if(gamePlayer->getPlayerSpeed()/1.01 < 0.2) gamePlayer->setPlayerSpeed(0.2);
+        //gamePlayer->setPlayerSpeed(gamePlayer->getPlayerSpeed()/1.01);
+        //if(gamePlayer->getPlayerSpeed()/1.01 < 0.2) gamePlayer->setPlayerSpeed(0.2);
 
-        //gamePlayer->move(0,-gamePlayer->getPlayerSpeed()*dTime);
+        gamePlayer->move(0,-gamePlayer->getPlayerSpeed()*2*dTime);
     }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)){
         gamePlayer->move(2*dTime,0);
     }
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Q)){
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)){
         gamePlayer->move(-2*dTime,0);
     }
     if(!pauseGame) gamePlayer->move(0,gamePlayer->getPlayerSpeed()*dTime);
@@ -200,6 +218,9 @@ void DungeonRunner::Game::run() {
         gameWindow->clear();
         auto now = std::chrono::high_resolution_clock::now();
         dTime = std::chrono::duration_cast<std::chrono::duration<double>>(now-start).count();
+        if(dTime>1/30.0f){
+            dTime = 1/30.0f;
+        }
         start = now;
         update(dTime);
         gameWindow->display();
@@ -226,7 +247,12 @@ void DungeonRunner::Game::manageAI(float dTime) {
             }
             else continue;
         }
-        ai->move(0,ai->getAiSpeed()*dTime);
         manageCollision(ai);
+        ai->move(0,ai->getAiSpeed()*dTime);
+        for(auto &checkai:aiPlayers){
+            manageCollision(checkai);
+        }
+
+
     }
 }

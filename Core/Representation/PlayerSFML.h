@@ -7,7 +7,7 @@
 #include "../Logic/Player.h"
 #include <SFML/Graphics.hpp>
 #include "../Logic/Transformation.h"
-
+#include "Animation.h"
 namespace DungeonRunnerSFML{
     class Player : public DungeonRunner::Player {
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -32,6 +32,8 @@ namespace DungeonRunnerSFML{
         void update() override;
         void display() override;
         void action() override;
+
+        void setUvRect(const std::shared_ptr<sf::IntRect> &uvRect);
     };
 }
 

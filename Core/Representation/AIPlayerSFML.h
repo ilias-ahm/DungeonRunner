@@ -13,12 +13,15 @@ namespace DungeonRunnerSFML {
         std::shared_ptr<sf::RenderWindow> gWindow;
         sf::RectangleShape aiPlayer;
         sf::Texture aiTexture;
+        sf::IntRect uvRect;
 
     public:
         AIPlayer(std::vector<std::shared_ptr<DungeonRunner::Entity>> &gameEntities,
         std::shared_ptr<sf::RenderWindow> &gWindow);
         void display() override;
         void update() override;
+
+        void setUvRect(const sf::IntRect &uvRect);
     };
 
 }

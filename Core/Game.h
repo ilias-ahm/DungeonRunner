@@ -27,6 +27,8 @@ namespace DungeonRunner {
         std::vector<std::shared_ptr<Entity>> gameEntities;
         std::vector<std::shared_ptr<Entity>> viewColliders;
         std::vector<std::shared_ptr<DungeonRunnerSFML::AIPlayer>> aiPlayers;
+        std::shared_ptr<DungeonRunnerSFML::Animation> playerAnimation;
+        std::shared_ptr<DungeonRunnerSFML::Animation> aiAnimation;
 
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
