@@ -21,16 +21,19 @@ DungeonRunner::World::World(std::shared_ptr<sf::RenderWindow> gWindow, int x, in
     initPillarTex();
     initSwordTex();
     initWorld();
-    std::pair<float,float> fSize = Transformation::toCoords(gWindow, gameWindow->getSize().x, gameWindow->getSize().y / 8.0);
+    std::pair<float,float> fSize = Transformation::toCoords(gWindow, gameWindow->getSize().x/2.0, gameWindow->getSize().y / 8.0);
     fSize.first+= Transformation::getWSize().first / 2.0;
     fSize.second+= Transformation::getWSize().second / 2.0;
     fSize.second = 1 - fSize.second;
-    worldFinishCollider = AbstractFactory::createCollider(std::pair<float,float>(0,7), fSize);
-    obstacles.push_back(worldFinishCollider);
-    worldFinish = std::make_shared<sf::RectangleShape>(sf::Vector2f(gameWindow->getSize().x,gameWindow->getSize().y/8.0));
-    worldFinish->setOrigin(gameWindow->getSize().x/2.0,worldFinish->getSize().y);
     std::pair<float,float> finishPos = Transformation::toPixel(gWindow,0 ,7);
-    worldFinish->setPosition(finishPos.first,finishPos.second);
+    auto wf = sf::RectangleShape(sf::Vector2f(gameWindow->getSize().x/2.0,gameWindow->getSize().y/8.0));
+    wf.setOrigin(wf.getSize().x/2.0,wf.getSize().y);
+    wf.setPosition(finishPos.first,finishPos.second);
+    worldFinish = AbstractFactory::createFinish(gWindow,wf);
+    worldFinish->setEPosition(std::pair<float,float>(0,7));
+    worldFinish->setESize(fSize);
+    obstacles.push_back(worldFinish);
+
     eType = "World";
 
 }
@@ -50,9 +53,9 @@ void DungeonRunner::World::initWorld() {
             while (currentRow != 8) {
                 std::vector<std::shared_ptr<sf::RectangleShape>> Tile;
                 double rand = Random::generateRandomChance();
-                if(rand<0.018 and board>0) {
+                if(rand<0.030 and board>0) {
                     std::shared_ptr<sf::RectangleShape> dRec = std::make_shared<sf::RectangleShape>(
-                            sf::Vector2f(gameWindow->getSize().x / 8.0, gameWindow->getSize().y / 8.0));
+                            sf::Vector2f(gameWindow->getSize().x / 10.0, gameWindow->getSize().y / 10.0));
                     std::shared_ptr<DungeonRunnerSFML::DoorSFML> dObs = AbstractFactory::createDoor(dRec, gameWindow, obstacleTextures);
                     dRec->setPosition((float) ((lane + 2) * gameWindow->getSize().x / 8)+dRec->getSize().x/2.0,
                                       (float) (currentRow * gameWindow->getSize().y / 8 ) + dRec->getSize().y -
@@ -202,7 +205,7 @@ void DungeonRunner::World::display() {
             }
         }
     }
-    gameWindow->draw(*worldFinish);
+    worldFinish->display();
 }
 
 const std::vector<std::shared_ptr<DungeonRunner::Entity>> &DungeonRunner::World::getObstacles(){

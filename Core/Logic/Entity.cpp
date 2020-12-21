@@ -54,5 +54,9 @@ void DungeonRunner::Entity::setNoclip(bool noclip) {
     Entity::noclip = noclip;
 }
 
+void DungeonRunner::Entity::setESize(const std::pair<float, float> &eSize) {
+    Entity::eSize = eSize;
+}
+
 
 

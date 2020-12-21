@@ -8,6 +8,7 @@
 #include <memory>
 #include <vector>
 #include "Transformation.h"
+#include "Random.h"
 namespace DungeonRunner {
     class Entity {
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -42,6 +43,8 @@ namespace DungeonRunner {
         void setEPosition(const std::pair<float, float> &ePosition);
 
         const std::pair<float, float> &getESize() const;
+
+        void setESize(const std::pair<float, float> &eSize);
 
         std::string getType();
         virtual void display();

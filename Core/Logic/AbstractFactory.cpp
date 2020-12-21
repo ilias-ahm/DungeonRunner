@@ -42,5 +42,10 @@ DungeonRunner::AbstractFactory::createAI(std::vector<std::shared_ptr<DungeonRunn
     return std::make_shared<DungeonRunnerSFML::AIPlayer>(gameEntities,gWindow);
 }
 
+std::shared_ptr<DungeonRunnerSFML::finishLine>
+DungeonRunner::AbstractFactory::createFinish(std::shared_ptr<sf::RenderWindow> &gWindow, sf::RectangleShape &finish) {
+    return std::make_shared<DungeonRunnerSFML::finishLine>(gWindow,finish);
+}
+
 
 

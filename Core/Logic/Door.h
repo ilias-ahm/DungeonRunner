@@ -13,6 +13,10 @@ namespace DungeonRunner {
         bool isLocked = false;
 
     public:
+        bool IsLocked() const;
+
+        bool IsOpen() const;
+        void action() override;
     };
 
 }

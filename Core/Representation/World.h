@@ -9,6 +9,8 @@
 #include <SFML/Graphics.hpp>
 #include "../Logic/Random.h"
 #include "../Logic/Transformation.h"
+#include "finishLine.h"
+
 namespace DungeonRunner {
     class World : public Entity {
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -22,8 +24,7 @@ namespace DungeonRunner {
         std::vector<std::shared_ptr<sf::Texture>> tileTextures;
         std::map<std::string,std::shared_ptr<sf::Texture>> obstacleTextures;
         std::vector<std::shared_ptr<Entity>> obstacles;
-        std::shared_ptr<sf::RectangleShape> worldFinish;
-        std::shared_ptr<Entity> worldFinishCollider;
+        std::shared_ptr<DungeonRunnerSFML::finishLine> worldFinish;
 
 
     public:

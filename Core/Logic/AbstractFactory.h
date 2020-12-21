@@ -11,6 +11,7 @@
 #include "Transformation.h"
 #include "../Representation/SwordSFML.h"
 #include "../Representation/AIPlayerSFML.h"
+#include "../Representation/finishLine.h"
 
 namespace DungeonRunner {
     class AbstractFactory {
@@ -25,6 +26,7 @@ namespace DungeonRunner {
         static std::shared_ptr<DungeonRunnerSFML::Sword> createSword(std::shared_ptr<sf::RenderWindow> gWindow);
         static std::shared_ptr<DungeonRunnerSFML::AIPlayer> createAI(std::vector<std::shared_ptr<DungeonRunner::Entity>> &gameEntities,
                                                                   std::shared_ptr<sf::RenderWindow> &gWindow);
+        static std::shared_ptr<DungeonRunnerSFML::finishLine> createFinish(std::shared_ptr<sf::RenderWindow> &gWindow,sf::RectangleShape &finish);
     };
 }
 

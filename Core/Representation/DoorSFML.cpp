@@ -52,12 +52,7 @@ void DungeonRunnerSFML::DoorSFML::display() {
     gWindow->draw(rFrame);
 }
 
-void DungeonRunnerSFML::DoorSFML::action() {
-    if(isLocked or isOpen) return;
-    if(Random::generateRandomChance()<=0.6) {
-        isOpen = true;
-        return;
-    }
-    isLocked = true;
-    door->setFillColor(sf::Color::Red);
+
+DungeonRunnerSFML::DoorSFML::~DoorSFML() {
+
 }

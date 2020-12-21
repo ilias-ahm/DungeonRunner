@@ -20,18 +20,18 @@ DungeonRunner::Game::Game(const std::shared_ptr<sf::RenderWindow> &gameWindow) :
    gameEntities.push_back(gamePlayer);
    playerAnimation = std::make_shared<DungeonRunnerSFML::Animation>(maleTex,sf::Vector2u(3,4));
    aiAnimation = std::make_shared<DungeonRunnerSFML::Animation>(aiTex,sf::Vector2u(3,4));
-   std::shared_ptr<Entity> Wall1 = AbstractFactory::createCollider(std::pair<float,float>(-1.25,-7),std::pair<float,float>(0.5,1));
-   std::shared_ptr<Entity> Wall2 = AbstractFactory::createCollider(std::pair<float,float>(1.25,-7),std::pair<float,float>(0.5,1));
-   std::shared_ptr<Entity> Wall3 = AbstractFactory::createCollider(std::pair<float,float>(0,-6),std::pair<float,float>(4,0.125));
-   std::shared_ptr<Entity> Wall4 = AbstractFactory::createCollider(std::pair<float,float>(0,-7.125),std::pair<float,float>(4,0.125));
+   std::shared_ptr<Entity> Wall1 = AbstractFactory::createCollider(std::pair<float,float>(-1.25,-7),std::pair<float,float>(0.5,14));
+   std::shared_ptr<Entity> Wall2 = AbstractFactory::createCollider(std::pair<float,float>(1.25,-7),std::pair<float,float>(0.5,14));
+   //std::shared_ptr<Entity> Wall3 = AbstractFactory::createCollider(std::pair<float,float>(0,-6),std::pair<float,float>(4,0.125));
+   //std::shared_ptr<Entity> Wall4 = AbstractFactory::createCollider(std::pair<float,float>(0,-7.125),std::pair<float,float>(4,0.125));
    gameEntities.push_back(Wall1);
    gameEntities.push_back(Wall2);
-   gameEntities.push_back(Wall3);
-   gameEntities.push_back(Wall4);
+   //gameEntities.push_back(Wall3);
+   //gameEntities.push_back(Wall4);
    viewColliders.push_back(Wall1);
    viewColliders.push_back(Wall2);
-   viewColliders.push_back(Wall3);
-   viewColliders.push_back(Wall4);
+   //viewColliders.push_back(Wall3);
+   //viewColliders.push_back(Wall4);
 }
 
 void DungeonRunner::Game::update(double dTime) {
@@ -42,6 +42,7 @@ void DungeonRunner::Game::update(double dTime) {
     manageCollision(gamePlayer);
     managePlayerMovement(dTime);
     for(auto &ai:aiPlayers){
+        ai->updateGameEntities(gameEntities);
         manageCollision(ai);
     }
     manageAI(dTime);
@@ -56,9 +57,6 @@ void DungeonRunner::Game::update(double dTime) {
     gamePlayer->update();
     playerAnimation->update(3,dTime,true,0.15/gamePlayer->getPlayerSpeed());
     gamePlayer->setUvRect(std::make_shared<sf::IntRect>(playerAnimation->getUvRect()));
-
-
-
     gamePlayer->display();
     gameView.setCenter(gameWindow->getSize().x/2.0,gamePlayer->getPos().y-gameWindow->getSize().y/4.0);
     updateViewColliders();
@@ -93,8 +91,8 @@ void DungeonRunner::Game::updateViewColliders() {
     for(auto &collider:viewColliders){
         std::pair<float,float> newPos = collider->getEPosition();
         if(collider->getEPosition().first!=0){
-            newPos.second = Transformation::toCoords(gameWindow,gameView.getCenter().x,gameView.getCenter().y).second-collider->getESize().second/2.0;
-            collider->setEPosition(newPos);
+            //newPos.second = Transformation::toCoords(gameWindow,gameView.getCenter().x,gameView.getCenter().y).second-collider->getESize().second/2.0;
+            //collider->setEPosition(newPos);
         }
         else{
             if(newPos.second < gamePlayer->getEPosition().second){
@@ -123,12 +121,13 @@ void DungeonRunner::Game::manageCollision(std::shared_ptr<Entity> entity) {
                 collider->setEPosition(std::pair<float,float>(-3,9));
                 entity->action();
             }
+            continue;
         }
     }
 }
 
 void DungeonRunner::Game::managePlayerMovement(double dTime) {
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)){
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Z)){
         gamePlayer->setPlayerSpeed(gamePlayer->getPlayerSpeed()*1.01);
         if(gamePlayer->getPlayerSpeed()*1.01 > 0.5) gamePlayer->setPlayerSpeed(0.5);
         //gamePlayer->move(0,gamePlayer->getPlayerSpeed()*dTime);
@@ -138,12 +137,12 @@ void DungeonRunner::Game::managePlayerMovement(double dTime) {
         //gamePlayer->setPlayerSpeed(gamePlayer->getPlayerSpeed()/1.01);
         //if(gamePlayer->getPlayerSpeed()/1.01 < 0.2) gamePlayer->setPlayerSpeed(0.2);
 
-        gamePlayer->move(0,-gamePlayer->getPlayerSpeed()*2*dTime);
+        gamePlayer->move(0,-gamePlayer->getPlayerSpeed()*1.5*dTime);
     }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)){
         gamePlayer->move(2*dTime,0);
     }
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)){
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Q)){
         gamePlayer->move(-2*dTime,0);
     }
     if(!pauseGame) gamePlayer->move(0,gamePlayer->getPlayerSpeed()*dTime);
@@ -179,7 +178,12 @@ void DungeonRunner::Game::manageGameEvents() {
 
 void DungeonRunner::Game::spawnTraps() {
     std::pair<float, float> pPos = gamePlayer->getEPosition();
-    if(Random::generateRandomChance()<0.009 and pPos.second + 1 <7) {
+    std::pair<float, float> aiPos = aiPlayers[0]->getEPosition();
+    for(auto &ai:aiPlayers){
+        if(ai->getEPosition().second > aiPos.second) aiPos = ai->getEPosition();
+    }
+    if(aiPos.second > pPos.second) pPos =aiPos;
+    if(Random::generateRandomChance()<0.013 and pPos.second + 1 <7) {
         std::pair<float, float> tPos;
         tPos.first = Random::getInstance().generateRandFloat(-1, 1);
         tPos.second = pPos.second + 0.8;
@@ -196,7 +200,7 @@ void DungeonRunner::Game::spawnTraps() {
 void DungeonRunner::Game::manageTraps(double dTime) {
     for(auto &trap:gameEntities){
         if(trap->getType() == "Sword"){
-            trap->move(0,-dTime*0.6);
+            trap->move(0,-dTime*0.8);
         }
     }
 
@@ -215,6 +219,9 @@ void DungeonRunner::Game::run() {
     auto start = std::chrono::high_resolution_clock::now();
     double dTime;
     while (gameWindow->isOpen()){
+        auto bpos0 = aiPlayers[0]->getEPosition();
+        auto bpos1 = aiPlayers[1]->getEPosition();
+        auto bpos2 = aiPlayers[2]->getEPosition();
         gameWindow->clear();
         auto now = std::chrono::high_resolution_clock::now();
         dTime = std::chrono::duration_cast<std::chrono::duration<double>>(now-start).count();
@@ -224,34 +231,40 @@ void DungeonRunner::Game::run() {
         start = now;
         update(dTime);
         gameWindow->display();
+        auto apos0 = aiPlayers[0]->getEPosition();
+        auto apos1 = aiPlayers[1]->getEPosition();
+        auto apos2 = aiPlayers[2]->getEPosition();
+        auto checkPos0 = std::abs(bpos0.second - apos0.second);
+        auto checkPos1 = std::abs(bpos1.second - apos1.second);
+        auto checkPos2 = std::abs(bpos2.second - apos2.second);
+        if( checkPos0 +0.000001< aiPlayers[0]->getAiSpeed()*dTime) aiPlayers[0]->setIsStuck(true);
+        else aiPlayers[0]->setIsStuck(false);
+        if( checkPos1 +0.000001< aiPlayers[1]->getAiSpeed()*dTime) aiPlayers[1]->setIsStuck(true);
+        else aiPlayers[1]->setIsStuck(false);
+        if( checkPos2 +0.000001< aiPlayers[2]->getAiSpeed()*dTime) aiPlayers[2]->setIsStuck(true);
+        else aiPlayers[2]->setIsStuck(false);
     }
 }
 
 void DungeonRunner::Game::manageAI(float dTime) {
     for(auto &ai:aiPlayers){
-        if(Random::generateRandomChance() <0.5) {
-            double moveChance = Random::generateRandomChance();
-            if (moveChance < 1 / 5.0) {
-                ai->setAiSpeed(ai->getAiSpeed() * 1.02);
-                if(ai->getAiSpeed()*1.01 > 0.5) ai->setAiSpeed(0.5);
-            }
-            else if(moveChance > 1/5.0 and moveChance <2/5.0) {
-                ai->setAiSpeed(ai->getAiSpeed() / 1.01);
-                if(ai->getAiSpeed()/1.01 < 0.2) ai->setAiSpeed(0.2);
-            }
-            else if(moveChance > 2/5.0 and moveChance <3/5.0) {
-                ai->move(-2*dTime,0);
-            }
-            else if(moveChance > 3/5.0 and moveChance <4/5.0) {
-                ai->move(2*dTime,0);
-            }
-            else continue;
-        }
         manageCollision(ai);
+        ai->run();
         ai->move(0,ai->getAiSpeed()*dTime);
         for(auto &checkai:aiPlayers){
             manageCollision(checkai);
         }
+        if(ai->getDodgeState() == 1){
+            ai->move(-2*dTime,0);
+        }
+        else if(ai->getDodgeState() == 2){
+            ai->move(2*dTime,0);
+        }
+        for(auto &checkai:aiPlayers){
+            manageCollision(checkai);
+        }
+        manageCollision(gamePlayer);
+
 
 
     }

@@ -4,3 +4,18 @@
 
 #include "Door.h"
 
+bool DungeonRunner::Door::IsLocked() const {
+    return isLocked;
+}
+
+bool DungeonRunner::Door::IsOpen() const {
+    return isOpen;
+}
+
+void DungeonRunner::Door::action() {
+    if(isLocked or isOpen) return;
+    if(Random::generateRandomChance()<=0.5) {
+        isOpen = true;
+        return;
+    }
+}
