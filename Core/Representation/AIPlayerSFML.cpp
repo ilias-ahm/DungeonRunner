@@ -88,27 +88,29 @@ void DungeonRunnerSFML::AIPlayer::avoidObstacles() {
     std::sort(gameEntities.begin(),gameEntities.end(), [](std::shared_ptr<DungeonRunner::Entity> first, std::shared_ptr<DungeonRunner::Entity> second){
         return first->getEPosition().second < second->getEPosition().second;
     });
-    if(stuckResolving) return;
+    //if(stuckResolving) return;
     for(auto &entity:gameEntities){
         if(entity->getType() == "Door" or entity->getType() == "Sword"){
             auto dY = entity->getEPosition().second - ePosition.second;
             auto dX = std::abs(entity->getEPosition().first - ePosition.first);
             if(dY > 0 and dY < 0.6 and dX < entity->getESize().first/2.0 + eSize.first/2.0) {
                 if(isDodging and !isStuck) return;
-                if(entity->getType() == "Sword" and Random::generateRandomChance() <0.2 ) {
+                if(entity->getType() == "Sword" and Random::generateRandomChance() <0.2  and !stuckResolving) {
                     dodgeObstacle(entity);
                     return;
                 }
                 if(entity->getType() == "Door") {
                     if (dynamic_cast<DoorSFML*> (entity.get())->IsOpen()) continue;
-                    if (Random::generateRandomChance() < 0.1) {
-                        if (!interactObstacle(entity)) {
+                    if (Random::generateRandomChance() < 0.0025) {
+                        if (!interactObstacle(entity) and !stuckResolving) {
                             dodgeObstacle(entity);
                             return;
                         }
                     }
-                    dodgeObstacle(entity);
-                    return;
+                    if(!stuckResolving) {
+                        dodgeObstacle(entity);
+                        return;
+                    }
                 }
             }
         }

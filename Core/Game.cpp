@@ -58,7 +58,9 @@ void DungeonRunner::Game::update(double dTime) {
     playerAnimation->update(3,dTime,true,0.15/gamePlayer->getPlayerSpeed());
     gamePlayer->setUvRect(std::make_shared<sf::IntRect>(playerAnimation->getUvRect()));
     gamePlayer->display();
-    gameView.setCenter(gameWindow->getSize().x/2.0,gamePlayer->getPos().y-gameWindow->getSize().y/4.0);
+    auto mapCoords = Transformation::toPixel(gameWindow,0,6.5);
+    if(gamePlayer->getPos().y < mapCoords.second+gameWindow->getSize().y/2.0-gameWindow->getSize().y/4.0) gameView.setCenter(gameWindow->getSize().x/2.0,mapCoords.second);
+    else gameView.setCenter(gameWindow->getSize().x/2.0,gamePlayer->getPos().y-gameWindow->getSize().y/4.0);
     updateViewColliders();
 
     for(auto &entity:gameEntities){
@@ -127,7 +129,7 @@ void DungeonRunner::Game::manageCollision(std::shared_ptr<Entity> entity) {
 }
 
 void DungeonRunner::Game::managePlayerMovement(double dTime) {
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Z)){
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)){
         gamePlayer->setPlayerSpeed(gamePlayer->getPlayerSpeed()*1.01);
         if(gamePlayer->getPlayerSpeed()*1.01 > 0.5) gamePlayer->setPlayerSpeed(0.5);
         //gamePlayer->move(0,gamePlayer->getPlayerSpeed()*dTime);
@@ -142,7 +144,7 @@ void DungeonRunner::Game::managePlayerMovement(double dTime) {
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)){
         gamePlayer->move(2*dTime,0);
     }
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Q)){
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)){
         gamePlayer->move(-2*dTime,0);
     }
     if(!pauseGame) gamePlayer->move(0,gamePlayer->getPlayerSpeed()*dTime);
@@ -225,8 +227,8 @@ void DungeonRunner::Game::run() {
         gameWindow->clear();
         auto now = std::chrono::high_resolution_clock::now();
         dTime = std::chrono::duration_cast<std::chrono::duration<double>>(now-start).count();
-        if(dTime>1/30.0f){
-            dTime = 1/30.0f;
+        if(dTime>1/60.0f){
+            dTime = 1/60.0f;
         }
         start = now;
         update(dTime);

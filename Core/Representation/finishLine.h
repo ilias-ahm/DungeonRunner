@@ -11,6 +11,7 @@ namespace DungeonRunnerSFML {
         std::shared_ptr<sf::RenderWindow> gWindow;
         sf::RectangleShape finish;
         sf::Texture finishTexture;
+        sf::Sprite test;
     public:
         finishLine( std::shared_ptr<sf::RenderWindow> &gWindow,  sf::RectangleShape &finish);
         void display() override;

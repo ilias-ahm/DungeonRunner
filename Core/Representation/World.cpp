@@ -25,13 +25,13 @@ DungeonRunner::World::World(std::shared_ptr<sf::RenderWindow> gWindow, int x, in
     fSize.first+= Transformation::getWSize().first / 2.0;
     fSize.second+= Transformation::getWSize().second / 2.0;
     fSize.second = 1 - fSize.second;
-    std::pair<float,float> finishPos = Transformation::toPixel(gWindow,0 ,7);
+    std::pair<float,float> finishPos = Transformation::toPixel(gWindow,0 ,7-fSize.second);
     auto wf = sf::RectangleShape(sf::Vector2f(gameWindow->getSize().x/2.0,gameWindow->getSize().y/8.0));
     wf.setOrigin(wf.getSize().x/2.0,wf.getSize().y);
     wf.setPosition(finishPos.first,finishPos.second);
     worldFinish = AbstractFactory::createFinish(gWindow,wf);
-    worldFinish->setEPosition(std::pair<float,float>(0,7));
     worldFinish->setESize(fSize);
+    worldFinish->setEPosition(std::pair<float,float>(0,7-worldFinish->getESize().second));
     obstacles.push_back(worldFinish);
 
     eType = "World";
@@ -53,7 +53,7 @@ void DungeonRunner::World::initWorld() {
             while (currentRow != 8) {
                 std::vector<std::shared_ptr<sf::RectangleShape>> Tile;
                 double rand = Random::generateRandomChance();
-                if(rand<0.030 and board>0) {
+                if(rand<0.030 and board>0 and board !=worldSize.second-1) {
                     std::shared_ptr<sf::RectangleShape> dRec = std::make_shared<sf::RectangleShape>(
                             sf::Vector2f(gameWindow->getSize().x / 10.0, gameWindow->getSize().y / 10.0));
                     std::shared_ptr<DungeonRunnerSFML::DoorSFML> dObs = AbstractFactory::createDoor(dRec, gameWindow, obstacleTextures);
