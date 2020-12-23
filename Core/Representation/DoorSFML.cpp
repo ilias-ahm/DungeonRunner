@@ -11,7 +11,7 @@
 void DungeonRunnerSFML::DoorSFML::update() {
     if(isOpen){
         door->setTexture(&*doorStates["door_o"]);
-        noclip = true;
+        noClip = true;
     }
     else{
         door->setTexture(&*doorStates["door_c"]);

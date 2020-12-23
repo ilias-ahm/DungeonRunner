@@ -5,6 +5,8 @@
 #ifndef DUNGEONRUNNER_COLLISION_H
 #define DUNGEONRUNNER_COLLISION_H
 #include "Entity.h"
+#include "Player.h"
+#include "AIPlayer.h"
 namespace DungeonRunner {
     class Collision {
     public:

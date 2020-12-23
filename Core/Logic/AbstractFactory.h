@@ -27,6 +27,7 @@ namespace DungeonRunner {
         static std::shared_ptr<DungeonRunnerSFML::AIPlayer> createAI(std::vector<std::shared_ptr<DungeonRunner::Entity>> &gameEntities,
                                                                   std::shared_ptr<sf::RenderWindow> &gWindow);
         static std::shared_ptr<DungeonRunnerSFML::finishLine> createFinish(std::shared_ptr<sf::RenderWindow> &gWindow,sf::RectangleShape &finish);
+        static std::shared_ptr<DungeonRunner::Observer> createObserver(std::string observerName);
     };
 }
 

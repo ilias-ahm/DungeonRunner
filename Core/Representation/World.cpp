@@ -33,6 +33,7 @@ DungeonRunner::World::World(std::shared_ptr<sf::RenderWindow> gWindow, int x, in
     worldFinish->setESize(fSize);
     worldFinish->setEPosition(std::pair<float,float>(0,7-worldFinish->getESize().second));
     obstacles.push_back(worldFinish);
+    worldFinish->setNoClip(true);
 
     eType = "World";
 

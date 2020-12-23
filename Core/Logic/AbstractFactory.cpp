@@ -47,5 +47,9 @@ DungeonRunner::AbstractFactory::createFinish(std::shared_ptr<sf::RenderWindow> &
     return std::make_shared<DungeonRunnerSFML::finishLine>(gWindow,finish);
 }
 
+std::shared_ptr<DungeonRunner::Observer> DungeonRunner::AbstractFactory::createObserver(std::string observerName) {
+    return std::make_shared<DungeonRunner::Observer>(observerName);
+}
+
 
 

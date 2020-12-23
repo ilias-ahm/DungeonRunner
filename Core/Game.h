@@ -29,6 +29,8 @@ namespace DungeonRunner {
         std::vector<std::shared_ptr<DungeonRunnerSFML::AIPlayer>> aiPlayers;
         std::shared_ptr<DungeonRunnerSFML::Animation> playerAnimation;
         std::shared_ptr<DungeonRunnerSFML::Animation> aiAnimation;
+        bool finished;
+        int finishedPlayers = 0;
 
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -43,8 +45,8 @@ namespace DungeonRunner {
         void spawnTraps();
         void manageTraps(double dTime);
         void manageAI(float dTime);
-
         bool isColliding(std::shared_ptr<Entity> e1,std::shared_ptr<Entity> e2,float push);
+        void manageScores(float dTime);
 
     public:
         Game(const std::shared_ptr<sf::RenderWindow> &gameWindow);

@@ -9,8 +9,9 @@
 #include <vector>
 #include "Transformation.h"
 #include "Random.h"
+#include "Subject.h"
 namespace DungeonRunner {
-    class Entity {
+    class Entity: public DungeonRunner::Subject {
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //                                                          Variables                                                           //
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -18,7 +19,7 @@ namespace DungeonRunner {
         std::string eType;
         std::pair<float,float> ePosition;
         std::pair<float,float> eSize;
-        bool noclip = false;
+        bool noClip = false;
 
         public:
 
@@ -31,14 +32,14 @@ namespace DungeonRunner {
         public:
         Entity();
 
-        void setNoclip(bool noclip);
+        void setNoClip(bool noclip);
 
         Entity(const std::pair<float, float> &ePosition,
                const std::pair<float, float> &eSize);
 
         const std::pair<float, float> &getEPosition() const;
 
-        bool isNoclip() const;
+        bool isNoClip() const;
 
         void setEPosition(const std::pair<float, float> &ePosition);
 
@@ -52,7 +53,8 @@ namespace DungeonRunner {
         virtual void update();
 
         virtual void action();
-
+        void registerObserver(std::shared_ptr<Observer> observer) override;
+        void notifyObservers(Observer::Event event, float dTime=1) override;
     };
 
 }

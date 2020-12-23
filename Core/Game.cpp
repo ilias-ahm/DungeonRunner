@@ -22,19 +22,14 @@ DungeonRunner::Game::Game(const std::shared_ptr<sf::RenderWindow> &gameWindow) :
    aiAnimation = std::make_shared<DungeonRunnerSFML::Animation>(aiTex,sf::Vector2u(3,4));
    std::shared_ptr<Entity> Wall1 = AbstractFactory::createCollider(std::pair<float,float>(-1.25,-7),std::pair<float,float>(0.5,14));
    std::shared_ptr<Entity> Wall2 = AbstractFactory::createCollider(std::pair<float,float>(1.25,-7),std::pair<float,float>(0.5,14));
-   //std::shared_ptr<Entity> Wall3 = AbstractFactory::createCollider(std::pair<float,float>(0,-6),std::pair<float,float>(4,0.125));
-   //std::shared_ptr<Entity> Wall4 = AbstractFactory::createCollider(std::pair<float,float>(0,-7.125),std::pair<float,float>(4,0.125));
    gameEntities.push_back(Wall1);
    gameEntities.push_back(Wall2);
-   //gameEntities.push_back(Wall3);
-   //gameEntities.push_back(Wall4);
    viewColliders.push_back(Wall1);
    viewColliders.push_back(Wall2);
-   //viewColliders.push_back(Wall3);
-   //viewColliders.push_back(Wall4);
 }
 
 void DungeonRunner::Game::update(double dTime) {
+    manageScores(dTime);
     spawnTraps();
     gameWindow->clear();
     manageGameEvents();
@@ -81,7 +76,8 @@ void DungeonRunner::Game::createPlayer() {
     uvRect->top = uvRect->height*3;
     player->setTextureRect(*uvRect);
     player->setTexture(&*characterTex[0]);
-    gamePlayer = gameFactory.createPlayer(gameWindow,player,characterTex[0],uvRect);
+    gamePlayer = AbstractFactory::createPlayer(gameWindow,player,characterTex[0],uvRect);
+    gamePlayer->registerObserver(AbstractFactory::createObserver("Ilias"));
 }
 
 bool DungeonRunner::Game::isColliding(std::shared_ptr<Entity> e1, std::shared_ptr<Entity> e2,float push) {
@@ -93,20 +89,8 @@ void DungeonRunner::Game::updateViewColliders() {
     for(auto &collider:viewColliders){
         std::pair<float,float> newPos = collider->getEPosition();
         if(collider->getEPosition().first!=0){
-            //newPos.second = Transformation::toCoords(gameWindow,gameView.getCenter().x,gameView.getCenter().y).second-collider->getESize().second/2.0;
-            //collider->setEPosition(newPos);
-        }
-        else{
-            if(newPos.second < gamePlayer->getEPosition().second){
-                float newY = gameView.getCenter().y+gameView.getSize().y/2.0;
-                newPos.second = Transformation::toCoords(gameWindow,gameView.getCenter().x,newY).second-collider->getESize().second;
-                collider->setEPosition(newPos);
-            }
-            else{
-                float newY = gameView.getCenter().y-gameView.getSize().y/2.0;
-                newPos.second = Transformation::toCoords(gameWindow,gameView.getCenter().x,newY).second;
-                collider->setEPosition(newPos);
-            }
+            newPos.second = Transformation::toCoords(gameWindow,gameView.getCenter().x,gameView.getCenter().y).second-collider->getESize().second/2.0;
+            collider->setEPosition(newPos);
         }
     }
 }
@@ -123,28 +107,34 @@ void DungeonRunner::Game::manageCollision(std::shared_ptr<Entity> entity) {
                 collider->setEPosition(std::pair<float,float>(-3,9));
                 entity->action();
             }
+            if(collider->getType() == "Finish" and (entity->getType() == "Player" or entity->getType() == "AI")){
+                if(finishedPlayers == 0) entity->notifyObservers(DungeonRunner::Observer::finishedFirst);
+                if(finishedPlayers == 1) entity->notifyObservers(DungeonRunner::Observer::finishedSecond);
+                if(finishedPlayers == 2) entity->notifyObservers(DungeonRunner::Observer::finishedThird);
+                if(finishedPlayers == 3) entity->notifyObservers(DungeonRunner::Observer::finishedLast);
+                finishedPlayers++;
+                if(entity->getType() == "Player") finished = true;
+            }
             continue;
         }
     }
 }
 
 void DungeonRunner::Game::managePlayerMovement(double dTime) {
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)){
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Z)){
         gamePlayer->setPlayerSpeed(gamePlayer->getPlayerSpeed()*1.01);
         if(gamePlayer->getPlayerSpeed()*1.01 > 0.5) gamePlayer->setPlayerSpeed(0.5);
-        //gamePlayer->move(0,gamePlayer->getPlayerSpeed()*dTime);
 
     }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::S)){
-        //gamePlayer->setPlayerSpeed(gamePlayer->getPlayerSpeed()/1.01);
-        //if(gamePlayer->getPlayerSpeed()/1.01 < 0.2) gamePlayer->setPlayerSpeed(0.2);
+        gamePlayer->setPlayerSpeed(gamePlayer->getPlayerSpeed()/1.01);
+        if(gamePlayer->getPlayerSpeed()/1.01 < 0.2) gamePlayer->setPlayerSpeed(0.2);
 
-        gamePlayer->move(0,-gamePlayer->getPlayerSpeed()*1.5*dTime);
     }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)){
         gamePlayer->move(2*dTime,0);
     }
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)){
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Q)){
         gamePlayer->move(-2*dTime,0);
     }
     if(!pauseGame) gamePlayer->move(0,gamePlayer->getPlayerSpeed()*dTime);
@@ -160,15 +150,15 @@ void DungeonRunner::Game::manageGameEvents() {
             pauseGame = !pauseGame;
         }
         if(event.type == sf::Event::KeyReleased and event.key.code == sf::Keyboard::Space) {
-            bool doorOpened = false;
             for (auto &obstacle:gameEntities) {
-                if (obstacle->getType() == "Door" and !doorOpened and !obstacle->isNoclip()){
+                if (obstacle->getType() == "Door"  and !obstacle->isNoClip()){
                     std::pair<float, float> pPos = gamePlayer->getEPosition();
                     std::pair<float, float> oPos = obstacle->getEPosition();
                     if (oPos.second - pPos.second <= 0.6 and oPos.second - pPos.second >0) {
                         if(pPos.first>oPos.first-0.25 and pPos.first<oPos.first+0.25) {
                             obstacle->action();
-                            doorOpened = true;
+                            gamePlayer->notifyObservers(DungeonRunner::Observer::staticObstacleAction);
+                            break;
                         }
                     }
                 }
@@ -193,7 +183,7 @@ void DungeonRunner::Game::spawnTraps() {
         newTrap->setEPosition(tPos);
         newTrap->update();
         newTrap->display();
-        newTrap->setNoclip(true);
+        newTrap->setNoClip(true);
         gameEntities.push_back(newTrap);
     }
 
@@ -211,6 +201,8 @@ void DungeonRunner::Game::manageTraps(double dTime) {
 void DungeonRunner::Game::initAI() {
     for(int i=1;i!=4;i++){
         auto newAI = AbstractFactory::createAI(gameEntities,gameWindow);
+        auto newObserver = AbstractFactory::createObserver("CPU" + std::to_string(i));
+        newAI->registerObserver(newObserver);
         gameEntities.push_back(newAI);
         aiPlayers.push_back(newAI);
     }
@@ -231,7 +223,21 @@ void DungeonRunner::Game::run() {
             dTime = 1/60.0f;
         }
         start = now;
-        update(dTime);
+        if(!finished) update(dTime);
+        else manageGameEvents();
+        if(finished){
+            for(auto &ai:aiPlayers){
+                auto aiObservers = ai->getSubjectObservers();
+                for(const auto& observer:aiObservers){
+                    std::cout << observer->getObserverName()<< ": " << observer->getObserverData() <<std::endl;
+                }
+            }
+            auto playerObservers = gamePlayer->getSubjectObservers();
+            for(auto &observer:playerObservers){
+                std::cout << observer->getObserverName()<< ": " << observer->getObserverData() <<std::endl;
+            }
+            std::cout << "--------------------------" <<std::endl;
+        }
         gameWindow->display();
         auto apos0 = aiPlayers[0]->getEPosition();
         auto apos1 = aiPlayers[1]->getEPosition();
@@ -266,8 +272,23 @@ void DungeonRunner::Game::manageAI(float dTime) {
             manageCollision(checkai);
         }
         manageCollision(gamePlayer);
-
-
-
     }
+
+}
+
+void DungeonRunner::Game::manageScores(float dTime) {
+    std::sort(gameEntities.begin(),gameEntities.end(), [](std::shared_ptr<DungeonRunner::Entity> first, std::shared_ptr<DungeonRunner::Entity> second){
+        return first->getEPosition().second < second->getEPosition().second;
+    });
+    int placement = 4;
+    for(auto &entity:gameEntities){
+        if(entity->getType() == "Player" or entity->getType() == "AI"){
+            if(placement == 1) entity->notifyObservers(DungeonRunner::Observer::firstPlace, dTime);
+            if(placement == 2) entity->notifyObservers(DungeonRunner::Observer::secondPlace, dTime);
+            if(placement == 3) entity->notifyObservers(DungeonRunner::Observer::thirdPlace, dTime);
+            if(placement == 4) entity->notifyObservers(DungeonRunner::Observer::lastPlace, dTime);
+            placement--;
+        }
+    }
+
 }

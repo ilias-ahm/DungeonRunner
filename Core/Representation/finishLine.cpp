@@ -11,6 +11,7 @@ DungeonRunnerSFML::finishLine::finishLine(std::shared_ptr<sf::RenderWindow> &gWi
     finishTexture.setRepeated(true);
     this->finish.setTextureRect(sf::IntRect(0,0,gWindow->getSize().x/2.0,gWindow->getSize().x/8.0));
     this->finish.setTexture(&finishTexture);
+    eType = "Finish";
 }
 
 void DungeonRunnerSFML::finishLine::display() {

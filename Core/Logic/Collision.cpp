@@ -27,7 +27,17 @@ bool DungeonRunner::Collision::checkCollision(std::shared_ptr<Entity> &e2, float
     float intersectY = std::abs(dY) - (e2HalfSize.second+e1HalfSize.second);
 
     if(intersectX<0.0f and intersectY<0.0f){
-        if(e1->isNoclip() or e2->isNoclip()) return true;
+        if(e1->isNoClip() or e2->isNoClip()){
+            if(e2->getType() == "Player" and e1->getType() == "Sword"){
+                dynamic_cast<DungeonRunner::Player*>(e2.get())->setPlayerSpeed(dynamic_cast<DungeonRunner::Player*>(e2.get())->getPlayerSpeed()*0.75);
+                e2->notifyObservers(DungeonRunner::Observer::hitMovingObstacle);
+            }
+            if(e2->getType() == "AI" and e1->getType() == "Sword"){
+                dynamic_cast<DungeonRunner::AIPlayer*>(e2.get())->setAiSpeed(dynamic_cast<DungeonRunner::AIPlayer*>(e2.get())->getAiSpeed()*0.5);
+                e2->notifyObservers(DungeonRunner::Observer::hitMovingObstacle);
+            }
+            return true;
+        }
         push = std::min(std::max(push,0.0f),1.0f);
         if(intersectX>intersectY){
             if(dX>0.0f) {
@@ -44,6 +54,12 @@ bool DungeonRunner::Collision::checkCollision(std::shared_ptr<Entity> &e2, float
                 e2->move( 0,-intersectY * ( push));
             }
             else{
+                if(e2->getType() == "Player" and e1->getType() != "AI"){
+                    dynamic_cast<DungeonRunner::Player*>(e2.get())->setPlayerSpeed(0.3);
+                }
+                if(e2->getType() == "AI" and e1->getType() != "Player" and e1->getType() != "AI"){
+                    dynamic_cast<DungeonRunner::AIPlayer*>(e2.get())->setAiSpeed(0.3);
+                }
                 e1->move( 0,-intersectY * (1.0f - push));
                 e2->move( 0,intersectY * ( push));
             }

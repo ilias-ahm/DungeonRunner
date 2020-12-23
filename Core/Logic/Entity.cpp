@@ -42,20 +42,30 @@ void DungeonRunner::Entity::move(float x, float y) {
     ePosition.second+=y;
 }
 
-bool DungeonRunner::Entity::isNoclip() const {
-    return noclip;
+bool DungeonRunner::Entity::isNoClip() const {
+    return noClip;
 }
 
 DungeonRunner::Entity::Entity(const std::pair<float, float> &ePosition,
                               const std::pair<float, float> &eSize) : ePosition(ePosition),
                                                                       eSize(eSize) {}
 
-void DungeonRunner::Entity::setNoclip(bool noclip) {
-    Entity::noclip = noclip;
+void DungeonRunner::Entity::setNoClip(bool noclip) {
+    Entity::noClip = noclip;
 }
 
 void DungeonRunner::Entity::setESize(const std::pair<float, float> &eSize) {
     Entity::eSize = eSize;
+}
+
+void DungeonRunner::Entity::registerObserver(std::shared_ptr<Observer> observer) {
+    subjectObservers.push_back(observer);
+}
+
+void DungeonRunner::Entity::notifyObservers(DungeonRunner::Observer::Event event,float dTime) {
+    for(auto &observer:subjectObservers){
+        observer->update(event,dTime);
+    }
 }
 
 
