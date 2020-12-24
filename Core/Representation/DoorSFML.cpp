@@ -18,8 +18,6 @@ void DungeonRunnerSFML::DoorSFML::update() {
     }
     std::pair<float,float> pixelC = Transformation::toPixel(gWindow, ePosition.first, ePosition.second);
     door->setPosition(pixelC.first,pixelC.second);
-    lFrame.setPosition(door->getPosition().x-door->getSize().x/2.0+lFrame.getSize().x/2.0,door->getPosition().y+lFrame.getSize().y);
-    rFrame.setPosition(door->getPosition().x+door->getSize().x/2.0-rFrame.getSize().x/2.0,door->getPosition().y+rFrame.getSize().y);
 }
 
 DungeonRunnerSFML::DoorSFML::DoorSFML(std::shared_ptr<sf::RectangleShape> &door,
@@ -32,15 +30,6 @@ DungeonRunnerSFML::DoorSFML::DoorSFML(std::shared_ptr<sf::RectangleShape> &door,
     tSize.second+=Transformation::getWSize().second/2.0;
     tSize.second = 1 - tSize.second;
     eSize = tSize;
-    sf::Texture df = *DoorSFML::doorStates["door_o"];
-    sf::Vector2f lfSize(door->getSize().x*3/32.0,door->getSize().y*0.5);
-    sf::Vector2f rfSize(door->getSize().x*3/32.0,door->getSize().y*0.5);
-    lFrame = sf::RectangleShape(lfSize);
-    rFrame = sf::RectangleShape(rfSize);
-    lFrame.setOrigin(lFrame.getSize().x/2.0,door->getSize().y);
-    rFrame.setOrigin(rFrame.getSize().x/2.0,door->getSize().y);
-    lFrame.setFillColor(sf::Color::Transparent);
-    rFrame.setFillColor(sf::Color::Transparent);
     eType = "Door";
 
 
@@ -48,8 +37,6 @@ DungeonRunnerSFML::DoorSFML::DoorSFML(std::shared_ptr<sf::RectangleShape> &door,
 
 void DungeonRunnerSFML::DoorSFML::display() {
     gWindow->draw(*door);
-    gWindow->draw(lFrame);
-    gWindow->draw(rFrame);
 }
 
 

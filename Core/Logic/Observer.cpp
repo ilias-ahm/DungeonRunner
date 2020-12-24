@@ -3,6 +3,7 @@
 //
 
 #include <cmath>
+#include <utility>
 #include "Observer.h"
 
 void DungeonRunner::Observer::update(DungeonRunner::Observer::Event event, float dTime) {
@@ -20,7 +21,7 @@ void DungeonRunner::Observer::update(DungeonRunner::Observer::Event event, float
             hScore+=0;
             break;
         case Observer::hitMovingObstacle:
-            hScore-=30;
+            hScore-=20;
             break;
         case Observer::staticObstacleAction:
             hScore-=50;
@@ -44,7 +45,7 @@ int DungeonRunner::Observer::getObserverData() const {
     return std::round(hScore);
 }
 
-DungeonRunner::Observer::Observer(const std::string &observerName) : observerName(observerName) {}
+DungeonRunner::Observer::Observer(std::string observerName) : observerName(std::move(observerName)) {}
 
 const std::string &DungeonRunner::Observer::getObserverName() const {
     return observerName;

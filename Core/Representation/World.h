@@ -19,11 +19,11 @@ namespace DungeonRunner {
         private:
         std::shared_ptr<sf::RenderWindow> gameWindow;
         std::pair<int,int> worldSize;
-        std::vector<std::vector<std::vector<std::vector<std::shared_ptr<sf::RectangleShape>>>>> world;
+        std::vector<std::vector<std::vector<std::vector<std::shared_ptr<sf::RectangleShape>>>>> worldTiles;
         sf::Texture wallTexture;
         std::vector<std::shared_ptr<sf::Texture>> tileTextures;
         std::map<std::string,std::shared_ptr<sf::Texture>> obstacleTextures;
-        std::vector<std::shared_ptr<Entity>> obstacles;
+        std::vector<std::shared_ptr<Entity>> worldEntities;
         std::shared_ptr<DungeonRunnerSFML::finishLine> worldFinish;
 
 
@@ -35,7 +35,7 @@ namespace DungeonRunner {
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         private:
         void initWorld();
-        std::shared_ptr<sf::Texture> getRandomFloorTile();
+        std::shared_ptr<sf::Texture> getRandomFloorTexture();
         void initTileTex();
         void initSwordTex();
         void initDoorTex();
@@ -43,11 +43,7 @@ namespace DungeonRunner {
 
         public:
         World(std::shared_ptr<sf::RenderWindow> gWindow, int x, int y);
-
-        const std::vector<std::shared_ptr<Entity>> &getObstacles();
-
-        const std::map<std::string, std::shared_ptr<sf::Texture>> &getObstacleTextures() const;
-
+        const std::vector<std::shared_ptr<Entity>> &getWorldEntities();
         void update() override;
         void action() override;
         void display() override;

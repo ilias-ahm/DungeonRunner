@@ -17,8 +17,6 @@ namespace DungeonRunner {
     //                                                          Variables                                                           //
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         private:
-        bool pauseGame = false;
-        AbstractFactory gameFactory;
         std::shared_ptr<sf::RenderWindow> gameWindow;
         std::shared_ptr<World> gameWorld;
         sf::View gameView;
@@ -29,7 +27,8 @@ namespace DungeonRunner {
         std::vector<std::shared_ptr<DungeonRunnerSFML::AIPlayer>> aiPlayers;
         std::shared_ptr<DungeonRunnerSFML::Animation> playerAnimation;
         std::shared_ptr<DungeonRunnerSFML::Animation> aiAnimation;
-        bool finished;
+        std::shared_ptr<Highscores> gameScores;
+        bool finished = false;
         int finishedPlayers = 0;
 
 
@@ -47,6 +46,8 @@ namespace DungeonRunner {
         void manageAI(float dTime);
         bool isColliding(std::shared_ptr<Entity> e1,std::shared_ptr<Entity> e2,float push);
         void manageScores(float dTime);
+        void drawHighscores();
+        void drawPlayerScore();
 
     public:
         Game(const std::shared_ptr<sf::RenderWindow> &gameWindow);

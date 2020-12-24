@@ -12,6 +12,7 @@
 #include "../Representation/SwordSFML.h"
 #include "../Representation/AIPlayerSFML.h"
 #include "../Representation/finishLine.h"
+#include "Highscores.h"
 
 namespace DungeonRunner {
     class AbstractFactory {
@@ -28,6 +29,7 @@ namespace DungeonRunner {
                                                                   std::shared_ptr<sf::RenderWindow> &gWindow);
         static std::shared_ptr<DungeonRunnerSFML::finishLine> createFinish(std::shared_ptr<sf::RenderWindow> &gWindow,sf::RectangleShape &finish);
         static std::shared_ptr<DungeonRunner::Observer> createObserver(std::string observerName);
+        static std::shared_ptr<DungeonRunner::Highscores> createHighscores(std::string filePath);
     };
 }
 

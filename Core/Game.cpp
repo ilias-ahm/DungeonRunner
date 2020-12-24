@@ -2,23 +2,22 @@
 // Created by Ilias Ahmindach on 03/12/2020.
 //
 
+#include <sstream>
+#include <iomanip>
 #include "Game.h"
 
 DungeonRunner::Game::Game(const std::shared_ptr<sf::RenderWindow> &gameWindow) : gameWindow(gameWindow) {
-   gameWorld = gameFactory.createWorld(gameWindow,4,14);
+   gameWorld = AbstractFactory::createWorld(gameWindow,4,14);
    gameView = sf::View(sf::Vector2f(gameWindow->getSize().x/2.0,0),sf::Vector2f(gameWindow->getSize().x,gameWindow->getSize().y));
    gameView.setCenter(gameWindow->getSize().x/2.0,gameWindow->getSize().y/2.0);
    gameWorld->update();
-   gameEntities.insert(gameEntities.end(),gameWorld->getObstacles().begin(),gameWorld->getObstacles().end());
-   std::shared_ptr<sf::Texture> maleTex = std::make_shared<sf::Texture>();
+   gameEntities.insert(gameEntities.end(), gameWorld->getWorldEntities().begin(), gameWorld->getWorldEntities().end());
+   gameScores = AbstractFactory::createHighscores("../score.txt");
    std::shared_ptr<sf::Texture> aiTex = std::make_shared<sf::Texture>();
-   maleTex->loadFromFile("../Resources/characterSprites/Male_16-1.png");
    aiTex->loadFromFile("../Resources/characterSprites/Soldier_01-4.png");
-   characterTex.push_back(maleTex);
    createPlayer();
    initAI();
    gameEntities.push_back(gamePlayer);
-   playerAnimation = std::make_shared<DungeonRunnerSFML::Animation>(maleTex,sf::Vector2u(3,4));
    aiAnimation = std::make_shared<DungeonRunnerSFML::Animation>(aiTex,sf::Vector2u(3,4));
    std::shared_ptr<Entity> Wall1 = AbstractFactory::createCollider(std::pair<float,float>(-1.25,-7),std::pair<float,float>(0.5,14));
    std::shared_ptr<Entity> Wall2 = AbstractFactory::createCollider(std::pair<float,float>(1.25,-7),std::pair<float,float>(0.5,14));
@@ -29,9 +28,9 @@ DungeonRunner::Game::Game(const std::shared_ptr<sf::RenderWindow> &gameWindow) :
 }
 
 void DungeonRunner::Game::update(double dTime) {
+    gameWindow->clear();
     manageScores(dTime);
     spawnTraps();
-    gameWindow->clear();
     manageGameEvents();
     manageTraps(dTime);
     manageCollision(gamePlayer);
@@ -63,6 +62,7 @@ void DungeonRunner::Game::update(double dTime) {
         entity->update();
         entity->display();
     }
+    drawPlayerScore();
     gameWindow->setView(gameView);
 }
 
@@ -70,6 +70,10 @@ void DungeonRunner::Game::createPlayer() {
     std::shared_ptr<sf::RectangleShape> player = std::make_shared<sf::RectangleShape>(sf::Vector2f(gameWindow->getSize().x/11.0,gameWindow->getSize().y/11.0));
     std::shared_ptr<sf::Vector2u> playerSize = std::make_shared<sf::Vector2u>(32,32);
     std::shared_ptr<sf::IntRect> uvRect = std::make_shared<sf::IntRect>();
+    std::shared_ptr<sf::Texture> maleTex = std::make_shared<sf::Texture>();
+    maleTex->loadFromFile("../Resources/characterSprites/Male_16-1.png");
+    characterTex.push_back(maleTex);
+    playerAnimation = std::make_shared<DungeonRunnerSFML::Animation>(maleTex,sf::Vector2u(3,4));
     uvRect->width = playerSize->x;
     uvRect->height = playerSize->y;
     uvRect->left = uvRect->width*1;
@@ -96,6 +100,7 @@ void DungeonRunner::Game::updateViewColliders() {
 }
 
 void DungeonRunner::Game::manageCollision(std::shared_ptr<Entity> entity) {
+    if(finished) return;
     for(auto &collider:gameEntities){
         float push = 1;
         if(collider == entity) continue;
@@ -113,7 +118,22 @@ void DungeonRunner::Game::manageCollision(std::shared_ptr<Entity> entity) {
                 if(finishedPlayers == 2) entity->notifyObservers(DungeonRunner::Observer::finishedThird);
                 if(finishedPlayers == 3) entity->notifyObservers(DungeonRunner::Observer::finishedLast);
                 finishedPlayers++;
-                if(entity->getType() == "Player") finished = true;
+                if(entity->getType() == "Player") {
+                    finished = true;
+                    gameScores->addScore(entity->getSubjectObservers()[0]->getObserverName(),entity->getSubjectObservers()[0]->getObserverData());
+                    gameScores->writeToFile();
+                    std::sort(gameEntities.begin(),gameEntities.end(), [](std::shared_ptr<DungeonRunner::Entity> first, std::shared_ptr<DungeonRunner::Entity> second){
+                        return first->getEPosition().second < second->getEPosition().second;
+                    });
+                    for(auto &entity:gameEntities){
+                        if(entity->getType() == "AI" and entity->getEPosition().second<7){
+                            if(finishedPlayers == 1) entity->notifyObservers(DungeonRunner::Observer::finishedSecond);
+                            if(finishedPlayers == 2) entity->notifyObservers(DungeonRunner::Observer::finishedThird);
+                            if(finishedPlayers == 3) entity->notifyObservers(DungeonRunner::Observer::finishedLast);
+                            finishedPlayers++;
+                        }
+                    }
+                }
             }
             continue;
         }
@@ -121,7 +141,7 @@ void DungeonRunner::Game::manageCollision(std::shared_ptr<Entity> entity) {
 }
 
 void DungeonRunner::Game::managePlayerMovement(double dTime) {
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Z)){
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)){
         gamePlayer->setPlayerSpeed(gamePlayer->getPlayerSpeed()*1.01);
         if(gamePlayer->getPlayerSpeed()*1.01 > 0.5) gamePlayer->setPlayerSpeed(0.5);
 
@@ -134,21 +154,16 @@ void DungeonRunner::Game::managePlayerMovement(double dTime) {
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)){
         gamePlayer->move(2*dTime,0);
     }
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Q)){
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)){
         gamePlayer->move(-2*dTime,0);
     }
-    if(!pauseGame) gamePlayer->move(0,gamePlayer->getPlayerSpeed()*dTime);
+    gamePlayer->move(0,gamePlayer->getPlayerSpeed()*dTime);
 }
 
 void DungeonRunner::Game::manageGameEvents() {
     sf::Event event;
-    while (gameWindow->pollEvent(event))
-    {
-        if (event.type == sf::Event::Closed)
-            gameWindow->close();
-        if(event.type == sf::Event::KeyReleased and event.key.code == sf::Keyboard::Key::P){
-            pauseGame = !pauseGame;
-        }
+    while (gameWindow->pollEvent(event)){
+        if (event.type == sf::Event::Closed) gameWindow->close();
         if(event.type == sf::Event::KeyReleased and event.key.code == sf::Keyboard::Space) {
             for (auto &obstacle:gameEntities) {
                 if (obstacle->getType() == "Door"  and !obstacle->isNoClip()){
@@ -174,10 +189,10 @@ void DungeonRunner::Game::spawnTraps() {
     for(auto &ai:aiPlayers){
         if(ai->getEPosition().second > aiPos.second) aiPos = ai->getEPosition();
     }
-    if(aiPos.second > pPos.second) pPos =aiPos;
+    if(aiPos.second > pPos.second) pPos = aiPos;
     if(Random::generateRandomChance()<0.013 and pPos.second + 1 <7) {
         std::pair<float, float> tPos;
-        tPos.first = Random::getInstance().generateRandFloat(-1, 1);
+        tPos.first = Random::generateRandFloat(-1, 1);
         tPos.second = pPos.second + 0.8;
         std::shared_ptr<Entity> newTrap = AbstractFactory::createSword(gameWindow);
         newTrap->setEPosition(tPos);
@@ -224,19 +239,9 @@ void DungeonRunner::Game::run() {
         }
         start = now;
         if(!finished) update(dTime);
-        else manageGameEvents();
-        if(finished){
-            for(auto &ai:aiPlayers){
-                auto aiObservers = ai->getSubjectObservers();
-                for(const auto& observer:aiObservers){
-                    std::cout << observer->getObserverName()<< ": " << observer->getObserverData() <<std::endl;
-                }
-            }
-            auto playerObservers = gamePlayer->getSubjectObservers();
-            for(auto &observer:playerObservers){
-                std::cout << observer->getObserverName()<< ": " << observer->getObserverData() <<std::endl;
-            }
-            std::cout << "--------------------------" <<std::endl;
+        else {
+            manageGameEvents();
+            drawHighscores();
         }
         gameWindow->display();
         auto apos0 = aiPlayers[0]->getEPosition();
@@ -290,5 +295,79 @@ void DungeonRunner::Game::manageScores(float dTime) {
             placement--;
         }
     }
+
+}
+
+void DungeonRunner::Game::drawHighscores() {
+    sf::Text textTemplate;
+    sf::Font textFont;
+    textFont.loadFromFile("../Resources/Fonts/RetroGaming.ttf");
+    textTemplate.setFont(textFont);
+    sf::Text hsText(textTemplate);
+    hsText.setString("**GAME SCORES**");
+    hsText.setOrigin(hsText.getGlobalBounds().width / 2.0, hsText.getGlobalBounds().height / 2.0);
+    hsText.setPosition(gameView.getCenter().x,gameView.getCenter().y-gameView.getSize().y/8.0);
+
+    sf::Text scoreText1(textTemplate);
+    sf::Text scoreText2(textTemplate);
+    sf::Text scoreText3(textTemplate);
+    sf::Text scoreText4(textTemplate);
+
+    scoreText1.setFillColor(sf::Color::Yellow);
+    scoreText2.setFillColor(sf::Color(59,59,59));
+    scoreText3.setFillColor(sf::Color(102, 51, 0));
+
+
+    std::vector<std::pair<std::string,int>> endScore;
+    endScore.emplace_back(gamePlayer->getSubjectObservers()[0]->getObserverName(),gamePlayer->getSubjectObservers()[0]->getObserverData());
+    for(auto &ai:aiPlayers){
+        endScore.emplace_back(ai->getSubjectObservers()[0]->getObserverName(),ai->getSubjectObservers()[0]->getObserverData());
+    }
+    std::sort(endScore.begin(),endScore.end(),[](std::pair<std::string,int> a, std::pair<std::string,int> b){
+        return a.second > b.second;
+    });
+
+    std::stringstream firstPlace;
+    std::stringstream secondPlace;
+    std::stringstream thirdPlace;
+    std::stringstream fourthPlace;
+    firstPlace << endScore[0].first << std::setw(15) << endScore[0].second <<std::endl;
+    secondPlace << endScore[1].first << std::setw(15) << endScore[1].second <<std::endl;
+    thirdPlace << endScore[2].first << std::setw(15) << endScore[2].second <<std::endl;
+    fourthPlace << endScore[3].first << std::setw(15) << endScore[3].second <<std::endl;
+    scoreText1.setString(firstPlace.str());
+    scoreText2.setString(secondPlace.str());
+    scoreText3.setString(thirdPlace.str());
+    scoreText4.setString(fourthPlace.str());
+
+    scoreText1.setOrigin(scoreText1.getGlobalBounds().width/2.0,scoreText1.getGlobalBounds().height/2.0);
+    scoreText2.setOrigin(scoreText2.getGlobalBounds().width/2.0,scoreText2.getGlobalBounds().height/2.0);
+    scoreText3.setOrigin(scoreText3.getGlobalBounds().width/2.0,scoreText3.getGlobalBounds().height/2.0);
+    scoreText4.setOrigin(scoreText4.getGlobalBounds().width/2.0,scoreText4.getGlobalBounds().height/2.0);
+
+    scoreText1.setPosition(gameView.getCenter().x,gameView.getCenter().y);
+    scoreText2.setPosition(gameView.getCenter().x,scoreText1.getPosition().y+scoreText2.getLocalBounds().height);
+    scoreText3.setPosition(gameView.getCenter().x,scoreText2.getPosition().y+scoreText3.getLocalBounds().height);
+    scoreText4.setPosition(gameView.getCenter().x,scoreText3.getPosition().y+scoreText4.getLocalBounds().height);
+
+    gameWindow->draw(hsText);
+    gameWindow->draw(scoreText1);
+    gameWindow->draw(scoreText2);
+    gameWindow->draw(scoreText3);
+    gameWindow->draw(scoreText4);
+}
+
+void DungeonRunner::Game::drawPlayerScore() {
+    sf::Text playerScore;
+    sf::Font textFont;
+    textFont.loadFromFile("../Resources/Fonts/RetroGaming.ttf");
+    playerScore.setFont(textFont);
+
+    playerScore.setString(std::to_string(gamePlayer->getSubjectObservers()[0]->getObserverData()));
+    playerScore.setPosition(gameView.getCenter().x-gameWindow->getSize().x/2.0,gameView.getCenter().y-gameWindow->getSize().y/2.0);
+    playerScore.setScale(1.5,1.5);
+    playerScore.setOutlineThickness(5);
+    gameWindow->draw(playerScore);
+
 
 }

@@ -14,7 +14,7 @@ bool DungeonRunner::Door::IsOpen() const {
 
 void DungeonRunner::Door::action() {
     if(isLocked or isOpen) return;
-    if(Random::generateRandomChance()<=0.5) {
+    if(Random::generateRandomChance()<=1) {
         isOpen = true;
         return;
     }

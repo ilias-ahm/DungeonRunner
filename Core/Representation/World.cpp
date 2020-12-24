@@ -13,7 +13,7 @@ DungeonRunner::World::World(std::shared_ptr<sf::RenderWindow> gWindow, int x, in
         for(int lane = 0; lane!= x+2; lane++){
             pVector.push_back({placeholder});
         }
-        world.push_back(pVector);
+        worldTiles.push_back(pVector);
     }
     wallTexture.loadFromFile("../Resources/wallSprite/wall1.png");
     initTileTex();
@@ -21,20 +21,19 @@ DungeonRunner::World::World(std::shared_ptr<sf::RenderWindow> gWindow, int x, in
     initPillarTex();
     initSwordTex();
     initWorld();
-    std::pair<float,float> fSize = Transformation::toCoords(gWindow, gameWindow->getSize().x/2.0, gameWindow->getSize().y / 8.0);
-    fSize.first+= Transformation::getWSize().first / 2.0;
-    fSize.second+= Transformation::getWSize().second / 2.0;
-    fSize.second = 1 - fSize.second;
-    std::pair<float,float> finishPos = Transformation::toPixel(gWindow,0 ,7-fSize.second);
+    std::pair<float,float> entitySize = Transformation::toCoords(gWindow, gameWindow->getSize().x / 2.0, gameWindow->getSize().y / 8.0);
+    entitySize.first+= Transformation::getWSize().first / 2.0;
+    entitySize.second+= Transformation::getWSize().second / 2.0;
+    entitySize.second = 1 - entitySize.second;
+    std::pair<float,float> finishPos = Transformation::toPixel(gWindow,0 , 7 - entitySize.second);
     auto wf = sf::RectangleShape(sf::Vector2f(gameWindow->getSize().x/2.0,gameWindow->getSize().y/8.0));
     wf.setOrigin(wf.getSize().x/2.0,wf.getSize().y);
     wf.setPosition(finishPos.first,finishPos.second);
     worldFinish = AbstractFactory::createFinish(gWindow,wf);
-    worldFinish->setESize(fSize);
+    worldFinish->setESize(entitySize);
     worldFinish->setEPosition(std::pair<float,float>(0,7-worldFinish->getESize().second));
-    obstacles.push_back(worldFinish);
+    worldEntities.push_back(worldFinish);
     worldFinish->setNoClip(true);
-
     eType = "World";
 
 }
@@ -47,27 +46,26 @@ void DungeonRunner::World::initWorld() {
         Wall2->setTexture(&wallTexture);
         Wall1->setPosition(gameWindow->getSize().x/8.0,(float)board*(-(float)gameWindow->getSize().y));
         Wall2->setPosition(gameWindow->getSize().x/2.0 + gameWindow->getSize().x/4.0,(float)board*(-(float)gameWindow->getSize().y));
-        world[board][0] = {{Wall1}};
-        world[board][worldSize.first+1] = {{Wall2}};
+        worldTiles[board][0] = {{Wall1}};
+        worldTiles[board][worldSize.first + 1] = {{Wall2}};
         for (int lane = 0; lane != worldSize.first; lane++) {
             int currentRow = 0;
             while (currentRow != 8) {
                 std::vector<std::shared_ptr<sf::RectangleShape>> Tile;
                 double rand = Random::generateRandomChance();
                 if(rand<0.030 and board>0 and board !=worldSize.second-1) {
-                    std::shared_ptr<sf::RectangleShape> dRec = std::make_shared<sf::RectangleShape>(
-                            sf::Vector2f(gameWindow->getSize().x / 10.0, gameWindow->getSize().y / 10.0));
+                    std::shared_ptr<sf::RectangleShape> dRec = std::make_shared<sf::RectangleShape>(sf::Vector2f(gameWindow->getSize().x / 10.0, gameWindow->getSize().y / 10.0));
                     std::shared_ptr<DungeonRunnerSFML::DoorSFML> dObs = AbstractFactory::createDoor(dRec, gameWindow, obstacleTextures);
                     dRec->setPosition((float) ((lane + 2) * gameWindow->getSize().x / 8)+dRec->getSize().x/2.0,
                                       (float) (currentRow * gameWindow->getSize().y / 8 ) + dRec->getSize().y -
                                       (float) (board * gameWindow->getSize().y));
                     dObs->setEPosition(Transformation::toCoords(gameWindow,dRec->getPosition().x,dRec->getPosition().y));
-                    obstacles.push_back(dObs);
+                    worldEntities.push_back(dObs);
                 }
                 for (int i = 0; i != 4; i++) {
                     std::shared_ptr<sf::RectangleShape> tile = std::make_shared<sf::RectangleShape>();
                     tile->setSize(sf::Vector2f(gameWindow->getSize().x / 16.0, gameWindow->getSize().y / 16.0));
-                    tile->setTexture(getRandomFloorTile().get());
+                    tile->setTexture(getRandomFloorTexture().get());
                     switch (i) {
                         case 0:
                             tile->setPosition((float) (lane + 2) * gameWindow->getSize().x / 8,
@@ -99,10 +97,10 @@ void DungeonRunner::World::initWorld() {
                     Tile.push_back(tile);
                 }
                 if(currentRow == 0){
-                    world[board][lane+1][currentRow] = Tile;
+                    worldTiles[board][lane + 1][currentRow] = Tile;
                 }
                 else{
-                    world[board][lane+1].push_back(Tile);
+                    worldTiles[board][lane + 1].push_back(Tile);
                 }
                 currentRow++;
             }
@@ -110,7 +108,7 @@ void DungeonRunner::World::initWorld() {
     }
 }
 
-std::shared_ptr<sf::Texture> DungeonRunner::World::getRandomFloorTile() {
+std::shared_ptr<sf::Texture> DungeonRunner::World::getRandomFloorTexture() {
     std::string floorTile = "../Resources/floorSprites/floor_";
     int random = Random::generateRandInt(100);
     if(0<=random and random <50) random = 1;
@@ -197,7 +195,7 @@ void DungeonRunner::World::action() {
 }
 
 void DungeonRunner::World::display() {
-    for(auto &board:world){
+    for(auto &board:worldTiles){
         for( auto &lane:board){
             for(auto &tile:lane){
                 for(auto &subtile:tile){
@@ -209,18 +207,15 @@ void DungeonRunner::World::display() {
     worldFinish->display();
 }
 
-const std::vector<std::shared_ptr<DungeonRunner::Entity>> &DungeonRunner::World::getObstacles(){
-    for(int i=0;i!=obstacles.size();i++) {
-        for (int j = 0;j!=obstacles.size()-1;j++) {
-            if(obstacles[j]->getEPosition().second>obstacles[j+1]->getEPosition().second){
-                std::swap(obstacles[j],obstacles[j+1]);
+const std::vector<std::shared_ptr<DungeonRunner::Entity>> &DungeonRunner::World::getWorldEntities(){
+    for(int i=0; i != worldEntities.size(); i++) {
+        for (int j = 0; j != worldEntities.size() - 1; j++) {
+            if(worldEntities[j]->getEPosition().second > worldEntities[j + 1]->getEPosition().second){
+                std::swap(worldEntities[j], worldEntities[j + 1]);
             }
         }
     }
 
-    return obstacles;
+    return worldEntities;
 }
 
-const std::map<std::string, std::shared_ptr<sf::Texture>> &DungeonRunner::World::getObstacleTextures() const {
-    return obstacleTextures;
-}

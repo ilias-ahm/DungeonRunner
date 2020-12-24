@@ -51,5 +51,11 @@ std::shared_ptr<DungeonRunner::Observer> DungeonRunner::AbstractFactory::createO
     return std::make_shared<DungeonRunner::Observer>(observerName);
 }
 
+std::shared_ptr<DungeonRunner::Highscores> DungeonRunner::AbstractFactory::createHighscores(std::string filePath) {
+    return std::make_shared<DungeonRunner::Highscores>(filePath);
+}
+
+
+
 
 

@@ -23,7 +23,7 @@ namespace DungeonRunner {
             lastPlace
         };
 
-        Observer(const std::string &observerName);
+        Observer(std::string observerName);
 
         const std::string &getObserverName() const;
 
