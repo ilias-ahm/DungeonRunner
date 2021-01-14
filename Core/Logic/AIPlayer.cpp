@@ -61,10 +61,7 @@ void DungeonRunner::AIPlayer::avoidObstacles() {
                 if(entity->getType() == "Door") {
                     if (dynamic_cast<DungeonRunnerSFML::DoorSFML*> (entity.get())->IsOpen()) continue;
                     if (Random::generateRandomChance() < 0.0025) {
-                        if (!interactObstacle(entity) and !stuckResolving) {
-                            dodgeObstacle(entity);
-                            return;
-                        }
+                        interactObstacle(entity);
                     }
                     if(!stuckResolving) {
                         dodgeObstacle(entity);
