@@ -81,7 +81,7 @@ void DungeonRunner::Game::createPlayer() {
     player->setTextureRect(*uvRect);
     player->setTexture(&*characterTex[0]);
     gamePlayer = AbstractFactory::createPlayer(gameWindow,player,characterTex[0],uvRect);
-    gamePlayer->registerObserver(AbstractFactory::createObserver("Ilias"));
+    gamePlayer->registerObserver(AbstractFactory::createObserver("DD"));
 }
 
 bool DungeonRunner::Game::isColliding(std::shared_ptr<Entity> e1, std::shared_ptr<Entity> e2,float push) {
@@ -303,6 +303,7 @@ void DungeonRunner::Game::drawHighscores() {
     sf::Font textFont;
     textFont.loadFromFile("../Resources/Fonts/RetroGaming.ttf");
     textTemplate.setFont(textFont);
+    textTemplate.setCharacterSize(gameWindow->getSize().x*0.035);
     sf::Text hsText(textTemplate);
     hsText.setString("**GAME SCORES**");
     hsText.setOrigin(hsText.getGlobalBounds().width / 2.0, hsText.getGlobalBounds().height / 2.0);
@@ -360,6 +361,7 @@ void DungeonRunner::Game::drawHighscores() {
 void DungeonRunner::Game::drawPlayerScore() {
     sf::Text playerScore;
     sf::Font textFont;
+    playerScore.setCharacterSize(gameWindow->getSize().x*0.03);
     textFont.loadFromFile("../Resources/Fonts/RetroGaming.ttf");
     playerScore.setFont(textFont);
 
