@@ -2,10 +2,10 @@
 Welcome to DungeonRunner, this is a game where the player does his best in avoiding obstacles and making sure they stay ahead so they can escape from the dungeon.\
 
 Configuration:\
-  WASD Keys to move, changeable in Configuration.h\
-    W - Speed up (hold)\
+	WASD Keys to move, changeable in Configuration.h\
+		W - Speed up (hold)\
     S - Slow down (hold)\
-    A - Move left\
+    A - Move left\ 
     D - Move right\
     SPACEBAR - Interact with obstacles (doors will open)\
   Player name is "Player" by default, if you like you could change this in Configuration.h\
