@@ -60,8 +60,9 @@ namespace DungeonRunner {
         void manageGameEvents();
         /**
          * Spawns swords according to Player/AI in first place
+         * @param dTime
          */
-        void spawnTraps();
+        void spawnTraps(float dTime);
         /**
          * moves swords according to delta time to ensure same speed on all fps settings
          * @param dTime

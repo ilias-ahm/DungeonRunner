@@ -5,8 +5,8 @@
 #include <random>
 int main()
 {
-    std::shared_ptr<sf::RenderWindow> gWindow = std::make_shared<sf::RenderWindow>(sf::VideoMode(1000,1000),"Test",sf::Style::Titlebar|sf::Style::Close);
-    gWindow->setFramerateLimit(60);
+    std::shared_ptr<sf::RenderWindow> gWindow = std::make_shared<sf::RenderWindow>(sf::VideoMode(SCREENSIZE_X, SCREENSIZE_Y), "DungeonRunner", sf::Style::Titlebar | sf::Style::Close);
+    gWindow->setFramerateLimit(FPS);
     gWindow->clear();
     auto newGame = DungeonRunner::Game(gWindow);
     newGame.run();

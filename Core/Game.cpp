@@ -30,7 +30,7 @@ DungeonRunner::Game::Game(const std::shared_ptr<sf::RenderWindow> &gameWindow) :
 void DungeonRunner::Game::update(double dTime) {
     gameWindow->clear();
     manageScores(dTime);
-    spawnTraps();
+    spawnTraps(dTime);
     manageGameEvents();
     manageTraps(dTime);
     manageCollision(gamePlayer);
@@ -83,7 +83,7 @@ void DungeonRunner::Game::createPlayer() {
     player->setTextureRect(*uvRect);
     player->setTexture(&*characterTex[0]);
     gamePlayer = AbstractFactory::createPlayer(gameWindow,player,characterTex[0],uvRect);
-    gamePlayer->registerObserver(AbstractFactory::createObserver("Player"));
+    gamePlayer->registerObserver(AbstractFactory::createObserver(PLAYERNAME));
 }
 
 bool DungeonRunner::Game::isColliding(std::shared_ptr<Entity> e1, std::shared_ptr<Entity> e2,float push) {
@@ -143,20 +143,20 @@ void DungeonRunner::Game::manageCollision(std::shared_ptr<Entity> entity) {
 }
 
 void DungeonRunner::Game::managePlayerMovement(double dTime) {
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)){
+    if(sf::Keyboard::isKeyPressed(SPEEDUP)){
         gamePlayer->setPlayerSpeed(gamePlayer->getPlayerSpeed()*1.01); // speedup
         if(gamePlayer->getPlayerSpeed()*1.01 > 0.5) gamePlayer->setPlayerSpeed(0.5);
 
     }
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::S)){
+    if(sf::Keyboard::isKeyPressed(SLOWDOWN)){
         gamePlayer->setPlayerSpeed(gamePlayer->getPlayerSpeed()/1.01); // slowdown
         if(gamePlayer->getPlayerSpeed()/1.01 < 0.2) gamePlayer->setPlayerSpeed(0.2);
 
     }
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)){
+    if(sf::Keyboard::isKeyPressed(RIGHT)){
         gamePlayer->move(2*dTime,0);
     }
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)){
+    if(sf::Keyboard::isKeyPressed(LEFT)){
         gamePlayer->move(-2*dTime,0);
     }
     gamePlayer->move(0,gamePlayer->getPlayerSpeed()*dTime);
@@ -166,7 +166,7 @@ void DungeonRunner::Game::manageGameEvents() {
     sf::Event event;
     while (gameWindow->pollEvent(event)){
         if (event.type == sf::Event::Closed) gameWindow->close();
-        if(event.type == sf::Event::KeyReleased and event.key.code == sf::Keyboard::Space) {
+        if(event.type == sf::Event::KeyReleased and event.key.code == YELL) {
             for (auto &obstacle:gameEntities) {
                 if (obstacle->getType() == "Door"  and !obstacle->isNoClip()){ // if door isnt opened a player can open it by pressing space
                     std::pair<float, float> pPos = gamePlayer->getEPosition();
@@ -185,14 +185,14 @@ void DungeonRunner::Game::manageGameEvents() {
     }
 }
 
-void DungeonRunner::Game::spawnTraps() {
+void DungeonRunner::Game::spawnTraps(float dTime) {
     std::pair<float, float> pPos = gamePlayer->getEPosition();
     std::pair<float, float> aiPos = aiPlayers[0]->getEPosition();
     for(auto &ai:aiPlayers){
         if(ai->getEPosition().second > aiPos.second) aiPos = ai->getEPosition();
     }
     if(aiPos.second > pPos.second) pPos = aiPos;
-    if(Random::generateRandomChance()<0.013 and pPos.second + 1 <7) { // 1.3% chance every loop to spawn a new sword
+    if(Random::generateRandomChance()<1.3*dTime and pPos.second + 1 <7) { // 1.3% chance every loop to spawn a new sword
         std::pair<float, float> tPos;
         tPos.first = Random::generateRandFloat(-1, 1);
         tPos.second = pPos.second + 0.8;
@@ -230,14 +230,17 @@ void DungeonRunner::Game::run() {
     auto start = std::chrono::high_resolution_clock::now();
     double dTime;
     while (gameWindow->isOpen()){
+        float fixedD;
         auto bpos0 = aiPlayers[0]->getEPosition();
         auto bpos1 = aiPlayers[1]->getEPosition();
         auto bpos2 = aiPlayers[2]->getEPosition();
         gameWindow->clear();
         auto now = std::chrono::high_resolution_clock::now();
         dTime = std::chrono::duration_cast<std::chrono::duration<double>>(now-start).count();
-        if(dTime>1/60.0f){
-            dTime = 1/60.0f;
+        if(FPS < 60.0f) fixedD = FPS;
+        else fixedD = 60.0f;
+        if(dTime>1/fixedD){
+            dTime = 1/fixedD;
         }
         start = now;
         if(!finished) update(dTime);

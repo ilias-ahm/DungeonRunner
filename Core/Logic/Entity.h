@@ -10,6 +10,7 @@
 #include "Transformation.h"
 #include "Random.h"
 #include "Subject.h"
+#include "../Configuration.h"
 namespace DungeonRunner {
     class Entity: public DungeonRunner::Subject {
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
