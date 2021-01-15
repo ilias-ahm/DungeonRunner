@@ -14,7 +14,7 @@ Welcome to DungeonRunner, this is a game where the player does his best in avoid
   FPS is also changeable but its is recommended to keep it at 60FPS since this may cause some slight anomalies.\
 
 ## Gameplay:
-  There are obstacles you need to avoid\
+  There are obstacles you need to avoid
   - Swords: High velocity, -20points penalty
   - Doors: Static, will take away up to half of your velocity when hit head-on. Opening doors has a 100% chance of opening (interact) and will result in a -50points penalty
   ### AI:
@@ -28,6 +28,6 @@ Welcome to DungeonRunner, this is a game where the player does his best in avoid
   - Finishing 2nd place : +75p
   - Finishing 3rd place : +50
   - Finishing last place : +0p
-  Running will bring points over time, you get more points if you're running in first place than if you were running in second place etc,...\
+  - Running will bring points over time, you get more points if you're running in first place than if you were running in second place etc,...
  
- Happy running!\
+ Happy running!
