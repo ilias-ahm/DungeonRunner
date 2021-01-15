@@ -34,18 +34,47 @@ namespace DungeonRunner {
     //                                                          Functions                                                           //
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         private:
+        /**
+         * Initializes map
+         */
         void initWorld();
+        /**
+         * Returns random floortile texture [1-8]
+         * @return
+         */
         std::shared_ptr<sf::Texture> getRandomFloorTexture();
+        /**
+         * Loads all tile textures
+         */
         void initTileTex();
+        /**
+         * Loads sword texture(s)
+         */
         void initSwordTex();
+        /**
+         * Loads Door textures
+         */
         void initDoorTex();
-        void initPillarTex();
+        void initPillarTex(); // UNUSED
 
         public:
+        /**
+         * Constructor
+         * @param gWindow SFML Renderwindow
+         * @param x worldsize x
+         * @param y worldsize y
+         */
         World(std::shared_ptr<sf::RenderWindow> gWindow, int x, int y);
+        /**
+         * Returns world entities
+         * @return
+         */
         const std::vector<std::shared_ptr<Entity>> &getWorldEntities();
-        void update() override;
-        void action() override;
+        void update() override; // UNUSED
+        void action() override; // UNUSED
+        /**
+         * Displays worldmap on SFML Renderwindow
+         */
         void display() override;
 
 

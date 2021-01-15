@@ -35,26 +35,28 @@ void DungeonRunner::Game::update(double dTime) {
     manageTraps(dTime);
     manageCollision(gamePlayer);
     managePlayerMovement(dTime);
-    for(auto &ai:aiPlayers){
+    for(auto &ai:aiPlayers){ // before moving AI check for collision
         ai->updateGameEntities(gameEntities);
         manageCollision(ai);
     }
     manageAI(dTime);
     gameWorld->update();
     gameWorld->display();
-    for(auto &ai:aiPlayers){
+    for(auto &ai:aiPlayers){ // update AI texture (animation)
         aiAnimation->update(3,dTime,true,0.5/ai->getAiSpeed());
         ai->setUvRect(aiAnimation->getUvRect());
         ai->update();
         ai->display();
     }
     gamePlayer->update();
+    // update player texture (animation)
     playerAnimation->update(3,dTime,true,0.15/gamePlayer->getPlayerSpeed());
     gamePlayer->setUvRect(std::make_shared<sf::IntRect>(playerAnimation->getUvRect()));
     gamePlayer->display();
+
     auto mapCoords = Transformation::toPixel(gameWindow,0,6.5);
-    if(gamePlayer->getPos().y < mapCoords.second+gameWindow->getSize().y/2.0-gameWindow->getSize().y/4.0) gameView.setCenter(gameWindow->getSize().x/2.0,mapCoords.second);
-    else gameView.setCenter(gameWindow->getSize().x/2.0,gamePlayer->getPos().y-gameWindow->getSize().y/4.0);
+    if(gamePlayer->getPos().y < mapCoords.second+gameWindow->getSize().y/2.0-gameWindow->getSize().y/4.0) gameView.setCenter(gameWindow->getSize().x/2.0,mapCoords.second); // set static view untill player progresses
+    else gameView.setCenter(gameWindow->getSize().x/2.0,gamePlayer->getPos().y-gameWindow->getSize().y/4.0); // update view position to player position
     updateViewColliders();
 
     for(auto &entity:gameEntities){
@@ -81,7 +83,7 @@ void DungeonRunner::Game::createPlayer() {
     player->setTextureRect(*uvRect);
     player->setTexture(&*characterTex[0]);
     gamePlayer = AbstractFactory::createPlayer(gameWindow,player,characterTex[0],uvRect);
-    gamePlayer->registerObserver(AbstractFactory::createObserver("DD"));
+    gamePlayer->registerObserver(AbstractFactory::createObserver("Player"));
 }
 
 bool DungeonRunner::Game::isColliding(std::shared_ptr<Entity> e1, std::shared_ptr<Entity> e2,float push) {
@@ -100,32 +102,32 @@ void DungeonRunner::Game::updateViewColliders() {
 }
 
 void DungeonRunner::Game::manageCollision(std::shared_ptr<Entity> entity) {
-    if(finished) return;
+    if(finished) return; // doesnt check for collision when game ends
     for(auto &collider:gameEntities){
         float push = 1;
         if(collider == entity) continue;
-        if(entity->getType() == "AI" and collider->getType() == "Player") push =0.5;
-        if(collider->getType() == "AI" and entity->getType() == "Player") push =0.5;
-        if(collider->getType() == "AI" and entity->getType() == "AI") push =0.5;
+        if(entity->getType() == "AI" and collider->getType() == "Player") push =0.5; // AI and player have the same pushing force
+        if(collider->getType() == "AI" and entity->getType() == "Player") push =0.5; // AI and player have the same pushing force
+        if(collider->getType() == "AI" and entity->getType() == "AI") push =0.5; // AI and AI have the same pushing force
         if(isColliding(collider,entity,push)){
             if(collider->getType() == "Sword" and (entity->getType() == "Player" or entity->getType() == "AI")){
-                collider->setEPosition(std::pair<float,float>(-3,9));
+                collider->setEPosition(std::pair<float,float>(-3,9)); // teleport sword to no mans land when it hits ai or player
                 entity->action();
             }
-            if(collider->getType() == "Finish" and (entity->getType() == "Player" or entity->getType() == "AI")){
+            if(collider->getType() == "Finish" and (entity->getType() == "Player" or entity->getType() == "AI")){ // checks who finished in which place to give score accordingly
                 if(finishedPlayers == 0) entity->notifyObservers(DungeonRunner::Observer::finishedFirst);
                 if(finishedPlayers == 1) entity->notifyObservers(DungeonRunner::Observer::finishedSecond);
                 if(finishedPlayers == 2) entity->notifyObservers(DungeonRunner::Observer::finishedThird);
                 if(finishedPlayers == 3) entity->notifyObservers(DungeonRunner::Observer::finishedLast);
                 finishedPlayers++;
                 if(entity->getType() == "Player") {
-                    finished = true;
+                    finished = true; // game ends when player reaches finishline
                     gameScores->addScore(entity->getSubjectObservers()[0]->getObserverName(),entity->getSubjectObservers()[0]->getObserverData());
                     gameScores->writeToFile();
                     std::sort(gameEntities.begin(),gameEntities.end(), [](std::shared_ptr<DungeonRunner::Entity> first, std::shared_ptr<DungeonRunner::Entity> second){
                         return first->getEPosition().second < second->getEPosition().second;
-                    });
-                    for(auto &entity:gameEntities){
+                    }); // sorts entities from smallest y-value to highest
+                    for(auto &entity:gameEntities){ // places the rest of the hikers according to position at time that player finishes
                         if(entity->getType() == "AI" and entity->getEPosition().second<7){
                             if(finishedPlayers == 1) entity->notifyObservers(DungeonRunner::Observer::finishedSecond);
                             if(finishedPlayers == 2) entity->notifyObservers(DungeonRunner::Observer::finishedThird);
@@ -142,12 +144,12 @@ void DungeonRunner::Game::manageCollision(std::shared_ptr<Entity> entity) {
 
 void DungeonRunner::Game::managePlayerMovement(double dTime) {
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)){
-        gamePlayer->setPlayerSpeed(gamePlayer->getPlayerSpeed()*1.01);
+        gamePlayer->setPlayerSpeed(gamePlayer->getPlayerSpeed()*1.01); // speedup
         if(gamePlayer->getPlayerSpeed()*1.01 > 0.5) gamePlayer->setPlayerSpeed(0.5);
 
     }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::S)){
-        gamePlayer->setPlayerSpeed(gamePlayer->getPlayerSpeed()/1.01);
+        gamePlayer->setPlayerSpeed(gamePlayer->getPlayerSpeed()/1.01); // slowdown
         if(gamePlayer->getPlayerSpeed()/1.01 < 0.2) gamePlayer->setPlayerSpeed(0.2);
 
     }
@@ -166,13 +168,13 @@ void DungeonRunner::Game::manageGameEvents() {
         if (event.type == sf::Event::Closed) gameWindow->close();
         if(event.type == sf::Event::KeyReleased and event.key.code == sf::Keyboard::Space) {
             for (auto &obstacle:gameEntities) {
-                if (obstacle->getType() == "Door"  and !obstacle->isNoClip()){
+                if (obstacle->getType() == "Door"  and !obstacle->isNoClip()){ // if door isnt opened a player can open it by pressing space
                     std::pair<float, float> pPos = gamePlayer->getEPosition();
                     std::pair<float, float> oPos = obstacle->getEPosition();
-                    if (oPos.second - pPos.second <= 0.6 and oPos.second - pPos.second >0) {
+                    if (oPos.second - pPos.second <= 0.6 and oPos.second - pPos.second >0) { // if distance between object and player is lower dan 0.6 and player and the object are in the same lane
                         if(pPos.first>oPos.first-0.25 and pPos.first<oPos.first+0.25) {
-                            obstacle->action();
-                            gamePlayer->notifyObservers(DungeonRunner::Observer::staticObstacleAction);
+                            obstacle->action(); // opens door
+                            gamePlayer->notifyObservers(DungeonRunner::Observer::staticObstacleAction); // penalizes player
                             break;
                         }
                     }
@@ -190,7 +192,7 @@ void DungeonRunner::Game::spawnTraps() {
         if(ai->getEPosition().second > aiPos.second) aiPos = ai->getEPosition();
     }
     if(aiPos.second > pPos.second) pPos = aiPos;
-    if(Random::generateRandomChance()<0.013 and pPos.second + 1 <7) {
+    if(Random::generateRandomChance()<0.013 and pPos.second + 1 <7) { // 1.3% chance every loop to spawn a new sword
         std::pair<float, float> tPos;
         tPos.first = Random::generateRandFloat(-1, 1);
         tPos.second = pPos.second + 0.8;
@@ -213,7 +215,7 @@ void DungeonRunner::Game::manageTraps(double dTime) {
 
 }
 
-void DungeonRunner::Game::initAI() {
+void DungeonRunner::Game::initAI() { // initialise AI
     for(int i=1;i!=4;i++){
         auto newAI = AbstractFactory::createAI(gameEntities,gameWindow);
         auto newObserver = AbstractFactory::createObserver("CPU" + std::to_string(i));
@@ -250,6 +252,8 @@ void DungeonRunner::Game::run() {
         auto checkPos0 = std::abs(bpos0.second - apos0.second);
         auto checkPos1 = std::abs(bpos1.second - apos1.second);
         auto checkPos2 = std::abs(bpos2.second - apos2.second);
+
+        //check if AI has moved in y-direction to see if they are stuck
         if( checkPos0 +0.000001< aiPlayers[0]->getAiSpeed()*dTime) aiPlayers[0]->setIsStuck(true);
         else aiPlayers[0]->setIsStuck(false);
         if( checkPos1 +0.000001< aiPlayers[1]->getAiSpeed()*dTime) aiPlayers[1]->setIsStuck(true);
@@ -267,10 +271,10 @@ void DungeonRunner::Game::manageAI(float dTime) {
         for(auto &checkai:aiPlayers){
             manageCollision(checkai);
         }
-        if(ai->getDodgeState() == 1){
+        if(ai->getDodgeState() == 1){ // dodge left
             ai->move(-2*dTime,0);
         }
-        else if(ai->getDodgeState() == 2){
+        else if(ai->getDodgeState() == 2){ // dodge right
             ai->move(2*dTime,0);
         }
         for(auto &checkai:aiPlayers){

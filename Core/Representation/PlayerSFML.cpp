@@ -36,14 +36,6 @@ DungeonRunnerSFML::Player::Player(std::shared_ptr<sf::RenderWindow> &gWindow, st
     eType = "Player";
 }
 
-/*void DungeonRunnerSFML::Player::move(float x, float y) {
-    if(ePosition.first + x < -(Transformation::getWSize().first / 2.0) or ePosition.first + x >= (Transformation::getWSize().first / 2.0) or
-       ePosition.second + y < -(Transformation::getWSize().second / 2.0) or ePosition.second + y > (Transformation::getWSize().second / 2.0)) return;
-    ePosition.first+=x;
-    ePosition.second+=y;
-
-}*/
-
 sf::Vector2f DungeonRunnerSFML::Player::getPos() {
     return player->getPosition();
 }

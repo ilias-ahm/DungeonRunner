@@ -14,7 +14,16 @@ namespace DungeonRunner {
     protected:
         std::vector<std::shared_ptr<Observer>> subjectObservers;
     public:
+        /**
+         * pure virtual function to add new observers
+         * @param observer
+         */
         virtual void registerObserver(std::shared_ptr<Observer> observer) = 0;
+        /**
+         * pure virtual function to notify new observers
+         * @param event
+         * @param dTime
+         */
 
         virtual void notifyObservers(Observer::Event event,float dTime =1) = 0;
 

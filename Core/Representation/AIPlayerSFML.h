@@ -10,7 +10,6 @@
 namespace DungeonRunnerSFML {
     class AIPlayer: public DungeonRunner::AIPlayer {
     private:
-
         std::shared_ptr<sf::RenderWindow> gWindow;
         sf::RectangleShape aiPlayer;
         sf::Texture aiTexture;
@@ -18,10 +17,25 @@ namespace DungeonRunnerSFML {
 
 
     public:
+        /**
+         * Constructor
+         * @param gameEntities
+         * @param gWindow SFML Renderwindow
+         */
         AIPlayer(std::vector<std::shared_ptr<DungeonRunner::Entity>> &gameEntities,
         std::shared_ptr<sf::RenderWindow> &gWindow);
+        /**
+         * Displays Ai on Renderwindow
+         */
         void display() override;
+        /**
+         * Updates SMFML rectangle to ai position
+         */
         void update() override;
+        /**
+         * Setter for Texturerect
+         * @param uvRect
+         */
         void setUvRect(const sf::IntRect &uvRect);
     };
 

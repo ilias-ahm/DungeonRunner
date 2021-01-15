@@ -16,11 +16,14 @@ DungeonRunner::World::World(std::shared_ptr<sf::RenderWindow> gWindow, int x, in
         worldTiles.push_back(pVector);
     }
     wallTexture.loadFromFile("../Resources/wallSprite/wall1.png");
+    //initialise all textures needed
     initTileTex();
     initDoorTex();
     initPillarTex();
     initSwordTex();
+    //Initialise maps
     initWorld();
+    //Create finishline
     std::pair<float,float> entitySize = Transformation::toCoords(gWindow, gameWindow->getSize().x / 2.0, gameWindow->getSize().y / 8.0);
     entitySize.first+= Transformation::getWSize().first / 2.0;
     entitySize.second+= Transformation::getWSize().second / 2.0;
@@ -34,11 +37,12 @@ DungeonRunner::World::World(std::shared_ptr<sf::RenderWindow> gWindow, int x, in
     worldFinish->setEPosition(std::pair<float,float>(0,7-worldFinish->getESize().second));
     worldEntities.push_back(worldFinish);
     worldFinish->setNoClip(true);
+
     eType = "World";
 
 }
 
-void DungeonRunner::World::initWorld() {
+void DungeonRunner::World::initWorld() { // Generates world map, first code i wrote so may be a little unreadable
     for(int board = 0; board != worldSize.second;board++) {
         std::shared_ptr<sf::RectangleShape> Wall1 = std::make_shared<sf::RectangleShape>(sf::Vector2f(gameWindow->getSize().x/8.0,gameWindow->getSize().y));
         std::shared_ptr<sf::RectangleShape> Wall2 = std::make_shared<sf::RectangleShape>(sf::Vector2f(gameWindow->getSize().x/8.0,gameWindow->getSize().y));

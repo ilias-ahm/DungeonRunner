@@ -4,9 +4,6 @@
 
 #include "Door.h"
 
-bool DungeonRunner::Door::IsLocked() const {
-    return isLocked;
-}
 
 bool DungeonRunner::Door::IsOpen() const {
     return isOpen;

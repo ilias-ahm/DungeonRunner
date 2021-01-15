@@ -15,7 +15,6 @@ std::pair<float, float> Transformation::_toPixel(std::shared_ptr<sf::RenderWindo
     double newY;
     if(y>0) newY = windowSize.second - (rPosY *lenY) - ((int)y+wSize.second/2.0)*windowSize.second;
     else newY = windowSize.second + (rPosY *lenY) - ((int)y+wSize.second/2.0)*windowSize.second;
-    //std::cout << newX << ", "<< newY <<std::endl;
     return std::pair<float, float>(newX,newY);
 }
 

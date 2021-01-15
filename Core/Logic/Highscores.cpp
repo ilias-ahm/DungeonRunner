@@ -12,7 +12,7 @@ DungeonRunner::Highscores::Highscores(const std::string& fileName): fileName(fil
 void DungeonRunner::Highscores::loadHighscores(std::string fileName) {
     std::ifstream highscoreFile(fileName);
     std::string hs;
-    while(std::getline(highscoreFile, hs)){
+    while(std::getline(highscoreFile, hs)){ // Reads text file line per line
         std::string hsName = hs.substr(0,hs.find(' '));
         std::string hsScore = hs.substr(hs.find(' '),hs.size());
         highScores[hsName].insert(std::stoi(hsScore));
@@ -20,7 +20,7 @@ void DungeonRunner::Highscores::loadHighscores(std::string fileName) {
 }
 
 void DungeonRunner::Highscores::writeToFile() {
-    std::ofstream wFile(fileName,std::ofstream::out | std::ofstream::trunc);
+    std::ofstream wFile(fileName,std::ofstream::out | std::ofstream::trunc); // Flushes file and re-inserts every highscore into file
     for(auto &hs:highScores){
         for(auto &playerScore:hs.second) {
             wFile << hs.first << " " << playerScore <<"\n";

@@ -23,11 +23,26 @@ namespace DungeonRunner {
             lastPlace
         };
 
+        /**
+         * Constructor for observer
+         * @param observerName Player name or AI name
+         */
         Observer(std::string observerName);
-
+        /**
+         * Getter for observer name aka player/ai name
+         * @return
+         */
         const std::string &getObserverName() const;
-
+        /**
+         * Updates score of observer according to observer event
+         * @param event
+         * @param dTime
+         */
         void update(Event event,float dTime = 1);
+        /**
+         *
+         * @return observer score (hScore variable)
+         */
         int getObserverData() const;
 
     };

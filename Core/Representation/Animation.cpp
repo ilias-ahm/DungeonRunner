@@ -9,7 +9,6 @@ DungeonRunnerSFML::Animation::Animation(const std::shared_ptr<sf::Texture> &aniT
     currentImage.x = 0;
     uvRect.width = 32.0f;
     uvRect.height = 32.0f;
-    aniSpeed = 1/2.5;
 }
 
 void DungeonRunnerSFML::Animation::update(int row, float dTime, bool flip,float switchSpeed) {

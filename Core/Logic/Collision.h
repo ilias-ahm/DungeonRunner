@@ -10,8 +10,17 @@
 namespace DungeonRunner {
     class Collision {
     public:
+        /**
+         * Constructor
+         * @param e1 -- first entity for collision
+         */
         explicit Collision(std::shared_ptr<Entity> &e1);
-        void Move(float deltaX,float deltaY);
+        /**
+         *
+         * @param e2 -- second entity for collision
+         * @param push -- float between 0-1. higher means entity gets pushed easier
+         * @return true if entity1 and entity2 are colliding
+         */
         bool checkCollision(std::shared_ptr<Entity> &e2, float push);
         ~Collision();
 

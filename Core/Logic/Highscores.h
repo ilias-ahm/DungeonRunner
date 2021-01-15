@@ -10,12 +10,28 @@
 #include <set>
 namespace DungeonRunner {
     class Highscores {
-        std::map<std::string,std::set<int>> highScores;
+        std::map<std::string,std::set<int>> highScores; // Map with playernames and all their scores
         std::string fileName;
     public:
+        /**
+         * Constructor
+         * @param fileName
+         */
         Highscores(const std::string& fileName);
+        /**
+         * Loads highscores from a txt file
+         * @param fileName
+         */
         void loadHighscores(std::string fileName);
+        /**
+         * Writes to the selected txt file
+         */
         void writeToFile();
+        /**
+         * adds new score to highscores
+         * @param scoreName name of scoreholder
+         * @param score highscore
+         */
         void addScore(std::string scoreName, int score);
     };
 }

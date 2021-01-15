@@ -13,7 +13,15 @@ namespace DungeonRunnerSFML {
         sf::Texture finishTexture;
         sf::Sprite test;
     public:
+        /**
+         * Constructor
+         * @param gWindow  SFML Renderwindow
+         * @param finish SFML Rectangleshape
+         */
         finishLine( std::shared_ptr<sf::RenderWindow> &gWindow,  sf::RectangleShape &finish);
+        /**
+         * Displays finishline on SFML Renderwindow
+         */
         void display() override;
     };
 }

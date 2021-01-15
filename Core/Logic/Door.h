@@ -13,9 +13,14 @@ namespace DungeonRunner {
         bool isLocked = false;
 
     public:
-        bool IsLocked() const;
-
+        /**
+         * getter for isOpen
+         * @return true if door is open
+         */
         bool IsOpen() const;
+        /**
+         * opens door
+         */
         void action() override;
     };
 

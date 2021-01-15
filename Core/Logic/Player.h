@@ -25,6 +25,10 @@ namespace DungeonRunner {
         private:
 
         public:
+        /**
+         * Setter for playerspeed
+         * @param playerSpeed float [0.2-0.5]
+         */
         void setPlayerSpeed(float playerSpeed);
 
         void setPlayerLives(int playerLives);
@@ -34,7 +38,10 @@ namespace DungeonRunner {
         void setPlayerPosition(const std::pair<float, float> &playerPosition);
 
         void setPlayerPosition(float x, float y);
-
+        /**
+         * Getter for playerspeed
+         * @return
+         */
         float getPlayerSpeed() const;
 
         int getPlayerLives() const;

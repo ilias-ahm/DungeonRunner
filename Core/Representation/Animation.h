@@ -14,11 +14,25 @@ namespace DungeonRunnerSFML {
         sf::Vector2u currentImage;
 
         float switchTime;
-        float aniSpeed;
     public:
+        /**
+         *
+         * @param aniTexture SFML texture
+         * @param imageCount amount of images per row
+         */
         Animation(const std::shared_ptr<sf::Texture> &aniTexture,const sf::Vector2u &imageCount);
+        /**
+         * Updates the texture of the entity
+         * @param row
+         * @param dTime
+         * @param flip
+         * @param switchSpeed float
+         */
         void update(int row, float dTime, bool flip = true,float switchSpeed = 1/2.0);
-
+        /**
+         * Getter for uvRect
+         * @return uvRect
+         */
          sf::IntRect getUvRect() ;
     };
 }
