@@ -12,7 +12,7 @@ Configuration:
   The screensize is 1000 pixels x 1000 pixels, this is changeable in Configuration.h
   FPS is also changeable but its is recommended to keep it at 60FPS since this may cause some slight anomalies.
 
-Gameplay:
+Gameplay:\n
   There are obstacles you need to avoid
     - Swords: High velocity, -20points penalty
     - Doors: Static, will take away up to half of your velocity when hit head-on. Opening doors has a 100% chance of opening (interact) and will result in a -50points penalty
