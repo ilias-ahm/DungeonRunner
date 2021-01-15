@@ -9,7 +9,7 @@ Welcome to DungeonRunner, this is a game where the player does his best in avoid
   - D: Move right
   - SPACEBAR: Interact with obstacles (doors will open)
   - Player name is "Player" by default, if you like you could change this in Configuration.h
-  - The screensize is 1000 pixels x 1000 pixels, this is changeable in Configuration.h
+  - The screensize is 1000 pixels x 1000 pixels by default, this is changeable in Configuration.h. The recommended aspect ratio is 1:1
   - FPS is also changeable but its is recommended to keep it at 60FPS since this may cause some slight anomalies.
 
 ## Gameplay:
