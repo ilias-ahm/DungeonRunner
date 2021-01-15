@@ -1,0 +1,82 @@
+\hypertarget{class_dungeon_runner_1_1_subject}{}\doxysection{Dungeon\+Runner\+::Subject Class Reference}
+\label{class_dungeon_runner_1_1_subject}\index{DungeonRunner::Subject@{DungeonRunner::Subject}}
+
+
+{\ttfamily \#include $<$Subject.\+h$>$}
+
+Inheritance diagram for Dungeon\+Runner\+::Subject\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.744548cm]{class_dungeon_runner_1_1_subject}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{class_dungeon_runner_1_1_subject_a0a19035a5fb037ca64a759c910be45a2}{register\+Observer}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_dungeon_runner_1_1_observer}{Observer}} $>$ observer)=0
+\item 
+virtual void \mbox{\hyperlink{class_dungeon_runner_1_1_subject_a33eca2cdf1212f345fd6cfd0a903888f}{notify\+Observers}} (\mbox{\hyperlink{class_dungeon_runner_1_1_observer_a7315512764580c2b52a31bf78798f92c}{Observer\+::\+Event}} event, float d\+Time=1)=0
+\item 
+const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_dungeon_runner_1_1_observer}{Observer}} $>$ $>$ \& \mbox{\hyperlink{class_dungeon_runner_1_1_subject_adae0de2a2211d711cb0ac98decade570}{get\+Subject\+Observers}} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_dungeon_runner_1_1_observer}{Observer}} $>$ $>$ \mbox{\hyperlink{class_dungeon_runner_1_1_subject_a0ad3fe6e7325be1af1ca1c6daee3e8b2}{subject\+Observers}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_dungeon_runner_1_1_subject_adae0de2a2211d711cb0ac98decade570}\label{class_dungeon_runner_1_1_subject_adae0de2a2211d711cb0ac98decade570}} 
+\index{DungeonRunner::Subject@{DungeonRunner::Subject}!getSubjectObservers@{getSubjectObservers}}
+\index{getSubjectObservers@{getSubjectObservers}!DungeonRunner::Subject@{DungeonRunner::Subject}}
+\doxysubsubsection{\texorpdfstring{getSubjectObservers()}{getSubjectObservers()}}
+{\footnotesize\ttfamily const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_dungeon_runner_1_1_observer}{Dungeon\+Runner\+::\+Observer}} $>$ $>$ \& Dungeon\+Runner\+::\+Subject\+::get\+Subject\+Observers (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{class_dungeon_runner_1_1_subject_a33eca2cdf1212f345fd6cfd0a903888f}\label{class_dungeon_runner_1_1_subject_a33eca2cdf1212f345fd6cfd0a903888f}} 
+\index{DungeonRunner::Subject@{DungeonRunner::Subject}!notifyObservers@{notifyObservers}}
+\index{notifyObservers@{notifyObservers}!DungeonRunner::Subject@{DungeonRunner::Subject}}
+\doxysubsubsection{\texorpdfstring{notifyObservers()}{notifyObservers()}}
+{\footnotesize\ttfamily virtual void Dungeon\+Runner\+::\+Subject\+::notify\+Observers (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_dungeon_runner_1_1_observer_a7315512764580c2b52a31bf78798f92c}{Observer\+::\+Event}}}]{event,  }\item[{float}]{d\+Time = {\ttfamily 1} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+pure virtual function to notify new observers 
+\begin{DoxyParams}{Parameters}
+{\em event} & \\
+\hline
+{\em d\+Time} & \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{class_dungeon_runner_1_1_entity_ac03acd4de33cd1d5cb051029d26ed183}{Dungeon\+Runner\+::\+Entity}}.
+
+\mbox{\Hypertarget{class_dungeon_runner_1_1_subject_a0a19035a5fb037ca64a759c910be45a2}\label{class_dungeon_runner_1_1_subject_a0a19035a5fb037ca64a759c910be45a2}} 
+\index{DungeonRunner::Subject@{DungeonRunner::Subject}!registerObserver@{registerObserver}}
+\index{registerObserver@{registerObserver}!DungeonRunner::Subject@{DungeonRunner::Subject}}
+\doxysubsubsection{\texorpdfstring{registerObserver()}{registerObserver()}}
+{\footnotesize\ttfamily virtual void Dungeon\+Runner\+::\+Subject\+::register\+Observer (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_dungeon_runner_1_1_observer}{Observer}} $>$}]{observer }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+pure virtual function to add new observers 
+\begin{DoxyParams}{Parameters}
+{\em observer} & \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{class_dungeon_runner_1_1_entity_a9dd9473c72970dfa9a9c15d30b8ab7a4}{Dungeon\+Runner\+::\+Entity}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_dungeon_runner_1_1_subject_a0ad3fe6e7325be1af1ca1c6daee3e8b2}\label{class_dungeon_runner_1_1_subject_a0ad3fe6e7325be1af1ca1c6daee3e8b2}} 
+\index{DungeonRunner::Subject@{DungeonRunner::Subject}!subjectObservers@{subjectObservers}}
+\index{subjectObservers@{subjectObservers}!DungeonRunner::Subject@{DungeonRunner::Subject}}
+\doxysubsubsection{\texorpdfstring{subjectObservers}{subjectObservers}}
+{\footnotesize\ttfamily std\+::vector$<$std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{class_dungeon_runner_1_1_observer}{Observer}}$>$ $>$ Dungeon\+Runner\+::\+Subject\+::subject\+Observers\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Ilias/\+Documents/\+Git\+Hub/\+Dungeon\+Runner/\+Core/\+Logic/\mbox{\hyperlink{_subject_8h}{Subject.\+h}}\item 
+C\+:/\+Users/\+Ilias/\+Documents/\+Git\+Hub/\+Dungeon\+Runner/\+Core/\+Logic/\mbox{\hyperlink{_subject_8cpp}{Subject.\+cpp}}\end{DoxyCompactItemize}

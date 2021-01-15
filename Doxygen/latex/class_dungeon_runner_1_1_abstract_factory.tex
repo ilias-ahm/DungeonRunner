@@ -1,0 +1,182 @@
+\hypertarget{class_dungeon_runner_1_1_abstract_factory}{}\doxysection{Dungeon\+Runner\+::Abstract\+Factory Class Reference}
+\label{class_dungeon_runner_1_1_abstract_factory}\index{DungeonRunner::AbstractFactory@{DungeonRunner::AbstractFactory}}
+
+
+{\ttfamily \#include $<$Abstract\+Factory.\+h$>$}
+
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_dungeon_runner_1_1_world}{World}} $>$ \mbox{\hyperlink{class_dungeon_runner_1_1_abstract_factory_a312c0db4cef7f1aaef0b15d0e34d604d}{create\+World}} (std\+::shared\+\_\+ptr$<$ sf\+::\+Render\+Window $>$ g\+Window, int x, int y)
+\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_dungeon_runner_s_f_m_l_1_1_player}{Dungeon\+Runner\+SFML\+::\+Player}} $>$ \mbox{\hyperlink{class_dungeon_runner_1_1_abstract_factory_a0b4e1dab2071fe6d86838a622c4fc407}{create\+Player}} (std\+::shared\+\_\+ptr$<$ sf\+::\+Render\+Window $>$ g\+Window, std\+::shared\+\_\+ptr$<$ sf\+::\+Rectangle\+Shape $>$ player, std\+::shared\+\_\+ptr$<$ sf\+::\+Texture $>$ player\+Texture, std\+::shared\+\_\+ptr$<$ sf\+::\+Int\+Rect $>$ uv\+Rect)
+\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_dungeon_runner_s_f_m_l_1_1_door_s_f_m_l}{Dungeon\+Runner\+SFML\+::\+Door\+SFML}} $>$ \mbox{\hyperlink{class_dungeon_runner_1_1_abstract_factory_a88764273c69312b495e3dbcfcb3afd7c}{create\+Door}} (std\+::shared\+\_\+ptr$<$ sf\+::\+Rectangle\+Shape $>$ \&door, std\+::shared\+\_\+ptr$<$ sf\+::\+Render\+Window $>$ \&g\+Window, std\+::map$<$ std\+::string, std\+::shared\+\_\+ptr$<$ sf\+::\+Texture $>$$>$ \&door\+State)
+\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_dungeon_runner_1_1_entity}{Dungeon\+Runner\+::\+Entity}} $>$ \mbox{\hyperlink{class_dungeon_runner_1_1_abstract_factory_ac44b276912c9aab4370e62a557b17d6c}{create\+Collider}} (const std\+::pair$<$ float, float $>$ \&e\+Position, const std\+::pair$<$ float, float $>$ \&e\+Size)
+\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_dungeon_runner_s_f_m_l_1_1_sword}{Dungeon\+Runner\+SFML\+::\+Sword}} $>$ \mbox{\hyperlink{class_dungeon_runner_1_1_abstract_factory_a625c3862ffa43040c49370d1c914740b}{create\+Sword}} (std\+::shared\+\_\+ptr$<$ sf\+::\+Render\+Window $>$ g\+Window)
+\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_dungeon_runner_s_f_m_l_1_1_a_i_player}{Dungeon\+Runner\+SFML\+::\+AIPlayer}} $>$ \mbox{\hyperlink{class_dungeon_runner_1_1_abstract_factory_a841b1404a2077637301e6cba682df291}{create\+AI}} (std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_dungeon_runner_1_1_entity}{Dungeon\+Runner\+::\+Entity}} $>$$>$ \&game\+Entities, std\+::shared\+\_\+ptr$<$ sf\+::\+Render\+Window $>$ \&g\+Window)
+\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_dungeon_runner_s_f_m_l_1_1finish_line}{Dungeon\+Runner\+SFML\+::finish\+Line}} $>$ \mbox{\hyperlink{class_dungeon_runner_1_1_abstract_factory_a5bd6f9031cd6d3089c86fe02c1621d09}{create\+Finish}} (std\+::shared\+\_\+ptr$<$ sf\+::\+Render\+Window $>$ \&g\+Window, sf\+::\+Rectangle\+Shape \&finish)
+\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_dungeon_runner_1_1_observer}{Dungeon\+Runner\+::\+Observer}} $>$ \mbox{\hyperlink{class_dungeon_runner_1_1_abstract_factory_a2fa07224ab04e9feaeeee17697909be6}{create\+Observer}} (std\+::string observer\+Name)
+\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_dungeon_runner_1_1_highscores}{Dungeon\+Runner\+::\+Highscores}} $>$ \mbox{\hyperlink{class_dungeon_runner_1_1_abstract_factory_a3a3b79ba7377e4d6bae1d0a7b1026392}{create\+Highscores}} (std\+::string file\+Path)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_dungeon_runner_1_1_abstract_factory_a841b1404a2077637301e6cba682df291}\label{class_dungeon_runner_1_1_abstract_factory_a841b1404a2077637301e6cba682df291}} 
+\index{DungeonRunner::AbstractFactory@{DungeonRunner::AbstractFactory}!createAI@{createAI}}
+\index{createAI@{createAI}!DungeonRunner::AbstractFactory@{DungeonRunner::AbstractFactory}}
+\doxysubsubsection{\texorpdfstring{createAI()}{createAI()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_dungeon_runner_s_f_m_l_1_1_a_i_player}{Dungeon\+Runner\+SFML\+::\+AIPlayer}} $>$ Dungeon\+Runner\+::\+Abstract\+Factory\+::create\+AI (\begin{DoxyParamCaption}\item[{std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_dungeon_runner_1_1_entity}{Dungeon\+Runner\+::\+Entity}} $>$$>$ \&}]{game\+Entities,  }\item[{std\+::shared\+\_\+ptr$<$ sf\+::\+Render\+Window $>$ \&}]{g\+Window }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Creates a new AI entity 
+\begin{DoxyParams}{Parameters}
+{\em game\+Entities} & \\
+\hline
+{\em g\+Window} & -- SFML Renderwindow \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+std\+::shared\+\_\+ptr$<$\+Dungeon\+Runner\+SFML\+::\+AIPlayer$>$ 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_dungeon_runner_1_1_abstract_factory_ac44b276912c9aab4370e62a557b17d6c}\label{class_dungeon_runner_1_1_abstract_factory_ac44b276912c9aab4370e62a557b17d6c}} 
+\index{DungeonRunner::AbstractFactory@{DungeonRunner::AbstractFactory}!createCollider@{createCollider}}
+\index{createCollider@{createCollider}!DungeonRunner::AbstractFactory@{DungeonRunner::AbstractFactory}}
+\doxysubsubsection{\texorpdfstring{createCollider()}{createCollider()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_dungeon_runner_1_1_entity}{Dungeon\+Runner\+::\+Entity}} $>$ Dungeon\+Runner\+::\+Abstract\+Factory\+::create\+Collider (\begin{DoxyParamCaption}\item[{const std\+::pair$<$ float, float $>$ \&}]{e\+Position,  }\item[{const std\+::pair$<$ float, float $>$ \&}]{e\+Size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Creates a collider (invisible box) 
+\begin{DoxyParams}{Parameters}
+{\em e\+Position} & \\
+\hline
+{\em e\+Size} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+std\+::shared\+\_\+ptr$<$\+Dungeon\+Runner\+::\+Entity$>$ 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_dungeon_runner_1_1_abstract_factory_a88764273c69312b495e3dbcfcb3afd7c}\label{class_dungeon_runner_1_1_abstract_factory_a88764273c69312b495e3dbcfcb3afd7c}} 
+\index{DungeonRunner::AbstractFactory@{DungeonRunner::AbstractFactory}!createDoor@{createDoor}}
+\index{createDoor@{createDoor}!DungeonRunner::AbstractFactory@{DungeonRunner::AbstractFactory}}
+\doxysubsubsection{\texorpdfstring{createDoor()}{createDoor()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_dungeon_runner_s_f_m_l_1_1_door_s_f_m_l}{Dungeon\+Runner\+SFML\+::\+Door\+SFML}} $>$ Dungeon\+Runner\+::\+Abstract\+Factory\+::create\+Door (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ sf\+::\+Rectangle\+Shape $>$ \&}]{door,  }\item[{std\+::shared\+\_\+ptr$<$ sf\+::\+Render\+Window $>$ \&}]{g\+Window,  }\item[{std\+::map$<$ std\+::string, std\+::shared\+\_\+ptr$<$ sf\+::\+Texture $>$$>$ \&}]{door\+State }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Creates a new \mbox{\hyperlink{class_dungeon_runner_1_1_door}{Door}} entity 
+\begin{DoxyParams}{Parameters}
+{\em door} & SFML rectangleshape \\
+\hline
+{\em g\+Window} & SFML Renderwindow \\
+\hline
+{\em door\+State} & map containing \textquotesingle{}open\textquotesingle{} and \textquotesingle{}closed\textquotesingle{} door textures \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+std\+::shared\+\_\+ptr$<$\+Dungeon\+Runner\+SFML\+::\+Door\+SFML$>$ 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_dungeon_runner_1_1_abstract_factory_a5bd6f9031cd6d3089c86fe02c1621d09}\label{class_dungeon_runner_1_1_abstract_factory_a5bd6f9031cd6d3089c86fe02c1621d09}} 
+\index{DungeonRunner::AbstractFactory@{DungeonRunner::AbstractFactory}!createFinish@{createFinish}}
+\index{createFinish@{createFinish}!DungeonRunner::AbstractFactory@{DungeonRunner::AbstractFactory}}
+\doxysubsubsection{\texorpdfstring{createFinish()}{createFinish()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_dungeon_runner_s_f_m_l_1_1finish_line}{Dungeon\+Runner\+SFML\+::finish\+Line}} $>$ Dungeon\+Runner\+::\+Abstract\+Factory\+::create\+Finish (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ sf\+::\+Render\+Window $>$ \&}]{g\+Window,  }\item[{sf\+::\+Rectangle\+Shape \&}]{finish }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Creates a finishline entity 
+\begin{DoxyParams}{Parameters}
+{\em g\+Window} & SFML Renderwindow \\
+\hline
+{\em finish} & SFML Rectangleshape \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+std\+::shared\+\_\+ptr$<$\+Dungeon\+Runner\+SFML\+::finish\+Line$>$ 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_dungeon_runner_1_1_abstract_factory_a3a3b79ba7377e4d6bae1d0a7b1026392}\label{class_dungeon_runner_1_1_abstract_factory_a3a3b79ba7377e4d6bae1d0a7b1026392}} 
+\index{DungeonRunner::AbstractFactory@{DungeonRunner::AbstractFactory}!createHighscores@{createHighscores}}
+\index{createHighscores@{createHighscores}!DungeonRunner::AbstractFactory@{DungeonRunner::AbstractFactory}}
+\doxysubsubsection{\texorpdfstring{createHighscores()}{createHighscores()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_dungeon_runner_1_1_highscores}{Dungeon\+Runner\+::\+Highscores}} $>$ Dungeon\+Runner\+::\+Abstract\+Factory\+::create\+Highscores (\begin{DoxyParamCaption}\item[{std\+::string}]{file\+Path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Creates a new high\+Scores entity 
+\begin{DoxyParams}{Parameters}
+{\em file\+Path} & absolute filepath \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+std\+::shared\+\_\+ptr$<$\+Dungeon\+Runner\+::\+Highscores$>$ 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_dungeon_runner_1_1_abstract_factory_a2fa07224ab04e9feaeeee17697909be6}\label{class_dungeon_runner_1_1_abstract_factory_a2fa07224ab04e9feaeeee17697909be6}} 
+\index{DungeonRunner::AbstractFactory@{DungeonRunner::AbstractFactory}!createObserver@{createObserver}}
+\index{createObserver@{createObserver}!DungeonRunner::AbstractFactory@{DungeonRunner::AbstractFactory}}
+\doxysubsubsection{\texorpdfstring{createObserver()}{createObserver()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_dungeon_runner_1_1_observer}{Dungeon\+Runner\+::\+Observer}} $>$ Dungeon\+Runner\+::\+Abstract\+Factory\+::create\+Observer (\begin{DoxyParamCaption}\item[{std\+::string}]{observer\+Name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Creates a new observer 
+\begin{DoxyParams}{Parameters}
+{\em observer\+Name} & This name will appear on the leaderboard \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+std\+::shared\+\_\+ptr$<$\+Dungeon\+Runner\+::\+Observer$>$ 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_dungeon_runner_1_1_abstract_factory_a0b4e1dab2071fe6d86838a622c4fc407}\label{class_dungeon_runner_1_1_abstract_factory_a0b4e1dab2071fe6d86838a622c4fc407}} 
+\index{DungeonRunner::AbstractFactory@{DungeonRunner::AbstractFactory}!createPlayer@{createPlayer}}
+\index{createPlayer@{createPlayer}!DungeonRunner::AbstractFactory@{DungeonRunner::AbstractFactory}}
+\doxysubsubsection{\texorpdfstring{createPlayer()}{createPlayer()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_dungeon_runner_s_f_m_l_1_1_player}{Dungeon\+Runner\+SFML\+::\+Player}} $>$ Dungeon\+Runner\+::\+Abstract\+Factory\+::create\+Player (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ sf\+::\+Render\+Window $>$}]{g\+Window,  }\item[{std\+::shared\+\_\+ptr$<$ sf\+::\+Rectangle\+Shape $>$}]{player,  }\item[{std\+::shared\+\_\+ptr$<$ sf\+::\+Texture $>$}]{player\+Texture,  }\item[{std\+::shared\+\_\+ptr$<$ sf\+::\+Int\+Rect $>$}]{uv\+Rect }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Creates a new player entity 
+\begin{DoxyParams}{Parameters}
+{\em g\+Window} & SFML Renderwindow \\
+\hline
+{\em player} & SFML rectangleshape \\
+\hline
+{\em player\+Texture} & -- SFML Texture \\
+\hline
+{\em uv\+Rect} & SFML Int\+Rect \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+std\+::shared\+\_\+ptr$<$\+Dungeon\+Runner\+SFML\+::\+Player$>$ 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_dungeon_runner_1_1_abstract_factory_a625c3862ffa43040c49370d1c914740b}\label{class_dungeon_runner_1_1_abstract_factory_a625c3862ffa43040c49370d1c914740b}} 
+\index{DungeonRunner::AbstractFactory@{DungeonRunner::AbstractFactory}!createSword@{createSword}}
+\index{createSword@{createSword}!DungeonRunner::AbstractFactory@{DungeonRunner::AbstractFactory}}
+\doxysubsubsection{\texorpdfstring{createSword()}{createSword()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_dungeon_runner_s_f_m_l_1_1_sword}{Dungeon\+Runner\+SFML\+::\+Sword}} $>$ Dungeon\+Runner\+::\+Abstract\+Factory\+::create\+Sword (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ sf\+::\+Render\+Window $>$}]{g\+Window }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Creates a new sword entity 
+\begin{DoxyParams}{Parameters}
+{\em g\+Window} & SFML Renderwindow \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+std\+::shared\+\_\+ptr$<$\+Dungeon\+Runner\+SFML\+::\+Sword$>$ 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_dungeon_runner_1_1_abstract_factory_a312c0db4cef7f1aaef0b15d0e34d604d}\label{class_dungeon_runner_1_1_abstract_factory_a312c0db4cef7f1aaef0b15d0e34d604d}} 
+\index{DungeonRunner::AbstractFactory@{DungeonRunner::AbstractFactory}!createWorld@{createWorld}}
+\index{createWorld@{createWorld}!DungeonRunner::AbstractFactory@{DungeonRunner::AbstractFactory}}
+\doxysubsubsection{\texorpdfstring{createWorld()}{createWorld()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_dungeon_runner_1_1_world}{Dungeon\+Runner\+::\+World}} $>$ Dungeon\+Runner\+::\+Abstract\+Factory\+::create\+World (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ sf\+::\+Render\+Window $>$}]{g\+Window,  }\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Creates a new world entity 
+\begin{DoxyParams}{Parameters}
+{\em g\+Window} & -- SFML Renderwindow \\
+\hline
+{\em x} & worldsize x \\
+\hline
+{\em y} & worldsize x \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+std\+::shared\+\_\+ptr$<$\+World$>$ 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Ilias/\+Documents/\+Git\+Hub/\+Dungeon\+Runner/\+Core/\+Logic/\mbox{\hyperlink{_abstract_factory_8h}{Abstract\+Factory.\+h}}\item 
+C\+:/\+Users/\+Ilias/\+Documents/\+Git\+Hub/\+Dungeon\+Runner/\+Core/\+Logic/\mbox{\hyperlink{_abstract_factory_8cpp}{Abstract\+Factory.\+cpp}}\end{DoxyCompactItemize}

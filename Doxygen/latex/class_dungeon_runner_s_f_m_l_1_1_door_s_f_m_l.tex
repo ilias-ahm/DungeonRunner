@@ -1,0 +1,77 @@
+\hypertarget{class_dungeon_runner_s_f_m_l_1_1_door_s_f_m_l}{}\doxysection{Dungeon\+Runner\+SFML\+::Door\+SFML Class Reference}
+\label{class_dungeon_runner_s_f_m_l_1_1_door_s_f_m_l}\index{DungeonRunnerSFML::DoorSFML@{DungeonRunnerSFML::DoorSFML}}
+
+
+{\ttfamily \#include $<$Door\+SFML.\+h$>$}
+
+Inheritance diagram for Dungeon\+Runner\+SFML\+::Door\+SFML\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{class_dungeon_runner_s_f_m_l_1_1_door_s_f_m_l}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_dungeon_runner_s_f_m_l_1_1_door_s_f_m_l_adeb021c519103715ea4e931213cfd656}{Door\+SFML}} (std\+::shared\+\_\+ptr$<$ sf\+::\+Rectangle\+Shape $>$ \&door, const std\+::shared\+\_\+ptr$<$ sf\+::\+Render\+Window $>$ \&g\+Window, const std\+::map$<$ std\+::string, std\+::shared\+\_\+ptr$<$ sf\+::\+Texture $>$$>$ \&door\+States)
+\item 
+virtual \mbox{\hyperlink{class_dungeon_runner_s_f_m_l_1_1_door_s_f_m_l_a1046c128ed0b1758f9911fd725c93914}{$\sim$\+Door\+SFML}} ()
+\item 
+void \mbox{\hyperlink{class_dungeon_runner_s_f_m_l_1_1_door_s_f_m_l_a9513f153cf29f2c2bf367ac8b5ea8edf}{update}} () override
+\item 
+void \mbox{\hyperlink{class_dungeon_runner_s_f_m_l_1_1_door_s_f_m_l_aa6b6b25181432646d29799aaf7904197}{display}} () override
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_dungeon_runner_s_f_m_l_1_1_door_s_f_m_l_adeb021c519103715ea4e931213cfd656}\label{class_dungeon_runner_s_f_m_l_1_1_door_s_f_m_l_adeb021c519103715ea4e931213cfd656}} 
+\index{DungeonRunnerSFML::DoorSFML@{DungeonRunnerSFML::DoorSFML}!DoorSFML@{DoorSFML}}
+\index{DoorSFML@{DoorSFML}!DungeonRunnerSFML::DoorSFML@{DungeonRunnerSFML::DoorSFML}}
+\doxysubsubsection{\texorpdfstring{DoorSFML()}{DoorSFML()}}
+{\footnotesize\ttfamily Dungeon\+Runner\+SFML\+::\+Door\+SFML\+::\+Door\+SFML (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ sf\+::\+Rectangle\+Shape $>$ \&}]{door,  }\item[{const std\+::shared\+\_\+ptr$<$ sf\+::\+Render\+Window $>$ \&}]{g\+Window,  }\item[{const std\+::map$<$ std\+::string, std\+::shared\+\_\+ptr$<$ sf\+::\+Texture $>$$>$ \&}]{door\+States }\end{DoxyParamCaption})}
+
+Constructor 
+\begin{DoxyParams}{Parameters}
+{\em door} & SFML Rectangle \\
+\hline
+{\em g\+Window} & SFML Renderwindow \\
+\hline
+{\em door\+States} & map containing \textquotesingle{}open\textquotesingle{} and \textquotesingle{}closed\textquotesingle{} door textures \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_dungeon_runner_s_f_m_l_1_1_door_s_f_m_l_a1046c128ed0b1758f9911fd725c93914}\label{class_dungeon_runner_s_f_m_l_1_1_door_s_f_m_l_a1046c128ed0b1758f9911fd725c93914}} 
+\index{DungeonRunnerSFML::DoorSFML@{DungeonRunnerSFML::DoorSFML}!````~DoorSFML@{$\sim$DoorSFML}}
+\index{````~DoorSFML@{$\sim$DoorSFML}!DungeonRunnerSFML::DoorSFML@{DungeonRunnerSFML::DoorSFML}}
+\doxysubsubsection{\texorpdfstring{$\sim$DoorSFML()}{~DoorSFML()}}
+{\footnotesize\ttfamily Dungeon\+Runner\+SFML\+::\+Door\+SFML\+::$\sim$\+Door\+SFML (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_dungeon_runner_s_f_m_l_1_1_door_s_f_m_l_aa6b6b25181432646d29799aaf7904197}\label{class_dungeon_runner_s_f_m_l_1_1_door_s_f_m_l_aa6b6b25181432646d29799aaf7904197}} 
+\index{DungeonRunnerSFML::DoorSFML@{DungeonRunnerSFML::DoorSFML}!display@{display}}
+\index{display@{display}!DungeonRunnerSFML::DoorSFML@{DungeonRunnerSFML::DoorSFML}}
+\doxysubsubsection{\texorpdfstring{display()}{display()}}
+{\footnotesize\ttfamily void Dungeon\+Runner\+SFML\+::\+Door\+SFML\+::display (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Displays door on SFML Renderwindow 
+
+Reimplemented from \mbox{\hyperlink{class_dungeon_runner_1_1_entity_a86472f3517571aeb97b39402d28e3e8c}{Dungeon\+Runner\+::\+Entity}}.
+
+\mbox{\Hypertarget{class_dungeon_runner_s_f_m_l_1_1_door_s_f_m_l_a9513f153cf29f2c2bf367ac8b5ea8edf}\label{class_dungeon_runner_s_f_m_l_1_1_door_s_f_m_l_a9513f153cf29f2c2bf367ac8b5ea8edf}} 
+\index{DungeonRunnerSFML::DoorSFML@{DungeonRunnerSFML::DoorSFML}!update@{update}}
+\index{update@{update}!DungeonRunnerSFML::DoorSFML@{DungeonRunnerSFML::DoorSFML}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily void Dungeon\+Runner\+SFML\+::\+Door\+SFML\+::update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Updates texture according to is\+Open variable 
+
+Reimplemented from \mbox{\hyperlink{class_dungeon_runner_1_1_entity_aab104a2b30aa14e4f5aa6c4778792494}{Dungeon\+Runner\+::\+Entity}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Ilias/\+Documents/\+Git\+Hub/\+Dungeon\+Runner/\+Core/\+Representation/\mbox{\hyperlink{_door_s_f_m_l_8h}{Door\+SFML.\+h}}\item 
+C\+:/\+Users/\+Ilias/\+Documents/\+Git\+Hub/\+Dungeon\+Runner/\+Core/\+Representation/\mbox{\hyperlink{_door_s_f_m_l_8cpp}{Door\+SFML.\+cpp}}\end{DoxyCompactItemize}

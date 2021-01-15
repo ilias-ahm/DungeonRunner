@@ -1,0 +1,92 @@
+\hypertarget{class_dungeon_runner_1_1_world}{}\doxysection{Dungeon\+Runner\+::World Class Reference}
+\label{class_dungeon_runner_1_1_world}\index{DungeonRunner::World@{DungeonRunner::World}}
+
+
+{\ttfamily \#include $<$World.\+h$>$}
+
+Inheritance diagram for Dungeon\+Runner\+::World\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_dungeon_runner_1_1_world}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_dungeon_runner_1_1_world_a74eafe7629f73aaf7766bae34fe7db6f}{World}} (std\+::shared\+\_\+ptr$<$ sf\+::\+Render\+Window $>$ g\+Window, int x, int y)
+\item 
+const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_dungeon_runner_1_1_entity}{Entity}} $>$ $>$ \& \mbox{\hyperlink{class_dungeon_runner_1_1_world_aff4d89fdd3548d7b2ab5077955b5c94d}{get\+World\+Entities}} ()
+\item 
+void \mbox{\hyperlink{class_dungeon_runner_1_1_world_a0a7fea7a9e3e88e15493799e9e05456e}{update}} () override
+\item 
+void \mbox{\hyperlink{class_dungeon_runner_1_1_world_a20e46486df92e8ae17257d5cd8222d14}{action}} () override
+\item 
+void \mbox{\hyperlink{class_dungeon_runner_1_1_world_a36a37cb9115445a089052b41d97e53bf}{display}} () override
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_dungeon_runner_1_1_world_a74eafe7629f73aaf7766bae34fe7db6f}\label{class_dungeon_runner_1_1_world_a74eafe7629f73aaf7766bae34fe7db6f}} 
+\index{DungeonRunner::World@{DungeonRunner::World}!World@{World}}
+\index{World@{World}!DungeonRunner::World@{DungeonRunner::World}}
+\doxysubsubsection{\texorpdfstring{World()}{World()}}
+{\footnotesize\ttfamily Dungeon\+Runner\+::\+World\+::\+World (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ sf\+::\+Render\+Window $>$}]{g\+Window,  }\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})}
+
+Constructor 
+\begin{DoxyParams}{Parameters}
+{\em g\+Window} & SFML Renderwindow \\
+\hline
+{\em x} & worldsize x \\
+\hline
+{\em y} & worldsize y \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_dungeon_runner_1_1_world_a20e46486df92e8ae17257d5cd8222d14}\label{class_dungeon_runner_1_1_world_a20e46486df92e8ae17257d5cd8222d14}} 
+\index{DungeonRunner::World@{DungeonRunner::World}!action@{action}}
+\index{action@{action}!DungeonRunner::World@{DungeonRunner::World}}
+\doxysubsubsection{\texorpdfstring{action()}{action()}}
+{\footnotesize\ttfamily void Dungeon\+Runner\+::\+World\+::action (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Virtual function for an entity Action 
+
+Reimplemented from \mbox{\hyperlink{class_dungeon_runner_1_1_entity_a0364ac676f06f43b8aa73303d55c6d51}{Dungeon\+Runner\+::\+Entity}}.
+
+\mbox{\Hypertarget{class_dungeon_runner_1_1_world_a36a37cb9115445a089052b41d97e53bf}\label{class_dungeon_runner_1_1_world_a36a37cb9115445a089052b41d97e53bf}} 
+\index{DungeonRunner::World@{DungeonRunner::World}!display@{display}}
+\index{display@{display}!DungeonRunner::World@{DungeonRunner::World}}
+\doxysubsubsection{\texorpdfstring{display()}{display()}}
+{\footnotesize\ttfamily void Dungeon\+Runner\+::\+World\+::display (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Displays worldmap on SFML Renderwindow 
+
+Reimplemented from \mbox{\hyperlink{class_dungeon_runner_1_1_entity_a86472f3517571aeb97b39402d28e3e8c}{Dungeon\+Runner\+::\+Entity}}.
+
+\mbox{\Hypertarget{class_dungeon_runner_1_1_world_aff4d89fdd3548d7b2ab5077955b5c94d}\label{class_dungeon_runner_1_1_world_aff4d89fdd3548d7b2ab5077955b5c94d}} 
+\index{DungeonRunner::World@{DungeonRunner::World}!getWorldEntities@{getWorldEntities}}
+\index{getWorldEntities@{getWorldEntities}!DungeonRunner::World@{DungeonRunner::World}}
+\doxysubsubsection{\texorpdfstring{getWorldEntities()}{getWorldEntities()}}
+{\footnotesize\ttfamily const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_dungeon_runner_1_1_entity}{Dungeon\+Runner\+::\+Entity}} $>$ $>$ \& Dungeon\+Runner\+::\+World\+::get\+World\+Entities (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Returns world entities \begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_dungeon_runner_1_1_world_a0a7fea7a9e3e88e15493799e9e05456e}\label{class_dungeon_runner_1_1_world_a0a7fea7a9e3e88e15493799e9e05456e}} 
+\index{DungeonRunner::World@{DungeonRunner::World}!update@{update}}
+\index{update@{update}!DungeonRunner::World@{DungeonRunner::World}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily void Dungeon\+Runner\+::\+World\+::update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Virtual function that updates \mbox{\hyperlink{class_dungeon_runner_1_1_entity}{Entity}} 
+
+Reimplemented from \mbox{\hyperlink{class_dungeon_runner_1_1_entity_aab104a2b30aa14e4f5aa6c4778792494}{Dungeon\+Runner\+::\+Entity}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Ilias/\+Documents/\+Git\+Hub/\+Dungeon\+Runner/\+Core/\+Representation/\mbox{\hyperlink{_world_8h}{World.\+h}}\item 
+C\+:/\+Users/\+Ilias/\+Documents/\+Git\+Hub/\+Dungeon\+Runner/\+Core/\+Representation/\mbox{\hyperlink{_world_8cpp}{World.\+cpp}}\end{DoxyCompactItemize}

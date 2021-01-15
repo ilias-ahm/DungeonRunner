@@ -1,0 +1,258 @@
+\hypertarget{class_dungeon_runner_1_1_entity}{}\doxysection{Dungeon\+Runner\+::Entity Class Reference}
+\label{class_dungeon_runner_1_1_entity}\index{DungeonRunner::Entity@{DungeonRunner::Entity}}
+
+
+{\ttfamily \#include $<$Entity.\+h$>$}
+
+Inheritance diagram for Dungeon\+Runner\+::Entity\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.744548cm]{class_dungeon_runner_1_1_entity}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_dungeon_runner_1_1_entity_ace0f8172ecbe49ea1cf1e35394b709e7}{Entity}} ()
+\item 
+void \mbox{\hyperlink{class_dungeon_runner_1_1_entity_a83b76bdcdd3de9797758f5cdd7facff0}{set\+No\+Clip}} (bool noclip)
+\item 
+\mbox{\hyperlink{class_dungeon_runner_1_1_entity_a22393dffb04eb9cf7c0495f6faef3e38}{Entity}} (const std\+::pair$<$ float, float $>$ \&\mbox{\hyperlink{class_dungeon_runner_1_1_entity_aa02b2345051f244a0fb300496c3f5233}{e\+Position}}, const std\+::pair$<$ float, float $>$ \&\mbox{\hyperlink{class_dungeon_runner_1_1_entity_ac0315ad6575f8c4b05744aa7e38948e8}{e\+Size}})
+\item 
+const std\+::pair$<$ float, float $>$ \& \mbox{\hyperlink{class_dungeon_runner_1_1_entity_a824547a10e2a0e1f75cd2172da4d67d3}{get\+EPosition}} () const
+\item 
+bool \mbox{\hyperlink{class_dungeon_runner_1_1_entity_a5067d29d1779d486982663c6081045ce}{is\+No\+Clip}} () const
+\item 
+void \mbox{\hyperlink{class_dungeon_runner_1_1_entity_a15a087326f225fafa5af22c4389c24a6}{set\+EPosition}} (const std\+::pair$<$ float, float $>$ \&\mbox{\hyperlink{class_dungeon_runner_1_1_entity_aa02b2345051f244a0fb300496c3f5233}{e\+Position}})
+\item 
+const std\+::pair$<$ float, float $>$ \& \mbox{\hyperlink{class_dungeon_runner_1_1_entity_a102e686367c77d146ab51cc4eb538de3}{get\+ESize}} () const
+\item 
+void \mbox{\hyperlink{class_dungeon_runner_1_1_entity_a5ca662cbcb30789c741b4f73d273833d}{set\+ESize}} (const std\+::pair$<$ float, float $>$ \&\mbox{\hyperlink{class_dungeon_runner_1_1_entity_ac0315ad6575f8c4b05744aa7e38948e8}{e\+Size}})
+\item 
+std\+::string \mbox{\hyperlink{class_dungeon_runner_1_1_entity_a9bf10249177c0c751b7a10b12b5629c2}{get\+Type}} ()
+\item 
+virtual void \mbox{\hyperlink{class_dungeon_runner_1_1_entity_a86472f3517571aeb97b39402d28e3e8c}{display}} ()
+\item 
+void \mbox{\hyperlink{class_dungeon_runner_1_1_entity_a1019db9615bd9d6fc1f05ef0b3062297}{move}} (float x, float y)
+\item 
+virtual void \mbox{\hyperlink{class_dungeon_runner_1_1_entity_aab104a2b30aa14e4f5aa6c4778792494}{update}} ()
+\item 
+virtual void \mbox{\hyperlink{class_dungeon_runner_1_1_entity_a0364ac676f06f43b8aa73303d55c6d51}{action}} ()
+\item 
+void \mbox{\hyperlink{class_dungeon_runner_1_1_entity_a9dd9473c72970dfa9a9c15d30b8ab7a4}{register\+Observer}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_dungeon_runner_1_1_observer}{Observer}} $>$ observer) override
+\item 
+void \mbox{\hyperlink{class_dungeon_runner_1_1_entity_ac03acd4de33cd1d5cb051029d26ed183}{notify\+Observers}} (\mbox{\hyperlink{class_dungeon_runner_1_1_observer_a7315512764580c2b52a31bf78798f92c}{Observer\+::\+Event}} event, float d\+Time=1) override
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{class_dungeon_runner_1_1_entity_a37e522111b1c45de47508b35c0e18766}{e\+Type}}
+\item 
+std\+::pair$<$ float, float $>$ \mbox{\hyperlink{class_dungeon_runner_1_1_entity_aa02b2345051f244a0fb300496c3f5233}{e\+Position}}
+\item 
+std\+::pair$<$ float, float $>$ \mbox{\hyperlink{class_dungeon_runner_1_1_entity_ac0315ad6575f8c4b05744aa7e38948e8}{e\+Size}}
+\item 
+bool \mbox{\hyperlink{class_dungeon_runner_1_1_entity_a7256ed65f6d70dd02d8258c2bfac98ee}{no\+Clip}} = false
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_dungeon_runner_1_1_entity_ace0f8172ecbe49ea1cf1e35394b709e7}\label{class_dungeon_runner_1_1_entity_ace0f8172ecbe49ea1cf1e35394b709e7}} 
+\index{DungeonRunner::Entity@{DungeonRunner::Entity}!Entity@{Entity}}
+\index{Entity@{Entity}!DungeonRunner::Entity@{DungeonRunner::Entity}}
+\doxysubsubsection{\texorpdfstring{Entity()}{Entity()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Dungeon\+Runner\+::\+Entity\+::\+Entity (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Default constructor \mbox{\Hypertarget{class_dungeon_runner_1_1_entity_a22393dffb04eb9cf7c0495f6faef3e38}\label{class_dungeon_runner_1_1_entity_a22393dffb04eb9cf7c0495f6faef3e38}} 
+\index{DungeonRunner::Entity@{DungeonRunner::Entity}!Entity@{Entity}}
+\index{Entity@{Entity}!DungeonRunner::Entity@{DungeonRunner::Entity}}
+\doxysubsubsection{\texorpdfstring{Entity()}{Entity()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Dungeon\+Runner\+::\+Entity\+::\+Entity (\begin{DoxyParamCaption}\item[{const std\+::pair$<$ float, float $>$ \&}]{e\+Position,  }\item[{const std\+::pair$<$ float, float $>$ \&}]{e\+Size }\end{DoxyParamCaption})}
+
+Constructor to set position and size 
+\begin{DoxyParams}{Parameters}
+{\em e\+Position} & \\
+\hline
+{\em e\+Size} & \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_dungeon_runner_1_1_entity_a0364ac676f06f43b8aa73303d55c6d51}\label{class_dungeon_runner_1_1_entity_a0364ac676f06f43b8aa73303d55c6d51}} 
+\index{DungeonRunner::Entity@{DungeonRunner::Entity}!action@{action}}
+\index{action@{action}!DungeonRunner::Entity@{DungeonRunner::Entity}}
+\doxysubsubsection{\texorpdfstring{action()}{action()}}
+{\footnotesize\ttfamily void Dungeon\+Runner\+::\+Entity\+::action (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Virtual function for an entity Action 
+
+Reimplemented in \mbox{\hyperlink{class_dungeon_runner_1_1_world_a20e46486df92e8ae17257d5cd8222d14}{Dungeon\+Runner\+::\+World}}, \mbox{\hyperlink{class_dungeon_runner_s_f_m_l_1_1_player_acbf62a3003cc5e82b2106ef870990d05}{Dungeon\+Runner\+SFML\+::\+Player}}, and \mbox{\hyperlink{class_dungeon_runner_1_1_door_a764232ce46a6f88e8e1a7abda706b305}{Dungeon\+Runner\+::\+Door}}.
+
+\mbox{\Hypertarget{class_dungeon_runner_1_1_entity_a86472f3517571aeb97b39402d28e3e8c}\label{class_dungeon_runner_1_1_entity_a86472f3517571aeb97b39402d28e3e8c}} 
+\index{DungeonRunner::Entity@{DungeonRunner::Entity}!display@{display}}
+\index{display@{display}!DungeonRunner::Entity@{DungeonRunner::Entity}}
+\doxysubsubsection{\texorpdfstring{display()}{display()}}
+{\footnotesize\ttfamily void Dungeon\+Runner\+::\+Entity\+::display (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Displays SFML on the renderwindow 
+
+Reimplemented in \mbox{\hyperlink{class_dungeon_runner_1_1_world_a36a37cb9115445a089052b41d97e53bf}{Dungeon\+Runner\+::\+World}}, \mbox{\hyperlink{class_dungeon_runner_s_f_m_l_1_1_sword_ae4d0f1c24e7aa1730a7e8778f5ab31a5}{Dungeon\+Runner\+SFML\+::\+Sword}}, \mbox{\hyperlink{class_dungeon_runner_s_f_m_l_1_1_player_a0da85de6fd2c7445bc6b581277d1f70a}{Dungeon\+Runner\+SFML\+::\+Player}}, \mbox{\hyperlink{class_dungeon_runner_s_f_m_l_1_1finish_line_ab2c83dcf4692f0b5f7f6552f2cf58c59}{Dungeon\+Runner\+SFML\+::finish\+Line}}, \mbox{\hyperlink{class_dungeon_runner_s_f_m_l_1_1_door_s_f_m_l_aa6b6b25181432646d29799aaf7904197}{Dungeon\+Runner\+SFML\+::\+Door\+SFML}}, and \mbox{\hyperlink{class_dungeon_runner_s_f_m_l_1_1_a_i_player_a4f2d4b02e61f541d867904ef56e18dc0}{Dungeon\+Runner\+SFML\+::\+AIPlayer}}.
+
+\mbox{\Hypertarget{class_dungeon_runner_1_1_entity_a824547a10e2a0e1f75cd2172da4d67d3}\label{class_dungeon_runner_1_1_entity_a824547a10e2a0e1f75cd2172da4d67d3}} 
+\index{DungeonRunner::Entity@{DungeonRunner::Entity}!getEPosition@{getEPosition}}
+\index{getEPosition@{getEPosition}!DungeonRunner::Entity@{DungeonRunner::Entity}}
+\doxysubsubsection{\texorpdfstring{getEPosition()}{getEPosition()}}
+{\footnotesize\ttfamily const std\+::pair$<$ float, float $>$ \& Dungeon\+Runner\+::\+Entity\+::get\+EPosition (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Getter for position \begin{DoxyReturn}{Returns}
+returns float tuple(x,y) coordinate 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_dungeon_runner_1_1_entity_a102e686367c77d146ab51cc4eb538de3}\label{class_dungeon_runner_1_1_entity_a102e686367c77d146ab51cc4eb538de3}} 
+\index{DungeonRunner::Entity@{DungeonRunner::Entity}!getESize@{getESize}}
+\index{getESize@{getESize}!DungeonRunner::Entity@{DungeonRunner::Entity}}
+\doxysubsubsection{\texorpdfstring{getESize()}{getESize()}}
+{\footnotesize\ttfamily const std\+::pair$<$ float, float $>$ \& Dungeon\+Runner\+::\+Entity\+::get\+ESize (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Getter for entity size \begin{DoxyReturn}{Returns}
+float tuple(x,y) 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_dungeon_runner_1_1_entity_a9bf10249177c0c751b7a10b12b5629c2}\label{class_dungeon_runner_1_1_entity_a9bf10249177c0c751b7a10b12b5629c2}} 
+\index{DungeonRunner::Entity@{DungeonRunner::Entity}!getType@{getType}}
+\index{getType@{getType}!DungeonRunner::Entity@{DungeonRunner::Entity}}
+\doxysubsubsection{\texorpdfstring{getType()}{getType()}}
+{\footnotesize\ttfamily std\+::string Dungeon\+Runner\+::\+Entity\+::get\+Type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Getter for entity type \begin{DoxyReturn}{Returns}
+entity type 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_dungeon_runner_1_1_entity_a5067d29d1779d486982663c6081045ce}\label{class_dungeon_runner_1_1_entity_a5067d29d1779d486982663c6081045ce}} 
+\index{DungeonRunner::Entity@{DungeonRunner::Entity}!isNoClip@{isNoClip}}
+\index{isNoClip@{isNoClip}!DungeonRunner::Entity@{DungeonRunner::Entity}}
+\doxysubsubsection{\texorpdfstring{isNoClip()}{isNoClip()}}
+{\footnotesize\ttfamily bool Dungeon\+Runner\+::\+Entity\+::is\+No\+Clip (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+getter for no\+Clip variable \begin{DoxyReturn}{Returns}
+noclip 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_dungeon_runner_1_1_entity_a1019db9615bd9d6fc1f05ef0b3062297}\label{class_dungeon_runner_1_1_entity_a1019db9615bd9d6fc1f05ef0b3062297}} 
+\index{DungeonRunner::Entity@{DungeonRunner::Entity}!move@{move}}
+\index{move@{move}!DungeonRunner::Entity@{DungeonRunner::Entity}}
+\doxysubsubsection{\texorpdfstring{move()}{move()}}
+{\footnotesize\ttfamily void Dungeon\+Runner\+::\+Entity\+::move (\begin{DoxyParamCaption}\item[{float}]{x,  }\item[{float}]{y }\end{DoxyParamCaption})}
+
+Moves entity according to game coordinates 
+\begin{DoxyParams}{Parameters}
+{\em x} & float \\
+\hline
+{\em y} & float \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_dungeon_runner_1_1_entity_ac03acd4de33cd1d5cb051029d26ed183}\label{class_dungeon_runner_1_1_entity_ac03acd4de33cd1d5cb051029d26ed183}} 
+\index{DungeonRunner::Entity@{DungeonRunner::Entity}!notifyObservers@{notifyObservers}}
+\index{notifyObservers@{notifyObservers}!DungeonRunner::Entity@{DungeonRunner::Entity}}
+\doxysubsubsection{\texorpdfstring{notifyObservers()}{notifyObservers()}}
+{\footnotesize\ttfamily void Dungeon\+Runner\+::\+Entity\+::notify\+Observers (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_dungeon_runner_1_1_observer_a7315512764580c2b52a31bf78798f92c}{Observer\+::\+Event}}}]{event,  }\item[{float}]{d\+Time = {\ttfamily 1} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Notifies observer with new game event (game events can be found in \mbox{\hyperlink{class_dungeon_runner_1_1_observer}{Observer}}) 
+\begin{DoxyParams}{Parameters}
+{\em event} & \mbox{\hyperlink{class_dungeon_runner_1_1_observer_a7315512764580c2b52a31bf78798f92c}{Observer\+::\+Event}} \\
+\hline
+{\em d\+Time} & delta time to ensure that scores are the same on all fps settings \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_dungeon_runner_1_1_subject_a33eca2cdf1212f345fd6cfd0a903888f}{Dungeon\+Runner\+::\+Subject}}.
+
+\mbox{\Hypertarget{class_dungeon_runner_1_1_entity_a9dd9473c72970dfa9a9c15d30b8ab7a4}\label{class_dungeon_runner_1_1_entity_a9dd9473c72970dfa9a9c15d30b8ab7a4}} 
+\index{DungeonRunner::Entity@{DungeonRunner::Entity}!registerObserver@{registerObserver}}
+\index{registerObserver@{registerObserver}!DungeonRunner::Entity@{DungeonRunner::Entity}}
+\doxysubsubsection{\texorpdfstring{registerObserver()}{registerObserver()}}
+{\footnotesize\ttfamily void Dungeon\+Runner\+::\+Entity\+::register\+Observer (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_dungeon_runner_1_1_observer}{Observer}} $>$}]{observer }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Creates a new observer in observerlist 
+\begin{DoxyParams}{Parameters}
+{\em observer} & \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_dungeon_runner_1_1_subject_a0a19035a5fb037ca64a759c910be45a2}{Dungeon\+Runner\+::\+Subject}}.
+
+\mbox{\Hypertarget{class_dungeon_runner_1_1_entity_a15a087326f225fafa5af22c4389c24a6}\label{class_dungeon_runner_1_1_entity_a15a087326f225fafa5af22c4389c24a6}} 
+\index{DungeonRunner::Entity@{DungeonRunner::Entity}!setEPosition@{setEPosition}}
+\index{setEPosition@{setEPosition}!DungeonRunner::Entity@{DungeonRunner::Entity}}
+\doxysubsubsection{\texorpdfstring{setEPosition()}{setEPosition()}}
+{\footnotesize\ttfamily void Dungeon\+Runner\+::\+Entity\+::set\+EPosition (\begin{DoxyParamCaption}\item[{const std\+::pair$<$ float, float $>$ \&}]{e\+Position }\end{DoxyParamCaption})}
+
+Setter for entity position 
+\begin{DoxyParams}{Parameters}
+{\em e\+Position} & float tuple(x,y) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_dungeon_runner_1_1_entity_a5ca662cbcb30789c741b4f73d273833d}\label{class_dungeon_runner_1_1_entity_a5ca662cbcb30789c741b4f73d273833d}} 
+\index{DungeonRunner::Entity@{DungeonRunner::Entity}!setESize@{setESize}}
+\index{setESize@{setESize}!DungeonRunner::Entity@{DungeonRunner::Entity}}
+\doxysubsubsection{\texorpdfstring{setESize()}{setESize()}}
+{\footnotesize\ttfamily void Dungeon\+Runner\+::\+Entity\+::set\+ESize (\begin{DoxyParamCaption}\item[{const std\+::pair$<$ float, float $>$ \&}]{e\+Size }\end{DoxyParamCaption})}
+
+Setter for entity size 
+\begin{DoxyParams}{Parameters}
+{\em e\+Size} & float tuple(x,y) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_dungeon_runner_1_1_entity_a83b76bdcdd3de9797758f5cdd7facff0}\label{class_dungeon_runner_1_1_entity_a83b76bdcdd3de9797758f5cdd7facff0}} 
+\index{DungeonRunner::Entity@{DungeonRunner::Entity}!setNoClip@{setNoClip}}
+\index{setNoClip@{setNoClip}!DungeonRunner::Entity@{DungeonRunner::Entity}}
+\doxysubsubsection{\texorpdfstring{setNoClip()}{setNoClip()}}
+{\footnotesize\ttfamily void Dungeon\+Runner\+::\+Entity\+::set\+No\+Clip (\begin{DoxyParamCaption}\item[{bool}]{noclip }\end{DoxyParamCaption})}
+
+setter for variable no\+Clip 
+\begin{DoxyParams}{Parameters}
+{\em noclip} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_dungeon_runner_1_1_entity_aab104a2b30aa14e4f5aa6c4778792494}\label{class_dungeon_runner_1_1_entity_aab104a2b30aa14e4f5aa6c4778792494}} 
+\index{DungeonRunner::Entity@{DungeonRunner::Entity}!update@{update}}
+\index{update@{update}!DungeonRunner::Entity@{DungeonRunner::Entity}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily void Dungeon\+Runner\+::\+Entity\+::update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Virtual function that updates \mbox{\hyperlink{class_dungeon_runner_1_1_entity}{Entity}} 
+
+Reimplemented in \mbox{\hyperlink{class_dungeon_runner_1_1_world_a0a7fea7a9e3e88e15493799e9e05456e}{Dungeon\+Runner\+::\+World}}, \mbox{\hyperlink{class_dungeon_runner_s_f_m_l_1_1_sword_af9a76848d57b4dd5cae6830cbbd21bb0}{Dungeon\+Runner\+SFML\+::\+Sword}}, \mbox{\hyperlink{class_dungeon_runner_s_f_m_l_1_1_player_adfe06c474bb61a393e2b15dd686a3ea8}{Dungeon\+Runner\+SFML\+::\+Player}}, \mbox{\hyperlink{class_dungeon_runner_s_f_m_l_1_1_door_s_f_m_l_a9513f153cf29f2c2bf367ac8b5ea8edf}{Dungeon\+Runner\+SFML\+::\+Door\+SFML}}, and \mbox{\hyperlink{class_dungeon_runner_s_f_m_l_1_1_a_i_player_a038da7ccf3f8ac7ae17d01ceb11ca2d3}{Dungeon\+Runner\+SFML\+::\+AIPlayer}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_dungeon_runner_1_1_entity_aa02b2345051f244a0fb300496c3f5233}\label{class_dungeon_runner_1_1_entity_aa02b2345051f244a0fb300496c3f5233}} 
+\index{DungeonRunner::Entity@{DungeonRunner::Entity}!ePosition@{ePosition}}
+\index{ePosition@{ePosition}!DungeonRunner::Entity@{DungeonRunner::Entity}}
+\doxysubsubsection{\texorpdfstring{ePosition}{ePosition}}
+{\footnotesize\ttfamily std\+::pair$<$float,float$>$ Dungeon\+Runner\+::\+Entity\+::e\+Position\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_dungeon_runner_1_1_entity_ac0315ad6575f8c4b05744aa7e38948e8}\label{class_dungeon_runner_1_1_entity_ac0315ad6575f8c4b05744aa7e38948e8}} 
+\index{DungeonRunner::Entity@{DungeonRunner::Entity}!eSize@{eSize}}
+\index{eSize@{eSize}!DungeonRunner::Entity@{DungeonRunner::Entity}}
+\doxysubsubsection{\texorpdfstring{eSize}{eSize}}
+{\footnotesize\ttfamily std\+::pair$<$float,float$>$ Dungeon\+Runner\+::\+Entity\+::e\+Size\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_dungeon_runner_1_1_entity_a37e522111b1c45de47508b35c0e18766}\label{class_dungeon_runner_1_1_entity_a37e522111b1c45de47508b35c0e18766}} 
+\index{DungeonRunner::Entity@{DungeonRunner::Entity}!eType@{eType}}
+\index{eType@{eType}!DungeonRunner::Entity@{DungeonRunner::Entity}}
+\doxysubsubsection{\texorpdfstring{eType}{eType}}
+{\footnotesize\ttfamily std\+::string Dungeon\+Runner\+::\+Entity\+::e\+Type\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_dungeon_runner_1_1_entity_a7256ed65f6d70dd02d8258c2bfac98ee}\label{class_dungeon_runner_1_1_entity_a7256ed65f6d70dd02d8258c2bfac98ee}} 
+\index{DungeonRunner::Entity@{DungeonRunner::Entity}!noClip@{noClip}}
+\index{noClip@{noClip}!DungeonRunner::Entity@{DungeonRunner::Entity}}
+\doxysubsubsection{\texorpdfstring{noClip}{noClip}}
+{\footnotesize\ttfamily bool Dungeon\+Runner\+::\+Entity\+::no\+Clip = false\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Ilias/\+Documents/\+Git\+Hub/\+Dungeon\+Runner/\+Core/\+Logic/\mbox{\hyperlink{_entity_8h}{Entity.\+h}}\item 
+C\+:/\+Users/\+Ilias/\+Documents/\+Git\+Hub/\+Dungeon\+Runner/\+Core/\+Logic/\mbox{\hyperlink{_entity_8cpp}{Entity.\+cpp}}\end{DoxyCompactItemize}

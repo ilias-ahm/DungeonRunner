@@ -1,0 +1,198 @@
+\hypertarget{class_dungeon_runner_1_1_a_i_player}{}\doxysection{Dungeon\+Runner\+::AIPlayer Class Reference}
+\label{class_dungeon_runner_1_1_a_i_player}\index{DungeonRunner::AIPlayer@{DungeonRunner::AIPlayer}}
+
+
+{\ttfamily \#include $<$AIPlayer.\+h$>$}
+
+Inheritance diagram for Dungeon\+Runner\+::AIPlayer\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{class_dungeon_runner_1_1_a_i_player}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+float \mbox{\hyperlink{class_dungeon_runner_1_1_a_i_player_acabff8c524c0a1437521ed5b97a97cdb}{get\+Ai\+Speed}} () const
+\item 
+void \mbox{\hyperlink{class_dungeon_runner_1_1_a_i_player_ab18fea1b70b69c7a44c12a6cb2919970}{run}} ()
+\item 
+void \mbox{\hyperlink{class_dungeon_runner_1_1_a_i_player_aaa621b2074304035e71fab8e788166e8}{update\+Game\+Entities}} (std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_dungeon_runner_1_1_entity}{Dungeon\+Runner\+::\+Entity}} $>$$>$ \&\mbox{\hyperlink{class_dungeon_runner_1_1_a_i_player_a3a36114ffac6593e5bc38814ac76cc6d}{game\+Entities}})
+\item 
+int \mbox{\hyperlink{class_dungeon_runner_1_1_a_i_player_aaddf08bc4981bd3616f6747de4a9d5aa}{get\+Dodge\+State}} () const
+\item 
+void \mbox{\hyperlink{class_dungeon_runner_1_1_a_i_player_af882799664e1e2a3590b13333f7d4c6e}{set\+Is\+Stuck}} (bool \mbox{\hyperlink{class_dungeon_runner_1_1_a_i_player_ae05914bca1b18b16da25e25e1ac7cdb8}{is\+Stuck}})
+\item 
+void \mbox{\hyperlink{class_dungeon_runner_1_1_a_i_player_ad83629589dd9cbc64206fcc704c8f7be}{set\+Ai\+Speed}} (float \mbox{\hyperlink{class_dungeon_runner_1_1_a_i_player_a9b5df87bcf74136473f8bf3fabda4992}{ai\+Speed}})
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_dungeon_runner_1_1_a_i_player_ae4faf38af69020d8130ebd1e741a66e8}{avoid\+Obstacles}} ()
+\item 
+void \mbox{\hyperlink{class_dungeon_runner_1_1_a_i_player_ab9ec916b008859c3aec42c67c09b7075}{dodge\+Obstacle}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_dungeon_runner_1_1_entity}{Dungeon\+Runner\+::\+Entity}} $>$ obstacle)
+\item 
+bool \mbox{\hyperlink{class_dungeon_runner_1_1_a_i_player_ae3969314f0ba164f7d340586e51f3fc1}{interact\+Obstacle}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_dungeon_runner_1_1_entity}{Dungeon\+Runner\+::\+Entity}} $>$ obstacle)
+\item 
+float \mbox{\hyperlink{class_dungeon_runner_1_1_a_i_player_a1aada7140caa58f8169c4e044b0ce00d}{get\+Move\+Chance}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+float \mbox{\hyperlink{class_dungeon_runner_1_1_a_i_player_a9b5df87bcf74136473f8bf3fabda4992}{ai\+Speed}}
+\item 
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_dungeon_runner_1_1_entity}{Dungeon\+Runner\+::\+Entity}} $>$ $>$ \mbox{\hyperlink{class_dungeon_runner_1_1_a_i_player_a3a36114ffac6593e5bc38814ac76cc6d}{game\+Entities}}
+\item 
+int \mbox{\hyperlink{class_dungeon_runner_1_1_a_i_player_a7fd6fac4a47fe4742b39706a5d8ffa2f}{dodge\+State}} = 0
+\item 
+bool \mbox{\hyperlink{class_dungeon_runner_1_1_a_i_player_ad3bb7b627b4c3d33d653de0e1aea9fec}{is\+Dodging}} = false
+\item 
+bool \mbox{\hyperlink{class_dungeon_runner_1_1_a_i_player_ae05914bca1b18b16da25e25e1ac7cdb8}{is\+Stuck}} = false
+\item 
+bool \mbox{\hyperlink{class_dungeon_runner_1_1_a_i_player_addd5e96789be6598cc3c80bb08b87710}{stuck\+Resolving}} = false
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_dungeon_runner_1_1_a_i_player_ae4faf38af69020d8130ebd1e741a66e8}\label{class_dungeon_runner_1_1_a_i_player_ae4faf38af69020d8130ebd1e741a66e8}} 
+\index{DungeonRunner::AIPlayer@{DungeonRunner::AIPlayer}!avoidObstacles@{avoidObstacles}}
+\index{avoidObstacles@{avoidObstacles}!DungeonRunner::AIPlayer@{DungeonRunner::AIPlayer}}
+\doxysubsubsection{\texorpdfstring{avoidObstacles()}{avoidObstacles()}}
+{\footnotesize\ttfamily void Dungeon\+Runner\+::\+AIPlayer\+::avoid\+Obstacles (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+Contains the actions and intelligence for the AI\textquotesingle{}s to avoid obstacles and other players (move left and right or interact (yell) with obstacles) \mbox{\Hypertarget{class_dungeon_runner_1_1_a_i_player_ab9ec916b008859c3aec42c67c09b7075}\label{class_dungeon_runner_1_1_a_i_player_ab9ec916b008859c3aec42c67c09b7075}} 
+\index{DungeonRunner::AIPlayer@{DungeonRunner::AIPlayer}!dodgeObstacle@{dodgeObstacle}}
+\index{dodgeObstacle@{dodgeObstacle}!DungeonRunner::AIPlayer@{DungeonRunner::AIPlayer}}
+\doxysubsubsection{\texorpdfstring{dodgeObstacle()}{dodgeObstacle()}}
+{\footnotesize\ttfamily void Dungeon\+Runner\+::\+AIPlayer\+::dodge\+Obstacle (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_dungeon_runner_1_1_entity}{Dungeon\+Runner\+::\+Entity}} $>$}]{obstacle }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+dodges an obstacle 
+\begin{DoxyParams}{Parameters}
+{\em obstacle} & -- \mbox{\hyperlink{class_dungeon_runner_1_1_entity}{Entity}} to dodge \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_dungeon_runner_1_1_a_i_player_acabff8c524c0a1437521ed5b97a97cdb}\label{class_dungeon_runner_1_1_a_i_player_acabff8c524c0a1437521ed5b97a97cdb}} 
+\index{DungeonRunner::AIPlayer@{DungeonRunner::AIPlayer}!getAiSpeed@{getAiSpeed}}
+\index{getAiSpeed@{getAiSpeed}!DungeonRunner::AIPlayer@{DungeonRunner::AIPlayer}}
+\doxysubsubsection{\texorpdfstring{getAiSpeed()}{getAiSpeed()}}
+{\footnotesize\ttfamily float Dungeon\+Runner\+::\+AIPlayer\+::get\+Ai\+Speed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Getter for AI Speed \begin{DoxyReturn}{Returns}
+AI Speed 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_dungeon_runner_1_1_a_i_player_aaddf08bc4981bd3616f6747de4a9d5aa}\label{class_dungeon_runner_1_1_a_i_player_aaddf08bc4981bd3616f6747de4a9d5aa}} 
+\index{DungeonRunner::AIPlayer@{DungeonRunner::AIPlayer}!getDodgeState@{getDodgeState}}
+\index{getDodgeState@{getDodgeState}!DungeonRunner::AIPlayer@{DungeonRunner::AIPlayer}}
+\doxysubsubsection{\texorpdfstring{getDodgeState()}{getDodgeState()}}
+{\footnotesize\ttfamily int Dungeon\+Runner\+::\+AIPlayer\+::get\+Dodge\+State (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Getter for dodge\+State \begin{DoxyReturn}{Returns}
+integer between 0-\/2 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_dungeon_runner_1_1_a_i_player_a1aada7140caa58f8169c4e044b0ce00d}\label{class_dungeon_runner_1_1_a_i_player_a1aada7140caa58f8169c4e044b0ce00d}} 
+\index{DungeonRunner::AIPlayer@{DungeonRunner::AIPlayer}!getMoveChance@{getMoveChance}}
+\index{getMoveChance@{getMoveChance}!DungeonRunner::AIPlayer@{DungeonRunner::AIPlayer}}
+\doxysubsubsection{\texorpdfstring{getMoveChance()}{getMoveChance()}}
+{\footnotesize\ttfamily float Dungeon\+Runner\+::\+AIPlayer\+::get\+Move\+Chance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+Chance to speedup/slow down, changes dynamically. Chance to speedup increases if player is further ahead. \begin{DoxyReturn}{Returns}
+float between 0-\/1 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_dungeon_runner_1_1_a_i_player_ae3969314f0ba164f7d340586e51f3fc1}\label{class_dungeon_runner_1_1_a_i_player_ae3969314f0ba164f7d340586e51f3fc1}} 
+\index{DungeonRunner::AIPlayer@{DungeonRunner::AIPlayer}!interactObstacle@{interactObstacle}}
+\index{interactObstacle@{interactObstacle}!DungeonRunner::AIPlayer@{DungeonRunner::AIPlayer}}
+\doxysubsubsection{\texorpdfstring{interactObstacle()}{interactObstacle()}}
+{\footnotesize\ttfamily bool Dungeon\+Runner\+::\+AIPlayer\+::interact\+Obstacle (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_dungeon_runner_1_1_entity}{Dungeon\+Runner\+::\+Entity}} $>$}]{obstacle }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em obstacle} & -- obstacle tot interact with \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+boolean on whether or not the interaction was succesful (opened door) 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_dungeon_runner_1_1_a_i_player_ab18fea1b70b69c7a44c12a6cb2919970}\label{class_dungeon_runner_1_1_a_i_player_ab18fea1b70b69c7a44c12a6cb2919970}} 
+\index{DungeonRunner::AIPlayer@{DungeonRunner::AIPlayer}!run@{run}}
+\index{run@{run}!DungeonRunner::AIPlayer@{DungeonRunner::AIPlayer}}
+\doxysubsubsection{\texorpdfstring{run()}{run()}}
+{\footnotesize\ttfamily void Dungeon\+Runner\+::\+AIPlayer\+::run (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Moves the AI and checks what to avoid and how to avoid obstacles \mbox{\Hypertarget{class_dungeon_runner_1_1_a_i_player_ad83629589dd9cbc64206fcc704c8f7be}\label{class_dungeon_runner_1_1_a_i_player_ad83629589dd9cbc64206fcc704c8f7be}} 
+\index{DungeonRunner::AIPlayer@{DungeonRunner::AIPlayer}!setAiSpeed@{setAiSpeed}}
+\index{setAiSpeed@{setAiSpeed}!DungeonRunner::AIPlayer@{DungeonRunner::AIPlayer}}
+\doxysubsubsection{\texorpdfstring{setAiSpeed()}{setAiSpeed()}}
+{\footnotesize\ttfamily void Dungeon\+Runner\+::\+AIPlayer\+::set\+Ai\+Speed (\begin{DoxyParamCaption}\item[{float}]{ai\+Speed }\end{DoxyParamCaption})}
+
+setter for AI Speed 
+\begin{DoxyParams}{Parameters}
+{\em ai\+Speed} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_dungeon_runner_1_1_a_i_player_af882799664e1e2a3590b13333f7d4c6e}\label{class_dungeon_runner_1_1_a_i_player_af882799664e1e2a3590b13333f7d4c6e}} 
+\index{DungeonRunner::AIPlayer@{DungeonRunner::AIPlayer}!setIsStuck@{setIsStuck}}
+\index{setIsStuck@{setIsStuck}!DungeonRunner::AIPlayer@{DungeonRunner::AIPlayer}}
+\doxysubsubsection{\texorpdfstring{setIsStuck()}{setIsStuck()}}
+{\footnotesize\ttfamily void Dungeon\+Runner\+::\+AIPlayer\+::set\+Is\+Stuck (\begin{DoxyParamCaption}\item[{bool}]{is\+Stuck }\end{DoxyParamCaption})}
+
+Setter for is\+Stuck parameter 
+\begin{DoxyParams}{Parameters}
+{\em is\+Stuck} & -- 1\+: Ai is stuck 0\+: ai is not stuck \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_dungeon_runner_1_1_a_i_player_aaa621b2074304035e71fab8e788166e8}\label{class_dungeon_runner_1_1_a_i_player_aaa621b2074304035e71fab8e788166e8}} 
+\index{DungeonRunner::AIPlayer@{DungeonRunner::AIPlayer}!updateGameEntities@{updateGameEntities}}
+\index{updateGameEntities@{updateGameEntities}!DungeonRunner::AIPlayer@{DungeonRunner::AIPlayer}}
+\doxysubsubsection{\texorpdfstring{updateGameEntities()}{updateGameEntities()}}
+{\footnotesize\ttfamily void Dungeon\+Runner\+::\+AIPlayer\+::update\+Game\+Entities (\begin{DoxyParamCaption}\item[{std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_dungeon_runner_1_1_entity}{Dungeon\+Runner\+::\+Entity}} $>$$>$ \&}]{game\+Entities }\end{DoxyParamCaption})}
+
+Setter for game\+Entities 
+\begin{DoxyParams}{Parameters}
+{\em game\+Entities} & -- all entities in the game \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_dungeon_runner_1_1_a_i_player_a9b5df87bcf74136473f8bf3fabda4992}\label{class_dungeon_runner_1_1_a_i_player_a9b5df87bcf74136473f8bf3fabda4992}} 
+\index{DungeonRunner::AIPlayer@{DungeonRunner::AIPlayer}!aiSpeed@{aiSpeed}}
+\index{aiSpeed@{aiSpeed}!DungeonRunner::AIPlayer@{DungeonRunner::AIPlayer}}
+\doxysubsubsection{\texorpdfstring{aiSpeed}{aiSpeed}}
+{\footnotesize\ttfamily float Dungeon\+Runner\+::\+AIPlayer\+::ai\+Speed\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_dungeon_runner_1_1_a_i_player_a7fd6fac4a47fe4742b39706a5d8ffa2f}\label{class_dungeon_runner_1_1_a_i_player_a7fd6fac4a47fe4742b39706a5d8ffa2f}} 
+\index{DungeonRunner::AIPlayer@{DungeonRunner::AIPlayer}!dodgeState@{dodgeState}}
+\index{dodgeState@{dodgeState}!DungeonRunner::AIPlayer@{DungeonRunner::AIPlayer}}
+\doxysubsubsection{\texorpdfstring{dodgeState}{dodgeState}}
+{\footnotesize\ttfamily int Dungeon\+Runner\+::\+AIPlayer\+::dodge\+State = 0\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_dungeon_runner_1_1_a_i_player_a3a36114ffac6593e5bc38814ac76cc6d}\label{class_dungeon_runner_1_1_a_i_player_a3a36114ffac6593e5bc38814ac76cc6d}} 
+\index{DungeonRunner::AIPlayer@{DungeonRunner::AIPlayer}!gameEntities@{gameEntities}}
+\index{gameEntities@{gameEntities}!DungeonRunner::AIPlayer@{DungeonRunner::AIPlayer}}
+\doxysubsubsection{\texorpdfstring{gameEntities}{gameEntities}}
+{\footnotesize\ttfamily std\+::vector$<$std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{class_dungeon_runner_1_1_entity}{Dungeon\+Runner\+::\+Entity}}$>$ $>$ Dungeon\+Runner\+::\+AIPlayer\+::game\+Entities\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_dungeon_runner_1_1_a_i_player_ad3bb7b627b4c3d33d653de0e1aea9fec}\label{class_dungeon_runner_1_1_a_i_player_ad3bb7b627b4c3d33d653de0e1aea9fec}} 
+\index{DungeonRunner::AIPlayer@{DungeonRunner::AIPlayer}!isDodging@{isDodging}}
+\index{isDodging@{isDodging}!DungeonRunner::AIPlayer@{DungeonRunner::AIPlayer}}
+\doxysubsubsection{\texorpdfstring{isDodging}{isDodging}}
+{\footnotesize\ttfamily bool Dungeon\+Runner\+::\+AIPlayer\+::is\+Dodging = false\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_dungeon_runner_1_1_a_i_player_ae05914bca1b18b16da25e25e1ac7cdb8}\label{class_dungeon_runner_1_1_a_i_player_ae05914bca1b18b16da25e25e1ac7cdb8}} 
+\index{DungeonRunner::AIPlayer@{DungeonRunner::AIPlayer}!isStuck@{isStuck}}
+\index{isStuck@{isStuck}!DungeonRunner::AIPlayer@{DungeonRunner::AIPlayer}}
+\doxysubsubsection{\texorpdfstring{isStuck}{isStuck}}
+{\footnotesize\ttfamily bool Dungeon\+Runner\+::\+AIPlayer\+::is\+Stuck = false\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_dungeon_runner_1_1_a_i_player_addd5e96789be6598cc3c80bb08b87710}\label{class_dungeon_runner_1_1_a_i_player_addd5e96789be6598cc3c80bb08b87710}} 
+\index{DungeonRunner::AIPlayer@{DungeonRunner::AIPlayer}!stuckResolving@{stuckResolving}}
+\index{stuckResolving@{stuckResolving}!DungeonRunner::AIPlayer@{DungeonRunner::AIPlayer}}
+\doxysubsubsection{\texorpdfstring{stuckResolving}{stuckResolving}}
+{\footnotesize\ttfamily bool Dungeon\+Runner\+::\+AIPlayer\+::stuck\+Resolving = false\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Ilias/\+Documents/\+Git\+Hub/\+Dungeon\+Runner/\+Core/\+Logic/\mbox{\hyperlink{_a_i_player_8h}{AIPlayer.\+h}}\item 
+C\+:/\+Users/\+Ilias/\+Documents/\+Git\+Hub/\+Dungeon\+Runner/\+Core/\+Logic/\mbox{\hyperlink{_a_i_player_8cpp}{AIPlayer.\+cpp}}\end{DoxyCompactItemize}

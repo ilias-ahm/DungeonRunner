@@ -1,0 +1,80 @@
+\hypertarget{class_transformation}{}\doxysection{Transformation Class Reference}
+\label{class_transformation}\index{Transformation@{Transformation}}
+
+
+{\ttfamily \#include $<$Transformation.\+h$>$}
+
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::pair$<$ float, float $>$ \mbox{\hyperlink{class_transformation_a83f391ab0a1278270f14d2baef6b6b50}{to\+Coords}} (std\+::shared\+\_\+ptr$<$ sf\+::\+Render\+Window $>$g\+Window, float x, float y)
+\item 
+static std\+::pair$<$ float, float $>$ \mbox{\hyperlink{class_transformation_a5be72187f610551dbbf90fdc598e2b17}{to\+Pixel}} (std\+::shared\+\_\+ptr$<$ sf\+::\+Render\+Window $>$ g\+Window, float x, float y)
+\item 
+static \mbox{\hyperlink{class_transformation}{Transformation}} \& \mbox{\hyperlink{class_transformation_a33d49600e087b60273b3ec316e00d9cb}{get\+Instance}} ()
+\item 
+static std\+::pair$<$ int, int $>$ \mbox{\hyperlink{class_transformation_acae9f7ba8ac8f8fb8bd29e1cfe2d209d}{get\+WSize}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_transformation_a33d49600e087b60273b3ec316e00d9cb}\label{class_transformation_a33d49600e087b60273b3ec316e00d9cb}} 
+\index{Transformation@{Transformation}!getInstance@{getInstance}}
+\index{getInstance@{getInstance}!Transformation@{Transformation}}
+\doxysubsubsection{\texorpdfstring{getInstance()}{getInstance()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_transformation}{Transformation}} \& Transformation\+::get\+Instance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+gets instance \begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_transformation_acae9f7ba8ac8f8fb8bd29e1cfe2d209d}\label{class_transformation_acae9f7ba8ac8f8fb8bd29e1cfe2d209d}} 
+\index{Transformation@{Transformation}!getWSize@{getWSize}}
+\index{getWSize@{getWSize}!Transformation@{Transformation}}
+\doxysubsubsection{\texorpdfstring{getWSize()}{getWSize()}}
+{\footnotesize\ttfamily std\+::pair$<$ int, int $>$ Transformation\+::get\+WSize (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Getter for world size \begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_transformation_a83f391ab0a1278270f14d2baef6b6b50}\label{class_transformation_a83f391ab0a1278270f14d2baef6b6b50}} 
+\index{Transformation@{Transformation}!toCoords@{toCoords}}
+\index{toCoords@{toCoords}!Transformation@{Transformation}}
+\doxysubsubsection{\texorpdfstring{toCoords()}{toCoords()}}
+{\footnotesize\ttfamily std\+::pair$<$ float, float $>$ Transformation\+::to\+Coords (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ sf\+::\+Render\+Window $>$}]{g\+Window,  }\item[{float}]{x,  }\item[{float}]{y }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Function to convert SFML coordinates to world coordinates 
+\begin{DoxyParams}{Parameters}
+{\em g\+Window} & SFML Renderwindow \\
+\hline
+{\em x} & x position to convert \\
+\hline
+{\em y} & y position to convert \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+tuple (x,y) in World coordinates 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_transformation_a5be72187f610551dbbf90fdc598e2b17}\label{class_transformation_a5be72187f610551dbbf90fdc598e2b17}} 
+\index{Transformation@{Transformation}!toPixel@{toPixel}}
+\index{toPixel@{toPixel}!Transformation@{Transformation}}
+\doxysubsubsection{\texorpdfstring{toPixel()}{toPixel()}}
+{\footnotesize\ttfamily std\+::pair$<$ float, float $>$ Transformation\+::to\+Pixel (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ sf\+::\+Render\+Window $>$}]{g\+Window,  }\item[{float}]{x,  }\item[{float}]{y }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Function to convert World coordinates to SFML coordinates 
+\begin{DoxyParams}{Parameters}
+{\em g\+Window} & SFML Renderwindow \\
+\hline
+{\em x} & x position to convert \\
+\hline
+{\em y} & y position to convert \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+tuple (x,y) in SFML coordinates 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Ilias/\+Documents/\+Git\+Hub/\+Dungeon\+Runner/\+Core/\+Logic/\mbox{\hyperlink{_transformation_8h}{Transformation.\+h}}\item 
+C\+:/\+Users/\+Ilias/\+Documents/\+Git\+Hub/\+Dungeon\+Runner/\+Core/\+Logic/\mbox{\hyperlink{_transformation_8cpp}{Transformation.\+cpp}}\end{DoxyCompactItemize}

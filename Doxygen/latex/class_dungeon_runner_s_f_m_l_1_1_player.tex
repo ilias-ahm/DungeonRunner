@@ -1,0 +1,107 @@
+\hypertarget{class_dungeon_runner_s_f_m_l_1_1_player}{}\doxysection{Dungeon\+Runner\+SFML\+::Player Class Reference}
+\label{class_dungeon_runner_s_f_m_l_1_1_player}\index{DungeonRunnerSFML::Player@{DungeonRunnerSFML::Player}}
+
+
+{\ttfamily \#include $<$Player\+SFML.\+h$>$}
+
+Inheritance diagram for Dungeon\+Runner\+SFML\+::Player\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{class_dungeon_runner_s_f_m_l_1_1_player}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_dungeon_runner_s_f_m_l_1_1_player_accf44b7845138e742c5c0f1bb187b8da}{Player}} (std\+::shared\+\_\+ptr$<$ sf\+::\+Render\+Window $>$ \&g\+Window, std\+::shared\+\_\+ptr$<$ sf\+::\+Rectangle\+Shape $>$ \&player, std\+::shared\+\_\+ptr$<$ sf\+::\+Texture $>$ \&player\+Texture, std\+::shared\+\_\+ptr$<$ sf\+::\+Int\+Rect $>$ \&uv\+Rect)
+\item 
+sf\+::\+Vector2f \mbox{\hyperlink{class_dungeon_runner_s_f_m_l_1_1_player_a9cd9d95ca635986ef157bb8a2b55ba08}{get\+Pos}} ()
+\item 
+void \mbox{\hyperlink{class_dungeon_runner_s_f_m_l_1_1_player_adfe06c474bb61a393e2b15dd686a3ea8}{update}} () override
+\item 
+void \mbox{\hyperlink{class_dungeon_runner_s_f_m_l_1_1_player_a0da85de6fd2c7445bc6b581277d1f70a}{display}} () override
+\item 
+void \mbox{\hyperlink{class_dungeon_runner_s_f_m_l_1_1_player_acbf62a3003cc5e82b2106ef870990d05}{action}} () override
+\item 
+void \mbox{\hyperlink{class_dungeon_runner_s_f_m_l_1_1_player_a919dcc4e7c763bbd33746700c5102ff1}{set\+Uv\+Rect}} (const std\+::shared\+\_\+ptr$<$ sf\+::\+Int\+Rect $>$ \&uv\+Rect)
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_dungeon_runner_s_f_m_l_1_1_player_accf44b7845138e742c5c0f1bb187b8da}\label{class_dungeon_runner_s_f_m_l_1_1_player_accf44b7845138e742c5c0f1bb187b8da}} 
+\index{DungeonRunnerSFML::Player@{DungeonRunnerSFML::Player}!Player@{Player}}
+\index{Player@{Player}!DungeonRunnerSFML::Player@{DungeonRunnerSFML::Player}}
+\doxysubsubsection{\texorpdfstring{Player()}{Player()}}
+{\footnotesize\ttfamily Dungeon\+Runner\+SFML\+::\+Player\+::\+Player (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ sf\+::\+Render\+Window $>$ \&}]{g\+Window,  }\item[{std\+::shared\+\_\+ptr$<$ sf\+::\+Rectangle\+Shape $>$ \&}]{player,  }\item[{std\+::shared\+\_\+ptr$<$ sf\+::\+Texture $>$ \&}]{player\+Texture,  }\item[{std\+::shared\+\_\+ptr$<$ sf\+::\+Int\+Rect $>$ \&}]{uv\+Rect }\end{DoxyParamCaption})}
+
+Constructor 
+\begin{DoxyParams}{Parameters}
+{\em g\+Window} & SFML Renderwindow \\
+\hline
+{\em player} & SFML Rectangleshape \\
+\hline
+{\em player\+Texture} & SFML Texture \\
+\hline
+{\em uv\+Rect} & SFML Int\+Rect \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_dungeon_runner_s_f_m_l_1_1_player_acbf62a3003cc5e82b2106ef870990d05}\label{class_dungeon_runner_s_f_m_l_1_1_player_acbf62a3003cc5e82b2106ef870990d05}} 
+\index{DungeonRunnerSFML::Player@{DungeonRunnerSFML::Player}!action@{action}}
+\index{action@{action}!DungeonRunnerSFML::Player@{DungeonRunnerSFML::Player}}
+\doxysubsubsection{\texorpdfstring{action()}{action()}}
+{\footnotesize\ttfamily void Dungeon\+Runner\+SFML\+::\+Player\+::action (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Turns player red for a split moment to show that the player is damaged 
+
+Reimplemented from \mbox{\hyperlink{class_dungeon_runner_1_1_entity_a0364ac676f06f43b8aa73303d55c6d51}{Dungeon\+Runner\+::\+Entity}}.
+
+\mbox{\Hypertarget{class_dungeon_runner_s_f_m_l_1_1_player_a0da85de6fd2c7445bc6b581277d1f70a}\label{class_dungeon_runner_s_f_m_l_1_1_player_a0da85de6fd2c7445bc6b581277d1f70a}} 
+\index{DungeonRunnerSFML::Player@{DungeonRunnerSFML::Player}!display@{display}}
+\index{display@{display}!DungeonRunnerSFML::Player@{DungeonRunnerSFML::Player}}
+\doxysubsubsection{\texorpdfstring{display()}{display()}}
+{\footnotesize\ttfamily void Dungeon\+Runner\+SFML\+::\+Player\+::display (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Displays player to SFML Renderwindow 
+
+Reimplemented from \mbox{\hyperlink{class_dungeon_runner_1_1_entity_a86472f3517571aeb97b39402d28e3e8c}{Dungeon\+Runner\+::\+Entity}}.
+
+\mbox{\Hypertarget{class_dungeon_runner_s_f_m_l_1_1_player_a9cd9d95ca635986ef157bb8a2b55ba08}\label{class_dungeon_runner_s_f_m_l_1_1_player_a9cd9d95ca635986ef157bb8a2b55ba08}} 
+\index{DungeonRunnerSFML::Player@{DungeonRunnerSFML::Player}!getPos@{getPos}}
+\index{getPos@{getPos}!DungeonRunnerSFML::Player@{DungeonRunnerSFML::Player}}
+\doxysubsubsection{\texorpdfstring{getPos()}{getPos()}}
+{\footnotesize\ttfamily sf\+::\+Vector2f Dungeon\+Runner\+SFML\+::\+Player\+::get\+Pos (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Getter for playerposition in SFML coordinates \begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_dungeon_runner_s_f_m_l_1_1_player_a919dcc4e7c763bbd33746700c5102ff1}\label{class_dungeon_runner_s_f_m_l_1_1_player_a919dcc4e7c763bbd33746700c5102ff1}} 
+\index{DungeonRunnerSFML::Player@{DungeonRunnerSFML::Player}!setUvRect@{setUvRect}}
+\index{setUvRect@{setUvRect}!DungeonRunnerSFML::Player@{DungeonRunnerSFML::Player}}
+\doxysubsubsection{\texorpdfstring{setUvRect()}{setUvRect()}}
+{\footnotesize\ttfamily void Dungeon\+Runner\+SFML\+::\+Player\+::set\+Uv\+Rect (\begin{DoxyParamCaption}\item[{const std\+::shared\+\_\+ptr$<$ sf\+::\+Int\+Rect $>$ \&}]{uv\+Rect }\end{DoxyParamCaption})}
+
+Setter for uv\+Rect 
+\begin{DoxyParams}{Parameters}
+{\em uv\+Rect} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_dungeon_runner_s_f_m_l_1_1_player_adfe06c474bb61a393e2b15dd686a3ea8}\label{class_dungeon_runner_s_f_m_l_1_1_player_adfe06c474bb61a393e2b15dd686a3ea8}} 
+\index{DungeonRunnerSFML::Player@{DungeonRunnerSFML::Player}!update@{update}}
+\index{update@{update}!DungeonRunnerSFML::Player@{DungeonRunnerSFML::Player}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily void Dungeon\+Runner\+SFML\+::\+Player\+::update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Updates SFML Position to entity position 
+
+Reimplemented from \mbox{\hyperlink{class_dungeon_runner_1_1_entity_aab104a2b30aa14e4f5aa6c4778792494}{Dungeon\+Runner\+::\+Entity}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Ilias/\+Documents/\+Git\+Hub/\+Dungeon\+Runner/\+Core/\+Representation/\mbox{\hyperlink{_player_s_f_m_l_8h}{Player\+SFML.\+h}}\item 
+C\+:/\+Users/\+Ilias/\+Documents/\+Git\+Hub/\+Dungeon\+Runner/\+Core/\+Representation/\mbox{\hyperlink{_player_s_f_m_l_8cpp}{Player\+SFML.\+cpp}}\end{DoxyCompactItemize}

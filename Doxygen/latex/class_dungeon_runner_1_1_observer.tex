@@ -1,0 +1,140 @@
+\hypertarget{class_dungeon_runner_1_1_observer}{}\doxysection{Dungeon\+Runner\+::Observer Class Reference}
+\label{class_dungeon_runner_1_1_observer}\index{DungeonRunner::Observer@{DungeonRunner::Observer}}
+
+
+{\ttfamily \#include $<$Observer.\+h$>$}
+
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{class_dungeon_runner_1_1_observer_a7315512764580c2b52a31bf78798f92c}{Event}} \{ \newline
+\mbox{\hyperlink{class_dungeon_runner_1_1_observer_a7315512764580c2b52a31bf78798f92cac61a269c9e4672fa6cf2bf363e2edf76}{finished\+First}}
+, \mbox{\hyperlink{class_dungeon_runner_1_1_observer_a7315512764580c2b52a31bf78798f92ca3c00fea3b7767fa91993ebf08e062ba6}{finished\+Second}}
+, \mbox{\hyperlink{class_dungeon_runner_1_1_observer_a7315512764580c2b52a31bf78798f92cae3a4e7974b2e96243fe814f7a158cbcd}{finished\+Third}}
+, \mbox{\hyperlink{class_dungeon_runner_1_1_observer_a7315512764580c2b52a31bf78798f92caa55b4ada204a5e5fb59fea546a5b4474}{finished\+Last}}
+, \newline
+\mbox{\hyperlink{class_dungeon_runner_1_1_observer_a7315512764580c2b52a31bf78798f92ca4d43f47b389415a299c78522d1a9ad2d}{hit\+Moving\+Obstacle}}
+, \mbox{\hyperlink{class_dungeon_runner_1_1_observer_a7315512764580c2b52a31bf78798f92ca0e2c7627e12c273d6ffbada18be4a037}{static\+Obstacle\+Action}}
+, \mbox{\hyperlink{class_dungeon_runner_1_1_observer_a7315512764580c2b52a31bf78798f92ca77e4245b796510df4362c9d4413b7803}{first\+Place}}
+, \mbox{\hyperlink{class_dungeon_runner_1_1_observer_a7315512764580c2b52a31bf78798f92ca7ad62f52032f79d952288c495a59bb5a}{second\+Place}}
+, \newline
+\mbox{\hyperlink{class_dungeon_runner_1_1_observer_a7315512764580c2b52a31bf78798f92ca70920536d352dea15309031b11c8dbc3}{third\+Place}}
+, \mbox{\hyperlink{class_dungeon_runner_1_1_observer_a7315512764580c2b52a31bf78798f92cad7dc6cd09092591b5dfeb1e0f841bd4a}{last\+Place}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_dungeon_runner_1_1_observer_a7a2f8709325174a5db69019f8f4eddad}{Observer}} (std\+::string observer\+Name)
+\item 
+const std\+::string \& \mbox{\hyperlink{class_dungeon_runner_1_1_observer_aa04a423c40b937bd14c94a18db5b1008}{get\+Observer\+Name}} () const
+\item 
+void \mbox{\hyperlink{class_dungeon_runner_1_1_observer_a614da9f30dec9b4276407cb587b9eccf}{update}} (\mbox{\hyperlink{class_dungeon_runner_1_1_observer_a7315512764580c2b52a31bf78798f92c}{Event}} event, float d\+Time=1)
+\item 
+int \mbox{\hyperlink{class_dungeon_runner_1_1_observer_a8061adeed35ff40769cfe761cb7fa09f}{get\+Observer\+Data}} () const
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Enumeration Documentation}
+\mbox{\Hypertarget{class_dungeon_runner_1_1_observer_a7315512764580c2b52a31bf78798f92c}\label{class_dungeon_runner_1_1_observer_a7315512764580c2b52a31bf78798f92c}} 
+\index{DungeonRunner::Observer@{DungeonRunner::Observer}!Event@{Event}}
+\index{Event@{Event}!DungeonRunner::Observer@{DungeonRunner::Observer}}
+\doxysubsubsection{\texorpdfstring{Event}{Event}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{class_dungeon_runner_1_1_observer_a7315512764580c2b52a31bf78798f92c}{Dungeon\+Runner\+::\+Observer\+::\+Event}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{finishedFirst@{finishedFirst}!DungeonRunner::Observer@{DungeonRunner::Observer}}\index{DungeonRunner::Observer@{DungeonRunner::Observer}!finishedFirst@{finishedFirst}}}\mbox{\Hypertarget{class_dungeon_runner_1_1_observer_a7315512764580c2b52a31bf78798f92cac61a269c9e4672fa6cf2bf363e2edf76}\label{class_dungeon_runner_1_1_observer_a7315512764580c2b52a31bf78798f92cac61a269c9e4672fa6cf2bf363e2edf76}} 
+finished\+First&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{finishedSecond@{finishedSecond}!DungeonRunner::Observer@{DungeonRunner::Observer}}\index{DungeonRunner::Observer@{DungeonRunner::Observer}!finishedSecond@{finishedSecond}}}\mbox{\Hypertarget{class_dungeon_runner_1_1_observer_a7315512764580c2b52a31bf78798f92ca3c00fea3b7767fa91993ebf08e062ba6}\label{class_dungeon_runner_1_1_observer_a7315512764580c2b52a31bf78798f92ca3c00fea3b7767fa91993ebf08e062ba6}} 
+finished\+Second&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{finishedThird@{finishedThird}!DungeonRunner::Observer@{DungeonRunner::Observer}}\index{DungeonRunner::Observer@{DungeonRunner::Observer}!finishedThird@{finishedThird}}}\mbox{\Hypertarget{class_dungeon_runner_1_1_observer_a7315512764580c2b52a31bf78798f92cae3a4e7974b2e96243fe814f7a158cbcd}\label{class_dungeon_runner_1_1_observer_a7315512764580c2b52a31bf78798f92cae3a4e7974b2e96243fe814f7a158cbcd}} 
+finished\+Third&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{finishedLast@{finishedLast}!DungeonRunner::Observer@{DungeonRunner::Observer}}\index{DungeonRunner::Observer@{DungeonRunner::Observer}!finishedLast@{finishedLast}}}\mbox{\Hypertarget{class_dungeon_runner_1_1_observer_a7315512764580c2b52a31bf78798f92caa55b4ada204a5e5fb59fea546a5b4474}\label{class_dungeon_runner_1_1_observer_a7315512764580c2b52a31bf78798f92caa55b4ada204a5e5fb59fea546a5b4474}} 
+finished\+Last&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{hitMovingObstacle@{hitMovingObstacle}!DungeonRunner::Observer@{DungeonRunner::Observer}}\index{DungeonRunner::Observer@{DungeonRunner::Observer}!hitMovingObstacle@{hitMovingObstacle}}}\mbox{\Hypertarget{class_dungeon_runner_1_1_observer_a7315512764580c2b52a31bf78798f92ca4d43f47b389415a299c78522d1a9ad2d}\label{class_dungeon_runner_1_1_observer_a7315512764580c2b52a31bf78798f92ca4d43f47b389415a299c78522d1a9ad2d}} 
+hit\+Moving\+Obstacle&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{staticObstacleAction@{staticObstacleAction}!DungeonRunner::Observer@{DungeonRunner::Observer}}\index{DungeonRunner::Observer@{DungeonRunner::Observer}!staticObstacleAction@{staticObstacleAction}}}\mbox{\Hypertarget{class_dungeon_runner_1_1_observer_a7315512764580c2b52a31bf78798f92ca0e2c7627e12c273d6ffbada18be4a037}\label{class_dungeon_runner_1_1_observer_a7315512764580c2b52a31bf78798f92ca0e2c7627e12c273d6ffbada18be4a037}} 
+static\+Obstacle\+Action&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{firstPlace@{firstPlace}!DungeonRunner::Observer@{DungeonRunner::Observer}}\index{DungeonRunner::Observer@{DungeonRunner::Observer}!firstPlace@{firstPlace}}}\mbox{\Hypertarget{class_dungeon_runner_1_1_observer_a7315512764580c2b52a31bf78798f92ca77e4245b796510df4362c9d4413b7803}\label{class_dungeon_runner_1_1_observer_a7315512764580c2b52a31bf78798f92ca77e4245b796510df4362c9d4413b7803}} 
+first\+Place&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{secondPlace@{secondPlace}!DungeonRunner::Observer@{DungeonRunner::Observer}}\index{DungeonRunner::Observer@{DungeonRunner::Observer}!secondPlace@{secondPlace}}}\mbox{\Hypertarget{class_dungeon_runner_1_1_observer_a7315512764580c2b52a31bf78798f92ca7ad62f52032f79d952288c495a59bb5a}\label{class_dungeon_runner_1_1_observer_a7315512764580c2b52a31bf78798f92ca7ad62f52032f79d952288c495a59bb5a}} 
+second\+Place&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{thirdPlace@{thirdPlace}!DungeonRunner::Observer@{DungeonRunner::Observer}}\index{DungeonRunner::Observer@{DungeonRunner::Observer}!thirdPlace@{thirdPlace}}}\mbox{\Hypertarget{class_dungeon_runner_1_1_observer_a7315512764580c2b52a31bf78798f92ca70920536d352dea15309031b11c8dbc3}\label{class_dungeon_runner_1_1_observer_a7315512764580c2b52a31bf78798f92ca70920536d352dea15309031b11c8dbc3}} 
+third\+Place&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{lastPlace@{lastPlace}!DungeonRunner::Observer@{DungeonRunner::Observer}}\index{DungeonRunner::Observer@{DungeonRunner::Observer}!lastPlace@{lastPlace}}}\mbox{\Hypertarget{class_dungeon_runner_1_1_observer_a7315512764580c2b52a31bf78798f92cad7dc6cd09092591b5dfeb1e0f841bd4a}\label{class_dungeon_runner_1_1_observer_a7315512764580c2b52a31bf78798f92cad7dc6cd09092591b5dfeb1e0f841bd4a}} 
+last\+Place&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_dungeon_runner_1_1_observer_a7a2f8709325174a5db69019f8f4eddad}\label{class_dungeon_runner_1_1_observer_a7a2f8709325174a5db69019f8f4eddad}} 
+\index{DungeonRunner::Observer@{DungeonRunner::Observer}!Observer@{Observer}}
+\index{Observer@{Observer}!DungeonRunner::Observer@{DungeonRunner::Observer}}
+\doxysubsubsection{\texorpdfstring{Observer()}{Observer()}}
+{\footnotesize\ttfamily Dungeon\+Runner\+::\+Observer\+::\+Observer (\begin{DoxyParamCaption}\item[{std\+::string}]{observer\+Name }\end{DoxyParamCaption})}
+
+Constructor for observer 
+\begin{DoxyParams}{Parameters}
+{\em observer\+Name} & \mbox{\hyperlink{class_dungeon_runner_1_1_player}{Player}} name or AI name \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_dungeon_runner_1_1_observer_a8061adeed35ff40769cfe761cb7fa09f}\label{class_dungeon_runner_1_1_observer_a8061adeed35ff40769cfe761cb7fa09f}} 
+\index{DungeonRunner::Observer@{DungeonRunner::Observer}!getObserverData@{getObserverData}}
+\index{getObserverData@{getObserverData}!DungeonRunner::Observer@{DungeonRunner::Observer}}
+\doxysubsubsection{\texorpdfstring{getObserverData()}{getObserverData()}}
+{\footnotesize\ttfamily int Dungeon\+Runner\+::\+Observer\+::get\+Observer\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\begin{DoxyReturn}{Returns}
+observer score (h\+Score variable) 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_dungeon_runner_1_1_observer_aa04a423c40b937bd14c94a18db5b1008}\label{class_dungeon_runner_1_1_observer_aa04a423c40b937bd14c94a18db5b1008}} 
+\index{DungeonRunner::Observer@{DungeonRunner::Observer}!getObserverName@{getObserverName}}
+\index{getObserverName@{getObserverName}!DungeonRunner::Observer@{DungeonRunner::Observer}}
+\doxysubsubsection{\texorpdfstring{getObserverName()}{getObserverName()}}
+{\footnotesize\ttfamily const std\+::string \& Dungeon\+Runner\+::\+Observer\+::get\+Observer\+Name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Getter for observer name aka player/ai name \begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_dungeon_runner_1_1_observer_a614da9f30dec9b4276407cb587b9eccf}\label{class_dungeon_runner_1_1_observer_a614da9f30dec9b4276407cb587b9eccf}} 
+\index{DungeonRunner::Observer@{DungeonRunner::Observer}!update@{update}}
+\index{update@{update}!DungeonRunner::Observer@{DungeonRunner::Observer}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily void Dungeon\+Runner\+::\+Observer\+::update (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_dungeon_runner_1_1_observer_a7315512764580c2b52a31bf78798f92c}{Event}}}]{event,  }\item[{float}]{d\+Time = {\ttfamily 1} }\end{DoxyParamCaption})}
+
+Updates score of observer according to observer event 
+\begin{DoxyParams}{Parameters}
+{\em event} & \\
+\hline
+{\em d\+Time} & \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Ilias/\+Documents/\+Git\+Hub/\+Dungeon\+Runner/\+Core/\+Logic/\mbox{\hyperlink{_observer_8h}{Observer.\+h}}\item 
+C\+:/\+Users/\+Ilias/\+Documents/\+Git\+Hub/\+Dungeon\+Runner/\+Core/\+Logic/\mbox{\hyperlink{_observer_8cpp}{Observer.\+cpp}}\end{DoxyCompactItemize}
