@@ -6,16 +6,18 @@
 #define DUNGEONRUNNER_SWORDSFML_H
 #include "../Logic/Sword.h"
 namespace DungeonRunnerSFML {
-    class Sword: public DungeonRunner::Sword {
+class Sword : public DungeonRunner::Sword
+{
         std::shared_ptr<sf::RectangleShape> sword;
         std::shared_ptr<sf::Texture> swordTexture;
         std::shared_ptr<sf::RenderWindow> gWindow;
-    public:
+
+public:
         /**
          * Constructor
          * @param gWindow SFML Renderwindow
          */
-        Sword(std::shared_ptr<sf::RenderWindow> &gWindow);
+        Sword(std::shared_ptr<sf::RenderWindow>& gWindow);
         /**
          * Updates SFML Position to entity position
          */
@@ -24,9 +26,7 @@ namespace DungeonRunnerSFML {
          * Displays player to SFML Renderwindow
          */
         void display() override;
+};
+} // namespace DungeonRunnerSFML
 
-    };
-}
-
-
-#endif //DUNGEONRUNNER_SWORDSFML_H
+#endif // DUNGEONRUNNER_SWORDSFML_H

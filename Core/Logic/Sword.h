@@ -8,10 +8,9 @@
 #include "Entity.h"
 
 namespace DungeonRunner {
-    class Sword : public Entity {
+class Sword : public Entity
+{
+};
+} // namespace DungeonRunner
 
-    };
-}
-
-
-#endif //DUNGEONRUNNER_SWORD_H
+#endif // DUNGEONRUNNER_SWORD_H

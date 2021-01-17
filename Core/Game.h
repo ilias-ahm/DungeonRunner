@@ -4,19 +4,20 @@
 
 #ifndef DUNGEONRUNNER_GAME_H
 #define DUNGEONRUNNER_GAME_H
-#include "Representation/PlayerSFML.h"
-#include "Representation/World.h"
 #include "Logic/AbstractFactory.h"
 #include "Logic/Collision.h"
 #include "Representation/AIPlayerSFML.h"
+#include "Representation/PlayerSFML.h"
+#include "Representation/World.h"
 #include <chrono>
 
 namespace DungeonRunner {
-    class Game {
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //                                                          Variables                                                           //
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        private:
+class Game
+{
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //                                                          Variables //
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+private:
         std::shared_ptr<sf::RenderWindow> gameWindow;
         std::shared_ptr<World> gameWorld;
         sf::View gameView;
@@ -31,11 +32,10 @@ namespace DungeonRunner {
         bool finished = false;
         int finishedPlayers = 0;
 
-
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //                                                          Functions                                                           //
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        private:
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //                                                          Functions //
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+private:
         /**
          * Creates a new player
          */
@@ -80,7 +80,7 @@ namespace DungeonRunner {
          * @param push float between 0-1. higher means entity gets pushed easier
          * @return true if entities are colliding
          */
-        bool isColliding(std::shared_ptr<Entity> e1,std::shared_ptr<Entity> e2,float push);
+        bool isColliding(std::shared_ptr<Entity> e1, std::shared_ptr<Entity> e2, float push);
         /**
          * Hikers gain score every loop depending on their place
          * @param dTime delta time to ensure the same score gain on all fps settings
@@ -96,12 +96,12 @@ namespace DungeonRunner {
         void drawPlayerScore();
         void initAI();
 
-    public:
+public:
         /**
          * Constructor
          * @param gameWindow SFML Renderwindow
          */
-        Game(const std::shared_ptr<sf::RenderWindow> &gameWindow);
+        Game(const std::shared_ptr<sf::RenderWindow>& gameWindow);
         /**
          * Updates the game
          * @param dTime delta time to ensure same product on different fps settings
@@ -111,10 +111,7 @@ namespace DungeonRunner {
          * Runs the game loop
          */
         void run();
+};
+} // namespace DungeonRunner
 
-
-
-    };
-}
-
-#endif //DUNGEONRUNNER_GAME_H
+#endif // DUNGEONRUNNER_GAME_H

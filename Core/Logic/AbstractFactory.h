@@ -4,19 +4,20 @@
 
 #ifndef DUNGEONRUNNER_ABSTRACTFACTORY_H
 #define DUNGEONRUNNER_ABSTRACTFACTORY_H
-#include "Entity.h"
-#include "../Representation/World.h"
-#include "Player.h"
-#include "../Representation/PlayerSFML.h"
-#include "Transformation.h"
-#include "../Representation/SwordSFML.h"
 #include "../Representation/AIPlayerSFML.h"
+#include "../Representation/PlayerSFML.h"
+#include "../Representation/SwordSFML.h"
+#include "../Representation/World.h"
 #include "../Representation/finishLine.h"
+#include "Entity.h"
 #include "Highscores.h"
+#include "Player.h"
+#include "Transformation.h"
 
 namespace DungeonRunner {
-    class AbstractFactory {
-    public:
+class AbstractFactory
+{
+public:
         /**
          * Creates a new world entity
          * @param gWindow -- SFML Renderwindow
@@ -33,7 +34,10 @@ namespace DungeonRunner {
          * @param uvRect  SFML IntRect
          * @return std::shared_ptr<DungeonRunnerSFML::Player>
          */
-        static std::shared_ptr<DungeonRunnerSFML::Player> createPlayer(std::shared_ptr<sf::RenderWindow> gWindow,std::shared_ptr<sf::RectangleShape> player,std::shared_ptr<sf::Texture> playerTexture,std::shared_ptr<sf::IntRect> uvRect);
+        static std::shared_ptr<DungeonRunnerSFML::Player> createPlayer(std::shared_ptr<sf::RenderWindow> gWindow,
+                                                                       std::shared_ptr<sf::RectangleShape> player,
+                                                                       std::shared_ptr<sf::Texture> playerTexture,
+                                                                       std::shared_ptr<sf::IntRect> uvRect);
         /**
          * Creates a new Door entity
          * @param door  SFML rectangleshape
@@ -41,17 +45,17 @@ namespace DungeonRunner {
          * @param doorState  map containing 'open' and 'closed' door textures
          * @return std::shared_ptr<DungeonRunnerSFML::DoorSFML>
          */
-        static std::shared_ptr<DungeonRunnerSFML::DoorSFML> createDoor(std::shared_ptr<sf::RectangleShape> &door,
-                                                                       std::shared_ptr<sf::RenderWindow> &gWindow,
-                                                                       std::map<std::string, std::shared_ptr<sf::Texture>> &doorState);
+        static std::shared_ptr<DungeonRunnerSFML::DoorSFML> createDoor(
+            std::shared_ptr<sf::RectangleShape>& door, std::shared_ptr<sf::RenderWindow>& gWindow,
+            std::map<std::string, std::shared_ptr<sf::Texture>>& doorState);
         /**
          * Creates a collider (invisible box)
          * @param ePosition
          * @param eSize
          * @return std::shared_ptr<DungeonRunner::Entity>
          */
-        static std::shared_ptr<DungeonRunner::Entity> createCollider(const std::pair<float, float> &ePosition,
-                                                              const std::pair<float, float> &eSize);
+        static std::shared_ptr<DungeonRunner::Entity> createCollider(const std::pair<float, float>& ePosition,
+                                                                     const std::pair<float, float>& eSize);
         /**
          * Creates a new sword entity
          * @param gWindow  SFML Renderwindow
@@ -64,15 +68,17 @@ namespace DungeonRunner {
          * @param gWindow -- SFML Renderwindow
          * @return std::shared_ptr<DungeonRunnerSFML::AIPlayer>
          */
-        static std::shared_ptr<DungeonRunnerSFML::AIPlayer> createAI(std::vector<std::shared_ptr<DungeonRunner::Entity>> &gameEntities,
-                                                                  std::shared_ptr<sf::RenderWindow> &gWindow);
+        static std::shared_ptr<DungeonRunnerSFML::AIPlayer> createAI(
+            std::vector<std::shared_ptr<DungeonRunner::Entity>>& gameEntities,
+            std::shared_ptr<sf::RenderWindow>& gWindow);
         /**
          *  Creates a finishline entity
          * @param gWindow  SFML Renderwindow
          * @param finish  SFML Rectangleshape
          * @return std::shared_ptr<DungeonRunnerSFML::finishLine>
          */
-        static std::shared_ptr<DungeonRunnerSFML::finishLine> createFinish(std::shared_ptr<sf::RenderWindow> &gWindow,sf::RectangleShape &finish);
+        static std::shared_ptr<DungeonRunnerSFML::finishLine> createFinish(std::shared_ptr<sf::RenderWindow>& gWindow,
+                                                                           sf::RectangleShape& finish);
         /**
          * Creates a new observer
          * @param observerName  This name will appear on the leaderboard
@@ -85,7 +91,7 @@ namespace DungeonRunner {
          * @return std::shared_ptr<DungeonRunner::Highscores>
          */
         static std::shared_ptr<DungeonRunner::Highscores> createHighscores(std::string filePath);
-    };
-}
+};
+} // namespace DungeonRunner
 
-#endif //DUNGEONRUNNER_ABSTRACTFACTORY_H
+#endif // DUNGEONRUNNER_ABSTRACTFACTORY_H

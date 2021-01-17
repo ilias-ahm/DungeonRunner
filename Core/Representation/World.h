@@ -5,35 +5,33 @@
 #ifndef DUNGEONRUNNER_WORLD_H
 #define DUNGEONRUNNER_WORLD_H
 #include "../Logic/Entity.h"
-#include "DoorSFML.h"
-#include <SFML/Graphics.hpp>
 #include "../Logic/Random.h"
 #include "../Logic/Transformation.h"
+#include "DoorSFML.h"
 #include "finishLine.h"
+#include <SFML/Graphics.hpp>
 
 namespace DungeonRunner {
-    class World : public Entity {
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //                                                          Variables                                                           //
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        private:
+class World : public Entity
+{
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //                                                          Variables //
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+private:
         std::shared_ptr<sf::RenderWindow> gameWindow;
-        std::pair<int,int> worldSize;
+        std::pair<int, int> worldSize;
         std::vector<std::vector<std::vector<std::vector<std::shared_ptr<sf::RectangleShape>>>>> worldTiles;
         sf::Texture wallTexture;
         std::vector<std::shared_ptr<sf::Texture>> tileTextures;
-        std::map<std::string,std::shared_ptr<sf::Texture>> obstacleTextures;
+        std::map<std::string, std::shared_ptr<sf::Texture>> obstacleTextures;
         std::vector<std::shared_ptr<Entity>> worldEntities;
         std::shared_ptr<DungeonRunnerSFML::finishLine> worldFinish;
 
-
-    public:
-
-
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //                                                          Functions                                                           //
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        private:
+public:
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //                                                          Functions //
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+private:
         /**
          * Initializes map
          */
@@ -57,7 +55,7 @@ namespace DungeonRunner {
         void initDoorTex();
         void initPillarTex(); // UNUSED
 
-        public:
+public:
         /**
          * Constructor
          * @param gWindow SFML Renderwindow
@@ -69,16 +67,14 @@ namespace DungeonRunner {
          * Returns world entities
          * @return
          */
-        const std::vector<std::shared_ptr<Entity>> &getWorldEntities();
+        const std::vector<std::shared_ptr<Entity>>& getWorldEntities();
         void update() override; // UNUSED
         void action() override; // UNUSED
         /**
          * Displays worldmap on SFML Renderwindow
          */
         void display() override;
+};
+} // namespace DungeonRunner
 
-
-    };
-}
-
-#endif //DUNGEONRUNNER_WORLD_H
+#endif // DUNGEONRUNNER_WORLD_H

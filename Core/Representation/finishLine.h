@@ -7,24 +7,25 @@
 #include "../Logic/Entity.h"
 
 namespace DungeonRunnerSFML {
-    class finishLine: public DungeonRunner::Entity {
+class finishLine : public DungeonRunner::Entity
+{
         std::shared_ptr<sf::RenderWindow> gWindow;
         sf::RectangleShape finish;
         sf::Texture finishTexture;
         sf::Sprite test;
-    public:
+
+public:
         /**
          * Constructor
          * @param gWindow  SFML Renderwindow
          * @param finish SFML Rectangleshape
          */
-        finishLine( std::shared_ptr<sf::RenderWindow> &gWindow,  sf::RectangleShape &finish);
+        finishLine(std::shared_ptr<sf::RenderWindow>& gWindow, sf::RectangleShape& finish);
         /**
          * Displays finishline on SFML Renderwindow
          */
         void display() override;
-    };
-}
+};
+} // namespace DungeonRunnerSFML
 
-
-#endif //DUNGEONRUNNER_FINISHLINE_H
+#endif // DUNGEONRUNNER_FINISHLINE_H

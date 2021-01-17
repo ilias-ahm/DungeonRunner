@@ -4,16 +4,18 @@
 
 #ifndef DUNGEONRUNNER_AIPLAYER_H
 #define DUNGEONRUNNER_AIPLAYER_H
-#include "Entity.h"
 #include "../Representation/DoorSFML.h"
+#include "Entity.h"
 namespace DungeonRunner {
-    class AIPlayer: public Entity {
-    protected:
-        float aiSpeed; // Float between 0.2 - 0.6
+class AIPlayer : public Entity
+{
+protected:
+        float aiSpeed;                                                    // Float between 0.2 - 0.6
         std::vector<std::shared_ptr<DungeonRunner::Entity>> gameEntities; // All entities in the game
-        int dodgeState = 0; // 0 = straight , 1 = left , 2 = right;
+        int dodgeState = 0;                                               // 0 = straight , 1 = left , 2 = right;
         /**
-         * Contains the actions and intelligence for the AI's to avoid obstacles and other players (move left and right or interact (yell) with obstacles)
+         * Contains the actions and intelligence for the AI's to avoid obstacles and other players (move left and right
+         * or interact (yell) with obstacles)
          */
         void avoidObstacles();
         /**
@@ -35,7 +37,8 @@ namespace DungeonRunner {
          * @return float between 0-1
          */
         float getMoveChance();
-    public:
+
+public:
         /**
          * Getter for AI Speed
          * @return AI Speed
@@ -49,7 +52,7 @@ namespace DungeonRunner {
          * Setter for gameEntities
          * @param gameEntities -- all entities in the game
          */
-        void updateGameEntities(std::vector<std::shared_ptr<DungeonRunner::Entity>> &gameEntities);
+        void updateGameEntities(std::vector<std::shared_ptr<DungeonRunner::Entity>>& gameEntities);
         /**
          * Getter for dodgeState
          * @return integer between 0-2
@@ -65,8 +68,7 @@ namespace DungeonRunner {
          * @param aiSpeed
          */
         void setAiSpeed(float aiSpeed);
-    };
-}
+};
+} // namespace DungeonRunner
 
-
-#endif //DUNGEONRUNNER_AIPLAYER_H
+#endif // DUNGEONRUNNER_AIPLAYER_H

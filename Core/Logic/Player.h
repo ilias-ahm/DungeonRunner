@@ -7,24 +7,22 @@
 #include "Entity.h"
 
 namespace DungeonRunner {
-    class Player : public Entity {
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //                                                          Variables                                                           //
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    protected:
+class Player : public Entity
+{
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //                                                          Variables //
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+protected:
         float playerSpeed;
         int playerLives;
         std::string playerName;
 
-        public:
-
-
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //                                                          Functions                                                           //
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        private:
-
-        public:
+public:
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //                                                          Functions //
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+private:
+public:
         /**
          * Setter for playerspeed
          * @param playerSpeed float [0.2-0.5]
@@ -33,9 +31,9 @@ namespace DungeonRunner {
 
         void setPlayerLives(int playerLives);
 
-        void setPlayerName(const std::string &playerName);
+        void setPlayerName(const std::string& playerName);
 
-        void setPlayerPosition(const std::pair<float, float> &playerPosition);
+        void setPlayerPosition(const std::pair<float, float>& playerPosition);
 
         void setPlayerPosition(float x, float y);
         /**
@@ -46,9 +44,8 @@ namespace DungeonRunner {
 
         int getPlayerLives() const;
 
-        const std::string &getPlayerName() const;
+        const std::string& getPlayerName() const;
+};
+} // namespace DungeonRunner
 
-    };
-}
-
-#endif //DUNGEONRUNNER_PLAYERSFML_H
+#endif // DUNGEONRUNNER_PLAYERSFML_H

@@ -4,15 +4,17 @@
 
 #ifndef DUNGEONRUNNER_HIGHSCORES_H
 #define DUNGEONRUNNER_HIGHSCORES_H
-#include <iostream>
 #include <fstream>
+#include <iostream>
 #include <map>
 #include <set>
 namespace DungeonRunner {
-    class Highscores {
-        std::map<std::string,std::set<int>> highScores; // Map with playernames and all their scores
+class Highscores
+{
+        std::map<std::string, std::set<int>> highScores; // Map with playernames and all their scores
         std::string fileName;
-    public:
+
+public:
         /**
          * Constructor
          * @param fileName
@@ -33,8 +35,7 @@ namespace DungeonRunner {
          * @param score highscore
          */
         void addScore(std::string scoreName, int score);
-    };
-}
+};
+} // namespace DungeonRunner
 
-
-#endif //DUNGEONRUNNER_HIGHSCORES_H
+#endif // DUNGEONRUNNER_HIGHSCORES_H

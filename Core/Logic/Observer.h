@@ -6,21 +6,24 @@
 #define DUNGEONRUNNER_OBSERVER_H
 #include <iostream>
 namespace DungeonRunner {
-    class Observer {
+class Observer
+{
         float hScore = 100;
         std::string observerName;
-    public:
-        enum Event {
-            finishedFirst,
-            finishedSecond,
-            finishedThird,
-            finishedLast,
-            hitMovingObstacle,
-            staticObstacleAction,
-            firstPlace,
-            secondPlace,
-            thirdPlace,
-            lastPlace
+
+public:
+        enum Event
+        {
+                finishedFirst,
+                finishedSecond,
+                finishedThird,
+                finishedLast,
+                hitMovingObstacle,
+                staticObstacleAction,
+                firstPlace,
+                secondPlace,
+                thirdPlace,
+                lastPlace
         };
 
         /**
@@ -32,21 +35,19 @@ namespace DungeonRunner {
          * Getter for observer name aka player/ai name
          * @return
          */
-        const std::string &getObserverName() const;
+        const std::string& getObserverName() const;
         /**
          * Updates score of observer according to observer event
          * @param event
          * @param dTime
          */
-        void update(Event event,float dTime = 1);
+        void update(Event event, float dTime = 1);
         /**
          *
          * @return observer score (hScore variable)
          */
         int getObserverData() const;
+};
+} // namespace DungeonRunner
 
-    };
-}
-
-
-#endif //DUNGEONRUNNER_OBSERVER_H
+#endif // DUNGEONRUNNER_OBSERVER_H

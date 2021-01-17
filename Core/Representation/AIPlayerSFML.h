@@ -8,22 +8,22 @@
 #include "DoorSFML.h"
 
 namespace DungeonRunnerSFML {
-    class AIPlayer: public DungeonRunner::AIPlayer {
-    private:
+class AIPlayer : public DungeonRunner::AIPlayer
+{
+private:
         std::shared_ptr<sf::RenderWindow> gWindow;
         sf::RectangleShape aiPlayer;
         sf::Texture aiTexture;
         sf::IntRect uvRect;
 
-
-    public:
+public:
         /**
          * Constructor
          * @param gameEntities
          * @param gWindow SFML Renderwindow
          */
-        AIPlayer(std::vector<std::shared_ptr<DungeonRunner::Entity>> &gameEntities,
-        std::shared_ptr<sf::RenderWindow> &gWindow);
+        AIPlayer(std::vector<std::shared_ptr<DungeonRunner::Entity>>& gameEntities,
+                 std::shared_ptr<sf::RenderWindow>& gWindow);
         /**
          * Displays Ai on Renderwindow
          */
@@ -36,8 +36,8 @@ namespace DungeonRunnerSFML {
          * Setter for Texturerect
          * @param uvRect
          */
-        void setUvRect(const sf::IntRect &uvRect);
-    };
+        void setUvRect(const sf::IntRect& uvRect);
+};
 
-}
-#endif //DUNGEONRUNNER_AIPLAYERSFML_H
+} // namespace DungeonRunnerSFML
+#endif // DUNGEONRUNNER_AIPLAYERSFML_H

@@ -4,6 +4,7 @@
 
 #include "Subject.h"
 
-const std::vector<std::shared_ptr<DungeonRunner::Observer>> &DungeonRunner::Subject::getSubjectObservers() const {
-    return subjectObservers;
+const std::vector<std::shared_ptr<DungeonRunner::Observer>>& DungeonRunner::Subject::getSubjectObservers() const
+{
+        return subjectObservers;
 }

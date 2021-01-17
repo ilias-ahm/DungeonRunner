@@ -10,10 +10,12 @@
 #include <vector>
 
 namespace DungeonRunner {
-    class Subject {
-    protected:
+class Subject
+{
+protected:
         std::vector<std::shared_ptr<Observer>> subjectObservers;
-    public:
+
+public:
         /**
          * pure virtual function to add new observers
          * @param observer
@@ -25,11 +27,10 @@ namespace DungeonRunner {
          * @param dTime
          */
 
-        virtual void notifyObservers(Observer::Event event,float dTime =1) = 0;
+        virtual void notifyObservers(Observer::Event event, float dTime = 1) = 0;
 
-        const std::vector<std::shared_ptr<Observer>> &getSubjectObservers() const;
-    };
-}
+        const std::vector<std::shared_ptr<Observer>>& getSubjectObservers() const;
+};
+} // namespace DungeonRunner
 
-
-#endif //DUNGEONRUNNER_SUBJECT_H
+#endif // DUNGEONRUNNER_SUBJECT_H

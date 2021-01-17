@@ -7,12 +7,13 @@
 #include "Entity.h"
 #include <memory>
 namespace DungeonRunner {
-    class Door: public Entity{
-    protected:
+class Door : public Entity
+{
+protected:
         bool isOpen = false;
         bool isLocked = false;
 
-    public:
+public:
         /**
          * getter for isOpen
          * @return true if door is open
@@ -22,7 +23,7 @@ namespace DungeonRunner {
          * opens door
          */
         void action() override;
-    };
+};
 
-}
-#endif //DUNGEONRUNNER_DOOR_H
+} // namespace DungeonRunner
+#endif // DUNGEONRUNNER_DOOR_H

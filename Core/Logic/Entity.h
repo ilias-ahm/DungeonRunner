@@ -4,33 +4,31 @@
 
 #ifndef DUNGEONRUNNER_ENTITY_H
 #define DUNGEONRUNNER_ENTITY_H
+#include "../Configuration.h"
+#include "Random.h"
+#include "Subject.h"
+#include "Transformation.h"
 #include <iostream>
 #include <memory>
 #include <vector>
-#include "Transformation.h"
-#include "Random.h"
-#include "Subject.h"
-#include "../Configuration.h"
 namespace DungeonRunner {
-    class Entity: public DungeonRunner::Subject {
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //                                                          Variables                                                           //
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        protected:
-        std::string eType; // Entity type
-        std::pair<float,float> ePosition; //
-        std::pair<float,float> eSize; // x and y value - Entity size
-        bool noClip = false; // true: collision control off for this entity
+class Entity : public DungeonRunner::Subject
+{
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //                                                          Variables //
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+protected:
+        std::string eType;                 // Entity type
+        std::pair<float, float> ePosition; //
+        std::pair<float, float> eSize;     // x and y value - Entity size
+        bool noClip = false;               // true: collision control off for this entity
 
-        public:
-
-
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //                                                          Functions                                                           //
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        private:
-
-        public:
+public:
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //                                                          Functions //
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+private:
+public:
         /**
          * Default constructor
          */
@@ -45,13 +43,12 @@ namespace DungeonRunner {
          * @param ePosition
          * @param eSize
          */
-        Entity(const std::pair<float, float> &ePosition,
-               const std::pair<float, float> &eSize);
+        Entity(const std::pair<float, float>& ePosition, const std::pair<float, float>& eSize);
         /**
          * Getter for position
          * @return returns float tuple(x,y) coordinate
          */
-        const std::pair<float, float> &getEPosition() const;
+        const std::pair<float, float>& getEPosition() const;
         /**
          * getter for noClip variable
          * @return noclip
@@ -61,17 +58,17 @@ namespace DungeonRunner {
          * Setter for entity position
          * @param ePosition float tuple(x,y)
          */
-        void setEPosition(const std::pair<float, float> &ePosition);
+        void setEPosition(const std::pair<float, float>& ePosition);
         /**
          * Getter for entity size
          * @return float tuple(x,y)
          */
-        const std::pair<float, float> &getESize() const;
+        const std::pair<float, float>& getESize() const;
         /**
          * Setter for entity size
          * @param eSize float tuple(x,y)
          */
-        void setESize(const std::pair<float, float> &eSize);
+        void setESize(const std::pair<float, float>& eSize);
         /**
          * Getter for entity type
          * @return entity type
@@ -105,8 +102,8 @@ namespace DungeonRunner {
          * @param event Observer::Event
          * @param dTime delta time to ensure that scores are the same on all fps settings
          */
-        void notifyObservers(Observer::Event event, float dTime=1) override;
-    };
+        void notifyObservers(Observer::Event event, float dTime = 1) override;
+};
 
-}
-#endif //DUNGEONRUNNER_ENTITY_H
+} // namespace DungeonRunner
+#endif // DUNGEONRUNNER_ENTITY_H

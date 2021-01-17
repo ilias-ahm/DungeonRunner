@@ -2,7 +2,6 @@
 // Created by Ilias on 15/01/2021.
 //
 
-
 #define SPEEDUP sf::Keyboard::W
 #define LEFT sf::Keyboard::A
 #define SLOWDOWN sf::Keyboard::S
